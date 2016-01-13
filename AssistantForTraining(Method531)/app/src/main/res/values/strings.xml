@@ -1,0 +1,156 @@
+<resources>
+    <string name="my_email" translatable="false">assistant531@gmail.com</string>
+    <string name="app_name" translatable="false">5/3/1 Assistant</string>
+    <string name="app_version" translatable="false">Version 1.0</string>
+    <string name="app_author_name" translatable="false">© ObidosDEV, 2015</string>
+
+
+    <string name="exercises_title">Exercises</string>
+    <string name="weight_chart_title">Your body weight</string>
+    <string name="title_dialog_add_body_weight">Add your body weight</string>
+    <string name="title_dialog_change_body_weight">Edit record</string>
+    <string name="btn_cancel">CANCEL</string>
+    <string name="btn_save">SAVE</string>
+    <string name="btn_no">NO</string>
+    <string name="btn_yes">YES</string>
+    <string name="btn_ok" translatable="false">OK</string>
+
+
+    <string name="hint_edit_text_weight">Body weight</string>
+    <string name="hint_enter_name">Name</string>
+    <string name="hint_enter_weight">Weight</string>
+    <string name="hint_enter_aim_weight">Aim weight</string>
+    <string name="hint_enter_repeat_count">Reps</string>
+    <string name="enter_repeat_count_last_set">Reps in the last set</string>
+    <string name="bottom_part_body">Deadlift, squat</string>
+    <string name="top_part_body">Upper-body exercise</string>
+
+
+    <string name="question_delete_record">Delete record?</string>
+    <string name="question_do_not_save">Save exercise?</string>
+    <string name="question_do_not_save_changes">Save changes?</string>
+    <string name="question_delete_exercise">Delete exercise?</string>
+    <string name="question_delete_all_exercises">Delete all exercises?</string>
+    <string name="question_reset_chart">Reset body weight chart?</string>
+    <string name="question_reset_exercise_chart">Reset all charts of exercises?</string>
+    <string name="question_reset_all">Reset all data?</string>
+    <string name="question_start_six_week_deload">Start this mode? Deload week will be lost!</string>
+    <string name="question_stop_six_week">Stop this mode?</string>
+    <string name="question_skip_deload_start_new_cycle">Start next cycle? Undo impossible!</string>
+
+
+    <string name="text_tip_how_fill_out_the_form">Enter the name of new exercise. Choose it\'s type. Than enter the weight, with which you can do this exercise less than 10 reps and count of reps which you do with this weight. At the end enter the weight which you want to do in 1RM and press save.</string>
+    <string name="text_tip_how_use_chart">This chart show the changes of your body weight. Bars of different seasons have different colors. Add new record about your body weight minimum one time per cycle, it helps you better see and understand changes. You can delete selected record or edit it after double-click on record.</string>
+    <string name="text_tip_how_use_chart_exercise">This chart show progress of 1RM which calculated via weight in last set of workout and count of reps which you enter after doing last set. Every workout except deload week you enter count of reps in last set, than calculated data displayed on this chart. You can remove selected record if you want.</string>
+
+
+    <string name="toast_enter_name">Enter the name!</string>
+    <string name="toast_enter_weight">Enter the weight!</string>
+    <string name="toast_enter_aim_weight">Enter the aim weight!</string>
+    <string name="toast_enter_repeat_count">Enter the reps count!</string>
+    <string name="toast_weight_bigger_than_zero">Weight must be bigger then zero!</string>
+    <string name="toast_repeat_count_bigger_than_zero">Reps count must be bigger then zero!</string>
+
+
+    <string name="text_cycle_number">Cycle #</string>
+    <string name="week_type_text">Week #</string>
+    <string name="warm_up">Warm-up</string>
+    <string name="work_set">Workout</string>
+    <string name="title_boring_but_big" translatable="false">Boring but big</string>
+    <string-array name="weeks">
+        <item name="week_easy">(Easy) 1</item>
+        <item name="week_medium">(Medium) 2</item>
+        <item name="week_hard">(Hard) 3</item>
+        <item name="week_light">(Deload) 4</item>
+    </string-array>
+    <string-array name="weeks6">
+        <item name="week_easy1">(Easy) 1</item>
+        <item name="week_medium1">(Medium) 2</item>
+        <item name="week_hard1">(Hard) 3</item>
+        <item name="week_easy2">(Easy) 4</item>
+        <item name="week_medium2">(Medium) 5</item>
+        <item name="week_hard2">(Hard) 6</item>
+        <item name="week_light">(Deload) 7</item>
+    </string-array>
+
+    <string-array name="weeks1">
+        <item name="week_easy">1 (Easy)</item>
+        <item name="week_medium">2 (Medium)</item>
+        <item name="week_hard">3 (Hard)</item>
+        <item name="week_light">4 (Deload)</item>
+    </string-array>
+    <string-array name="weeks61">
+        <item name="week_easy1">1 (Easy)</item>
+        <item name="week_medium1">2 (Medium)</item>
+        <item name="week_hard1">3 (Hard)</item>
+        <item name="week_easy2">4 (Easy)</item>
+        <item name="week_medium2">5 (Medium)</item>
+        <item name="week_hard2">6 (Hard)</item>
+        <item name="week_light">7 (Deload)</item>
+    </string-array>
+
+
+    <string name="tm">1TM(Training Max):</string>
+    <string name="record_weight">Max calculated weight in last set:</string>
+    <string name="title_edit_exercise">Edit exercise</string>
+    <string name="enter_your_weight">Enter your weight!</string>
+    <string name="weight_from_future">Weight from future!? O_o</string>
+    <string name="title_new_exercise">New exercise</string>
+    <string name="tap_to_add_new_exercise">Add new exercise</string>
+    <string name="tap_to_add_new_body_weight">Add new weight</string>
+    <string name="add_new_exercise_weight">Do not have any data</string>
+
+
+    <string name="settings_cycle">Cycle</string>
+    <string name="settings_workout">Workout</string>
+    <string name="settings_other">Other</string>
+    <string name="settings_general">General</string>
+    <string name="write_to_author">Write e-mail to author</string>
+    <string name="settings_cycles_calculation">Calculate cycles</string>
+    <string name="title_settings">Settings</string>
+    <string name="min_plate_weight">Min weight plate</string>
+    <string name="additional_weight_for_top">Increment weight in the upper-body exercises</string>
+    <string name="additional_weight_for_bottom">Increment weight in the squat and deadlift</string>
+    <string name="reset_all_btn">Reset all data</string>
+    <string name="reset_chart_btn">Reset body weight chart</string>
+    <string name="delete_all_exercises">Delete all exercises</string>
+    <string name="about_app_btn">About</string>
+    <string name="settings_vibration">Vibration</string>
+    <string name="settings_reset_all_charts_exercises">Reset all charts of exercises</string>
+    <string name="six_week_cycle_settings">6 week cycle + deload</string>
+    <string name="boring_but_big_settings" translatable="false">Boring but big</string>
+    <string name="settings_time_between_sets">Time between sets</string>
+    <string name="settings_skip_deload">Skip deload week</string>
+
+
+    <string name="info_exercise_percent_of_aim">Percent of the aim:</string>
+    <string name="info_exercise_aim_weight">Aim weight:</string>
+    <string name="info_exercise_calculated_1rm">Calculated 1RM:</string>
+    <string name="info_exercise_reps_label">Reps in last set:</string>
+    <string name="info_exercise_weight_label">Weight in last set:</string>
+
+
+    <string name="title_about">About</string>
+    <string name="about_thanks_to">Thanks to:</string>
+
+    <string name="dialog_pick_color">Pick color for exercise:</string>
+
+    <string name="title_timer">Prepare for the next set</string>
+    <string name="timer_end_phrase">Go!</string>
+    <string name="timer_next_set">Next set:</string>
+
+
+    <string name="text_edit">Edit</string>
+    <string name="text_delete">Delete</string>
+    <string name="text_get_stuck">Get stuck</string>
+    <string name="exercise_chart_progress">Progress</string>
+    <string name="question_get_stuck">Get stuck?</string>
+    <string name="title_activity_last_set">Result of workout</string>
+
+    <string name="minutes">Minutes</string>
+    <string name="seconds">Seconds</string>
+    <string name="select_start_date">Select the start date of cycle:</string>
+    <string name="start_date">Start date of cycle</string>
+    <string name="question_change_cycle_start_date">Are you sure? Undo impossible!</string>
+
+</resources>

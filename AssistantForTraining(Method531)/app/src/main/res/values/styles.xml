@@ -1,0 +1,31 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:color">@color/primary</item>
+        <item name="android:textColorHint">@color/secondary_text</item>
+        <item name="colorControlNormal">@color/divider</item>
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="colorControlHighlight">@color/primary</item>
+
+    </style>
+
+    <style name="Theme.SelectDate"
+        parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:editTextStyle">@style/Widget.EditText.Black</item>
+    </style>
+
+    <style name="Widget.EditText.Black" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/secondary_text</item>
+        <item name="colorControlNormal">@color/divider</item>
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="colorControlHighlight">@color/primary</item>
+        <item name="android:color">@color/primary</item>
+    </style>
+
+</resources>

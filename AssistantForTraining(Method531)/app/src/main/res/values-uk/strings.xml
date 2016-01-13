@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_app_btn">Інформація</string>
+    <string name="about_thanks_to">Зверніть увагу:</string>
+    <string name="add_new_exercise_weight">Немає даних</string>
+    <string name="additional_weight_for_bottom">Збільшення ваги у присіданнях та становій тязі</string>
+    <string name="additional_weight_for_top">Збільшення ваги для верхньої частини тіла</string>
+    <string name="bottom_part_body">Станова тяга, присідання</string>
+    <string name="btn_cancel">ВІДМІНА</string>
+    <string name="btn_no">НІ</string>
+    <string name="btn_save">ЗБЕРЕГТИ</string>
+    <string name="btn_yes">ТАК</string>
+    <string name="delete_all_exercises">Видалити всі вправи</string>
+    <string name="dialog_pick_color">Оберіть колір для вправи:</string>
+    <string name="enter_repeat_count_last_set">Повторів в останньому підході</string>
+    <string name="enter_your_weight">Введіть вашу вагу!</string>
+    <string name="exercise_chart_progress">Прогресс</string>
+    <string name="exercises_title">Вправи</string>
+    <string name="hint_edit_text_weight">Вага тіла</string>
+    <string name="hint_enter_aim_weight">Цільова вага</string>
+    <string name="hint_enter_name">Назва</string>
+    <string name="hint_enter_repeat_count">Повтори</string>
+    <string name="hint_enter_weight">Вага</string>
+    <string name="info_exercise_aim_weight">Цільова вага:</string>
+    <string name="info_exercise_calculated_1rm">Розрахований 1ПМ:</string>
+    <string name="info_exercise_percent_of_aim">Відсоток від цілі:</string>
+    <string name="info_exercise_reps_label">Повторів в останньому підході:</string>
+    <string name="info_exercise_weight_label">Вага в останньому підході:</string>
+    <string name="min_plate_weight">Вага найменшого млинця</string>
+    <string name="question_delete_all_exercises">Видалити всі вправи?</string>
+    <string name="question_delete_exercise">Видалити вправу?</string>
+    <string name="question_delete_record">Видалити запис?</string>
+    <string name="question_do_not_save">Зберегти вправу?</string>
+    <string name="question_do_not_save_changes">Зберегти зміни?</string>
+    <string name="question_get_stuck">Дуже важко виконувати вправу?</string>
+    <string name="question_reset_all">Видалити всі дані?</string>
+    <string name="question_reset_chart">Очистити графік зміни ваги тіла?</string>
+    <string name="question_reset_exercise_chart">Очистити всі графіки прогрессу у вправах?</string>
+    <string name="question_skip_deload_start_new_cycle">Почати наступний цикл? Відмінити буде неможливо!</string>
+    <string name="question_start_six_week_deload">Включити цей мод? Розвантажувальний тиждень буде завершено!</string>
+    <string name="question_stop_six_week">Вимкнути цей мод?</string>
+    <string name="record_weight">Найбільша розрахована вага в останніх підходах:</string>
+    <string name="reset_all_btn">Скинути всі дані</string>
+    <string name="reset_chart_btn">Скинути графік ваги тіла</string>
+    <string name="settings_cycle">Цикл</string>
+    <string name="settings_cycles_calculation">Виконувати розрахунки циклів</string>
+    <string name="settings_general">Загальні</string>
+    <string name="settings_other">Інші</string>
+    <string name="settings_reset_all_charts_exercises">Скинути графіки прогрессу у вправах</string>
+    <string name="settings_skip_deload">Пропускати розвантажувальний тиждень</string>
+    <string name="settings_time_between_sets">Час між підходами</string>
+    <string name="settings_vibration">Вібрація</string>
+    <string name="settings_workout">Тренування</string>
+    <string name="six_week_cycle_settings">6-ти тижневий цикл + розвантаження</string>
+    <string name="tap_to_add_new_body_weight">Додайте нову вагу</string>
+    <string name="tap_to_add_new_exercise">Додайте нову вправу</string>
+    <string name="text_cycle_number">Цикл №</string>
+    <string name="text_delete">Видалити</string>
+    <string name="text_edit">Редагувати</string>
+    <string name="text_get_stuck">Дуже тяжко</string>
+    <string name="timer_end_phrase">Підхід!</string>
+    <string name="timer_next_set">Наступний підхід:</string>
+    <string name="title_about">Інформація</string>
+    <string name="title_activity_last_set">Результат</string>
+    <string name="title_dialog_add_body_weight">Додайте вашу вагу</string>
+    <string name="title_dialog_change_body_weight">Редагування запису</string>
+    <string name="title_edit_exercise">Правити</string>
+    <string name="title_new_exercise">Нова вправа</string>
+    <string name="title_settings">Налаштування</string>
+    <string name="title_timer">Приготуйтеся до наступного підходу</string>
+    <string name="tm">1ТМ (Тренувальний Максимум):</string>
+    <string name="toast_enter_aim_weight">Введіть цільову вагу!</string>
+    <string name="toast_enter_name">Введіть назву!</string>
+    <string name="toast_enter_repeat_count">Введіть повтори!</string>
+    <string name="toast_enter_weight">Введіть вагу!</string>
+    <string name="toast_repeat_count_bigger_than_zero">Повторів має бути більше за нуль!</string>
+    <string name="toast_weight_bigger_than_zero">Вага має бути більше за нуль!</string>
+    <string name="top_part_body">Вправа для верху тіла</string>
+    <string name="warm_up">Розминка</string>
+    <string name="week_type_text">Тиждень №</string>
+    <string name="weight_chart_title">Ваша вага</string>
+    <string name="weight_from_future">Вага з майбутнього?! о_О</string>
+    <string name="work_set">Тренування</string>
+    <string name="write_to_author">Написати e-mail автору</string>
+
+    <string name="text_tip_how_fill_out_the_form">Введіть назву вправи. Оберіть її тип. Введіть вагу, з якою ви можете виконати вправу не більше ніж на 10 повторів, а потім введіть кількість повторів, яку ви можете виконати з цією вагою. В кінці введіть цільову вагу, яку ви хотіли б виконати в 1ПМ та натисніть зберегти.</string>
+    <string name="text_tip_how_use_chart">Цей графік демонструє зміну ваги вашого тіла. Стовпці різних сезонів мають різні кольори. Додавайте новий запис про вашу вагу мінімум один раз на цикл, це допоможе вам кращє бачити і відслідковувати зміни. Ви можете видалити обраний стовпець або відредагувати його виконавши подвійне натискання на обраний стовпець.</string>
+    <string name="text_tip_how_use_chart_exercise">Цей графік показує прогресс 1ПМ, який розраховується після останнього підходу вправи, в залежності від ваги і кількості виконаних повторів в ньому. Кожне тренування, окрім розвантажувального тижня, ви маєте вводити кількість повторів в останньому підході, потім розраховані дані будуть відображені на цьому графіку. Ви можете видалити обраний запис.</string>
+    <string name="minutes">Хвилини</string>
+    <string name="seconds">Секунди</string>
+    <string name="select_start_date">Оберіть дату початку циклу:</string>
+    <string name="start_date">Дата початку циклу</string>
+    <string name="question_change_cycle_start_date">Ви впевнені? Відмінити буде неможливо!</string>
+
+    <string-array name="weeks">
+        <item name="week_easy">(Легкий) 1</item>
+        <item name="week_medium">(Середній) 2</item>
+        <item name="week_hard">(Тяжкий) 3</item>
+        <item name="week_light">(Розвантажувальний) 4</item>
+    </string-array>
+    <string-array name="weeks6">
+        <item name="week_easy1">(Легкий) 1</item>
+        <item name="week_medium1">(Середній) 2</item>
+        <item name="week_hard1">(Тяжкий) 3</item>
+        <item name="week_easy2">(Легкий) 4</item>
+        <item name="week_medium2">(Середній) 5</item>
+        <item name="week_hard2">(Тяжкий) 6</item>
+        <item name="week_light">(Розвантажувальний) 7</item>
+    </string-array>
+
+    <string-array name="weeks1">
+        <item name="week_easy">1 (Легкий)</item>
+        <item name="week_medium">2 (Середній)</item>
+        <item name="week_hard">3 (Тяжкий)</item>
+        <item name="week_light">4 (Розвантажувальний)</item>
+    </string-array>
+    <string-array name="weeks61">
+        <item name="week_easy1">1 (Легкий)</item>
+        <item name="week_medium1">2 (Середній)</item>
+        <item name="week_hard1">3 (Тяжкий)</item>
+        <item name="week_easy2">4 (Легкий)</item>
+        <item name="week_medium2">5 (Середній)</item>
+        <item name="week_hard2">6 (Тяжкий)</item>
+        <item name="week_light">7 (Розвантажувальний)</item>
+    </string-array>
+
+</resources>

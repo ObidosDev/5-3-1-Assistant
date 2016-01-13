@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="exercise_info_weight_tv_weight">12</integer>
+    <integer name="exercise_info_weight_tv_reps">12</integer>
+    <integer name="exercise_info_weight_iv_check">3</integer>
+
+
+    <integer name="exercise_info_title_length">55</integer>
+    <integer name="exercise_chart_title_length">60</integer>
+
+</resources>

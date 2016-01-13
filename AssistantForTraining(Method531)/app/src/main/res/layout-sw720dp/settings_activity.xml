@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:elevation="4dp"
+        android:paddingRight="@dimen/titleBar_margin"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titleBar_height"
+        android:layout_weight="0"
+        android:background="@color/primary"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/btn_back_size_width"
+            android:layout_height="@dimen/btn_back_size"
+            android:scaleType="fitCenter"
+            android:clickable="true"
+            android:src="@drawable/btn_back_states"
+            android:paddingTop="@dimen/titleBar_margin_small"
+            android:paddingBottom="@dimen/titleBar_margin_small"
+            android:paddingLeft="@dimen/titleBar_margin"
+            android:paddingRight="@dimen/titleBar_margin"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/title_settings"
+            android:gravity="center_vertical|left"
+            android:textSize="@dimen/titleBar_textSize"
+            android:textColor="@color/white"
+            android:id="@+id/tvTitleActivity" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:id="@+id/scrollView">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_big_settings">
+
+                    <LinearLayout
+                        android:paddingLeft="@dimen/titleBar_margin"
+                        android:paddingTop="@dimen/padding_title_settings"
+                        android:paddingBottom="@dimen/padding_title_settings"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_subtitle_settings"
+                        android:background="@color/primary_light"
+                        android:clickable="true"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_general"
+                            android:id="@+id/tvTitleGeneral"
+                            android:textColor="@color/primary_dark"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/items_settings"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingRight="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:background="@color/white">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_cycle"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivCc" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/settings_cycles_calculation"
+                            android:id="@+id/tvStartStop"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                        <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
+                            android:layout_width="@dimen/settings_icon_size"
+                            android:layout_height="@dimen/settings_icon_size"
+                            android:id="@+id/chbCalculation"
+                            android:clickable="true"
+                            android:src="@drawable/png_check_on"
+                            android:scaleType="fitCenter"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:id="@+id/llSetStartDate"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:background="@drawable/item_bg_states"
+                        android:clickable="true"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_calendar"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivSsd" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:paddingLeft="@dimen/padding_text_settings"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/start_date"
+                                android:id="@+id/tvSetStartDate"
+                                android:clickable="false"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/settings_main_textsize"/>
+
+                            <TextView
+                                android:paddingLeft="@dimen/padding_text_settings"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="9.7.15"
+                                android:clickable="false"
+                                android:id="@+id/tvSetStartDateValue"
+                                android:textColor="@color/secondary_text"
+                                android:textSize="@dimen/settings_secondary_textsize"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:id="@+id/llResetAll"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:background="@drawable/item_bg_states">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_delete_all"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivRad" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/reset_all_btn"
+                            android:id="@+id/tvResetAll"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:id="@+id/llResetChart"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:background="@drawable/item_bg_states">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_reset_chart"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivRwc" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/reset_chart_btn"
+                            android:id="@+id/tvResetChart"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:id="@+id/llResetExerciseChart"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:background="@drawable/item_bg_states">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_reset_exercise_chart"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivResetExerciseChart" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_reset_all_charts_exercises"
+                            android:id="@+id/tvResetExerciseChart"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_big_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:id="@+id/llDeleteAllExercises"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:background="@drawable/item_bg_states">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_exercise"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivDae" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/delete_all_exercises"
+                            android:id="@+id/tvDeleteAllExercises"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_big_settings">
+
+                    <LinearLayout
+                        android:paddingLeft="@dimen/titleBar_margin"
+                        android:paddingTop="@dimen/padding_title_settings"
+                        android:paddingBottom="@dimen/padding_title_settings"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_subtitle_settings"
+                        android:background="@color/primary_light"
+                        android:clickable="true"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_workout"
+                            android:id="@+id/tvTitleWorkout"
+                            android:textColor="@color/primary_dark"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/items_settings"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:background="@color/white">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_bbb"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivBbb" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/boring_but_big_settings"
+                            android:id="@+id/tvBoringButBig"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                        <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
+                            android:layout_width="@dimen/settings_icon_size"
+                            android:layout_height="@dimen/settings_icon_size"
+                            android:id="@+id/chbBoringButBig"
+                            android:clickable="true"
+                            android:src="@drawable/png_check_on"
+                            android:scaleType="fitCenter"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:id="@+id/llMinWeightPlate"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:background="@drawable/item_bg_states"
+                        android:clickable="true"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_plate"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivMwp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:paddingLeft="@dimen/padding_text_settings"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/min_plate_weight"
+                                android:id="@+id/tvPlateWeight"
+                                android:clickable="false"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/settings_main_textsize"/>
+
+                            <TextView
+                                android:paddingLeft="@dimen/padding_text_settings"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="2.5"
+                                android:clickable="false"
+                                android:id="@+id/tvPlateWeightValue"
+                                android:textColor="@color/secondary_text"
+                                android:textSize="@dimen/settings_secondary_textsize"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_big_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:id="@+id/llTimer"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:background="@drawable/item_bg_states">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_time"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivTime" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:paddingLeft="@dimen/padding_text_settings"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_time_between_sets"
+                                android:id="@+id/tvTimer"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/settings_main_textsize"/>
+
+                            <TextView
+                                android:paddingLeft="@dimen/padding_text_settings"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="00:30"
+                                android:id="@+id/tvTimerValue"
+                                android:textColor="@color/secondary_text"
+                                android:textSize="@dimen/settings_secondary_textsize"/>
+                            </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/items_settings"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:background="@color/white">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_vibration"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivVibration" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/settings_vibration"
+                            android:id="@+id/tvVibration"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                        <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
+                            android:layout_width="@dimen/settings_icon_size"
+                            android:layout_height="@dimen/settings_icon_size"
+                            android:id="@+id/chbVibration"
+                            android:clickable="true"
+                            android:src="@drawable/png_check_on"
+                            android:scaleType="fitCenter"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_big_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:paddingLeft="@dimen/titleBar_margin"
+                        android:paddingTop="@dimen/padding_title_settings"
+                        android:paddingBottom="@dimen/padding_title_settings"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_subtitle_settings"
+                        android:background="@color/primary_light"
+                        android:clickable="true"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_cycle"
+                            android:id="@+id/tvTitleCycle"
+                            android:textColor="@color/primary_dark"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/items_settings"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:background="@color/white">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_six_week"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivSixWeek" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/six_week_cycle_settings"
+                            android:id="@+id/tvSixWeekCycle"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                        <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
+                            android:layout_width="@dimen/settings_icon_size"
+                            android:layout_height="@dimen/settings_icon_size"
+                            android:id="@+id/chbSixWeekCycle"
+                            android:clickable="true"
+                            android:src="@drawable/png_check_on"
+                            android:scaleType="fitCenter"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llSkipDeload"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/items_settings"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:background="@color/white">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_deload"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivDeload" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/settings_skip_deload"
+                            android:id="@+id/tvSkipDeload"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                        <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
+                            android:layout_width="@dimen/settings_icon_size"
+                            android:layout_height="@dimen/settings_icon_size"
+                            android:id="@+id/chbSkipDeload"
+                            android:clickable="true"
+                            android:src="@drawable/png_check_on"
+                            android:scaleType="fitCenter"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:id="@+id/llAddWeightTop"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:background="@drawable/item_bg_states">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_top_weight"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivTopBody" />
+
+                        <LinearLayout
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/additional_weight_for_top"
+                                android:id="@+id/tvAddWeightTop"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/settings_main_textsize"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="2.5"
+                                android:id="@+id/tvAddWeightTopValue"
+                                android:textColor="@color/secondary_text"
+                                android:textSize="@dimen/settings_secondary_textsize"/>
+                            </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_big_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:id="@+id/llAddWeightBottom"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:background="@drawable/item_bg_states">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_bottom_weight"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivBottomBody" />
+
+                        <LinearLayout
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/additional_weight_for_bottom"
+                                android:id="@+id/tvAddWeightBottom"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/settings_main_textsize"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="2.5"
+                                android:id="@+id/tvAddWeightBottomValue"
+                                android:textColor="@color/secondary_text"
+                                android:textSize="@dimen/settings_secondary_textsize"/>
+                            </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_big_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:paddingLeft="@dimen/titleBar_margin"
+                        android:paddingTop="@dimen/padding_title_settings"
+                        android:paddingBottom="@dimen/padding_title_settings"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_subtitle_settings"
+                        android:background="@color/primary_light"
+                        android:clickable="true"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_other"
+                            android:id="@+id/tvTitleOther"
+                            android:textColor="@color/primary_dark"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:id="@+id/llWriteToAuthor"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:background="@drawable/item_bg_states">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_mail"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivMail" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/write_to_author"
+                            android:id="@+id/tvWriteToAuthor"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/divider"
+                    android:paddingBottom="@dimen/divider_big_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:id="@+id/llAbout"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:background="@drawable/item_bg_states">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_about"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivAbout" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/about_app_btn"
+                            android:id="@+id/tvAbout"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/settings_main_textsize"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

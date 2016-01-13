@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#4CAF50</color>
+    <color name="primary_dark">#388E3C</color>
+    <color name="primary_light">#C8E6C9</color>
+    <color name="accent">#009688</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="white">#FFFFFF</color>
+    <color name="divider">#a9a9a9</color>
+
+    <color name="winter">#2196F3</color>
+    <color name="spring">#4CAF50</color>
+    <color name="summer">#CDDC39</color>
+    <color name="autumn">#FF5722</color>
+
+    <color name="marker_0">#66BB6A</color>
+    <color name="marker_4">#FFA726</color>
+    <color name="marker_5">#5C6BC0</color>
+    <color name="marker_2">#D4E157</color>
+    <color name="marker_3">#7E57C2</color>
+    <color name="marker_1">#EF5350</color>
+
+    <array name="marker_colors">
+        <item>@color/marker_0</item>
+        <item>@color/marker_1</item>
+        <item>@color/marker_2</item>
+        <item>@color/marker_3</item>
+        <item>@color/marker_4</item>
+        <item>@color/marker_5</item>
+    </array>
+</resources>

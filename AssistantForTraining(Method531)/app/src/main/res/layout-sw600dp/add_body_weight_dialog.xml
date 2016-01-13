@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:minWidth="@dimen/info_text_dialog_width"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dialog_padding">
+
+        <TextView
+            android:layout_marginBottom="@dimen/dialog_padding"
+            android:layout_width="match_parent"
+            android:minWidth="@dimen/titleBar_height"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:background="@drawable/btn_dialog_bg_states"
+            android:text="@string/title_dialog_add_body_weight"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/titleBar_textSize"
+            android:id="@+id/tvTitleDialog" />
+
+        <DatePicker
+            android:theme="@style/Theme.SelectDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
+            android:spinnersShown="true"
+            android:headerBackground="@color/primary_dark"
+            android:calendarTextColor="@color/primary_text"
+            android:yearListSelectorColor="@color/primary_text"
+            android:id="@+id/datePicker" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilBodyWeight"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/info_textsize"
+                android:id="@+id/edtWeight"
+                android:hint="@string/hint_edit_text_weight"
+                android:textColorHint="@color/secondary_text"
+                android:textColor="@color/primary_text"/>
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/info_dialog_btn_height"
+        android:layout_margin="@dimen/info_dialog_margin_btn"
+        android:gravity="right">
+
+        <TextView
+            android:id="@+id/btnCancel"
+            android:text="@string/btn_cancel"
+            android:layout_width="wrap_content"
+            android:paddingLeft="@dimen/info_dialog_margin_btn"
+            android:paddingRight="@dimen/info_dialog_margin_btn"
+            android:minWidth="@dimen/info_dialog_btn_width"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/btn_dialog_bg_states"
+            android:textColor="@color/primary_dark"
+            android:textSize="@dimen/info_btn_textsize" />
+
+        <TextView
+            android:text="@string/btn_save"
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:paddingLeft="@dimen/info_dialog_margin_btn"
+            android:paddingRight="@dimen/info_dialog_margin_btn"
+            android:minWidth="@dimen/info_dialog_btn_width"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/info_dialog_margin_btn"
+            android:gravity="center"
+            android:background="@drawable/btn_dialog_bg_states"
+            android:textColor="@color/primary_dark"
+            android:textSize="@dimen/info_btn_textsize"/>
+    </LinearLayout>
+
+</LinearLayout>
