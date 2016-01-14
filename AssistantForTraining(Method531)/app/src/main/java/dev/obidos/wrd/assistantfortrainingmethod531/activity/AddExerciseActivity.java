@@ -3,7 +3,6 @@ package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -12,7 +11,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
 
 import dev.obidos.wrd.assistantfortrainingmethod531.R;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.DatabaseHelper;
@@ -187,7 +185,7 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
                         setStartDateForExercise(m_exerciseData);
 
                         DatabaseHelper databaseHandler = new DatabaseHelper(this);
-                        if (databaseHandler.getAllExercises().size() == 0) {//if we do not have any exercises
+                        if (databaseHandler.getAllExercisesByStatus(DatabaseHelper.STATUS_NORMAL).size() == 0) {//if we do not have any exercises
                             setWeekOfCycle(0);
                             DateConverter culc = new DateConverter();
                             culc.setDate(Calendar.getInstance());

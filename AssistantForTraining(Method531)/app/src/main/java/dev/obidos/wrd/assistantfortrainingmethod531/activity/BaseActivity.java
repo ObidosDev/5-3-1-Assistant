@@ -1,6 +1,5 @@
 package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import dev.obidos.wrd.assistantfortrainingmethod531.AssistantApp;
 import dev.obidos.wrd.assistantfortrainingmethod531.R;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.DatabaseHelper;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseData;

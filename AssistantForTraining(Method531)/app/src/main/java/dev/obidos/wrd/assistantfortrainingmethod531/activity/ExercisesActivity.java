@@ -33,6 +33,8 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
     private ArrayList<ExerciseData> m_exerciseDataArrayList;
     private FloatingActionButton m_fabAddExercise;
 
+    private int m_nStatusOfExercises = DatabaseHelper.STATUS_NORMAL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +54,10 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
 
         m_exercisesRecyclerView = (RecyclerView) findViewById(R.id.exercisesRecyclerView);
         m_exercisesRecyclerView.setHasFixedSize(true);
-
         RecyclerView.LayoutManager m_LayoutManager = new LinearLayoutManager(this);
         m_exercisesRecyclerView.setLayoutManager(m_LayoutManager);
-
         m_exerciseDataArrayList = new ArrayList<>();
         m_exercisesRecyclerViewAdapter = new ExercisesRecyclerViewAdapter(m_exerciseDataArrayList, this);
-
         m_exercisesRecyclerView.setAdapter(m_exercisesRecyclerViewAdapter);
 
         m_exercisesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -103,16 +102,16 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
                     + getResources().getStringArray(R.array.weeks1)[getWeekOfCycle()]);
         }
         DatabaseHelper databaseHandler = new DatabaseHelper(this);
-        m_exerciseDataArrayList = databaseHandler.getAllExercises();
+        m_exerciseDataArrayList = databaseHandler.getAllExercisesByStatus(m_nStatusOfExercises);
         databaseHandler.close();
         m_exercisesRecyclerViewAdapter.setExerciseDataArrayList(m_exerciseDataArrayList);
         checkCountExercises();
         m_fabAddExercise.postDelayed(new Runnable() {
             @Override
             public void run() {
-             m_fabAddExercise.show();
+                m_fabAddExercise.show();
             }
-        },500);
+        }, 500);
     }
 
     @Override
@@ -159,5 +158,31 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
                 m_fabAddExercise.show();
                 break;
         }
+    }
+
+    private void setStatusOfExercises(int nStatus){
+        m_nStatusOfExercises = nStatus;
+        m_exercisesRecyclerViewAdapter.closeMenu(true);
+        m_fabAddExercise.hide();
+        DatabaseHelper databaseHandler = new DatabaseHelper(this);
+        m_exerciseDataArrayList = databaseHandler.getAllExercisesByStatus(nStatus);
+        databaseHandler.close();
+        m_exercisesRecyclerViewAdapter.setExerciseDataArrayList(m_exerciseDataArrayList);
+        checkCountExercises();
+        // TODO: 1/14/16 change fab
+        switch (nStatus){
+            case DatabaseHelper.STATUS_NORMAL:
+                m_fabAddExercise.setImageResource(R.drawable.png_add_fab);
+                break;
+            case DatabaseHelper.STATUS_DELETED:
+                m_fabAddExercise.setImageResource(R.drawable.png_trash_white);
+                break;
+        }
+        m_fabAddExercise.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                m_fabAddExercise.show();
+            }
+        }, 500);
     }
 }

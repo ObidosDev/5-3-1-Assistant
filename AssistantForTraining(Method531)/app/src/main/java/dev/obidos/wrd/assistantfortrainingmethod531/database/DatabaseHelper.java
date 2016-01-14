@@ -7,10 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import dev.obidos.wrd.assistantfortrainingmethod531.adapter.ExercisesRecyclerViewAdapter;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.BodyWeightData;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseData;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseWeightData;
@@ -20,8 +18,11 @@ import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseWeig
  */
 public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
 
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
     public static final String DATABASE_NAME = "assistant_training.db";
+
+    public static final int STATUS_NORMAL = 0;
+    public static final int STATUS_DELETED = 1;
 
     //TABLE_EXERCISES
     private static final String TABLE_EXERCISES = "exercises";
@@ -33,6 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     private static final String COL_AIM_WEIGHT = "aim_weight";
     private static final String COL_RECORD_WEIGHT = "record_weight";
     private static final String COL_COLOR = "exercise_color";
+    private static final String COL_STATUS = "exercise_status";
 
     //TABLE_BODY_WEIGHT
     private static final String TABLE_BODY_WEIGHT = "body_weight";
@@ -60,7 +62,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
                 + COL_CYCLE_NUMBER + " INTEGER NOT NULL, "
                 + COL_AIM_WEIGHT + " TEXT NOT NULL, "
                 + COL_RECORD_WEIGHT + " TEXT NOT NULL, "
-                + COL_COLOR + " INTEGER NOT NULL)";
+                + COL_COLOR + " INTEGER NOT NULL, "
+                + COL_STATUS + " INTEGER NOT NULL)";
         db.execSQL(CREATE_TABLE);
 
         CREATE_TABLE = "CREATE TABLE " + TABLE_BODY_WEIGHT + " ("
@@ -88,7 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
         //db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXERCISE_CHART_WEIGHT);
         //onCreate(db);
 
-        /*String strTempTable = "temp_exercises";
+        String strTempTable = "temp_exercises";
         db.execSQL("DROP TABLE IF EXISTS " + strTempTable);
         //create temp table
         String CREATE_TABLE = "CREATE TABLE " + strTempTable + " ("
@@ -96,9 +99,10 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
                 + COL_NAME + " TEXT NOT NULL, "
                 + COL_TYPE + " INTEGER NOT NULL, "
                 + COL_WEIGHT + " REAL NOT NULL, "
-                + COL_CYCLE_NUMBER + " INTEGER NOT NULL,"
-                + COL_AIM_WEIGHT + " TEXT NOT NULL,"
-                + COL_RECORD_WEIGHT + " TEXT NOT NULL)";
+                + COL_CYCLE_NUMBER + " INTEGER NOT NULL, "
+                + COL_AIM_WEIGHT + " TEXT NOT NULL, "
+                + COL_RECORD_WEIGHT + " TEXT NOT NULL, "
+                + COL_COLOR + " INTEGER NOT NULL)";
         db.execSQL(CREATE_TABLE);
 
         //copy all data from exercise table to temp table
@@ -114,13 +118,14 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
                 + COL_CYCLE_NUMBER + " INTEGER NOT NULL, "
                 + COL_AIM_WEIGHT + " TEXT NOT NULL, "
                 + COL_RECORD_WEIGHT + " TEXT NOT NULL, "
-                + COL_COLOR + " INTEGER NOT NULL)";
+                + COL_COLOR + " INTEGER NOT NULL, "
+                + COL_STATUS + " INTEGER NOT NULL)";
         db.execSQL(CREATE_TABLE);
 
         //copy all data from temp table to exercise table
-        db.execSQL("INSERT INTO " + TABLE_EXERCISES + " SELECT *, 0 as " + COL_COLOR + " FROM " + strTempTable + ";");
+        db.execSQL("INSERT INTO " + TABLE_EXERCISES + " SELECT *, 0 as " + COL_STATUS + " FROM " + strTempTable + ";");
 
-        db.execSQL("DROP TABLE IF EXISTS " + strTempTable);*/
+        db.execSQL("DROP TABLE IF EXISTS " + strTempTable);
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////Exercises
     public long addExercise(ExerciseData exerciseData) {
@@ -134,6 +139,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
             values.put(COL_AIM_WEIGHT, exerciseData.getAimWeight());
             values.put(COL_RECORD_WEIGHT, exerciseData.getRecordWeight());
             values.put(COL_COLOR, exerciseData.getColorNumber());
+            values.put(COL_STATUS, exerciseData.getStatus());
 
             nId = db.insert(TABLE_EXERCISES, null, values);
             db.close();
@@ -147,11 +153,37 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
             db.close();
     }
 
+    public void deleteAllExercisesByStatus(int nStatus) {
+        if(nStatus == STATUS_NORMAL){
+            ArrayList<ExerciseData> exerciseDatas = getAllExercisesByStatus(STATUS_NORMAL);
+            for(ExerciseData exerciseData : exerciseDatas){
+                exerciseData.setStatus(STATUS_DELETED);
+                updateExercise(exerciseData);
+            }
+        } else if(nStatus == STATUS_DELETED){
+            ArrayList<ExerciseData> exerciseDatas = getAllExercisesByStatus(STATUS_DELETED);
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.delete(TABLE_EXERCISES, COL_STATUS + "=" + STATUS_DELETED, null);
+            db.close();
+            ArrayList<Long> arrIds = new ArrayList<>();
+            for(ExerciseData exerciseData : exerciseDatas){
+                arrIds.add((long) exerciseData.getId());
+            }
+            deleteAllExercisesChartWeightsByIds(arrIds);
+        }
+    }
+
     public void deleteExercise(long nId) {
+        ExerciseData exerciseData = getExercise(nId);
+        if(exerciseData.getStatus()==STATUS_NORMAL){
+            exerciseData.setStatus(STATUS_DELETED);
+            updateExercise(exerciseData);
+        } else if(exerciseData.getStatus()==STATUS_DELETED){
             SQLiteDatabase db = this.getWritableDatabase();
             db.delete(TABLE_EXERCISES, COL_INDEX + " = " + nId, null);
             db.close();
             deleteAllExerciseChartWeights(nId);
+        }
     }
 
     public void updateExercise(ExerciseData exerciseData) {
@@ -198,12 +230,25 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
                 + "\" WHERE " + COL_INDEX + " = " + exerciseData.getId() + ";";
         db.execSQL(updateQuery);
 
+        updateQuery = "UPDATE " + TABLE_EXERCISES
+                + " SET "
+                + COL_STATUS + " = " + exerciseData.getStatus()
+                + " WHERE " + COL_INDEX + " = " + exerciseData.getId() + ";";
+        db.execSQL(updateQuery);
+
             db.close();
     }
 
-    public ArrayList<ExerciseData> getAllExercises() {
+    public ArrayList<ExerciseData> getAllExercisesByStatus(int nStatus) {
+        if(nStatus != DatabaseHelper.STATUS_NORMAL && nStatus != DatabaseHelper.STATUS_DELETED) {
+            throw new IllegalArgumentException("Status of exercises must be from {"
+                    + DatabaseHelper.STATUS_NORMAL + ", "
+                    + DatabaseHelper.STATUS_DELETED + "}, but nStatus = " + nStatus);
+        }
         ArrayList<ExerciseData> exerciseDatas = new ArrayList<ExerciseData>();
-        String selectQuery = "SELECT  * FROM " + TABLE_EXERCISES + " ORDER BY " + COL_COLOR + ", " + COL_NAME + " ASC";
+        String selectQuery = "SELECT  * FROM " + TABLE_EXERCISES
+                                + " WHERE " + COL_STATUS + " = " + nStatus
+                                + " ORDER BY " + COL_COLOR + ", " + COL_NAME + " ASC";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -219,6 +264,36 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
                 exerciseData.setAimWeight(cursor.getString(5));
                 exerciseData.setRecordWeight(cursor.getString(6));
                 exerciseData.setColorNumber(cursor.getInt(7));
+                exerciseData.setStatus(cursor.getInt(8));
+
+                exerciseDatas.add(exerciseData);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return exerciseDatas;
+    }
+
+    public ArrayList<ExerciseData> getAllExercises() {
+        ArrayList<ExerciseData> exerciseDatas = new ArrayList<ExerciseData>();
+        String selectQuery = "SELECT  * FROM " + TABLE_EXERCISES
+                + " ORDER BY " + COL_COLOR + ", " + COL_NAME + " ASC";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ExerciseData exerciseData = new ExerciseData();
+
+                exerciseData.setId(Integer.parseInt(cursor.getString(0)));
+                exerciseData.setName(cursor.getString(1));
+                exerciseData.setType(cursor.getInt(2));
+                exerciseData.setWeight(cursor.getDouble(3));
+                exerciseData.setNumberCycle(cursor.getInt(4));
+                exerciseData.setAimWeight(cursor.getString(5));
+                exerciseData.setRecordWeight(cursor.getString(6));
+                exerciseData.setColorNumber(cursor.getInt(7));
+                exerciseData.setStatus(cursor.getInt(8));
 
                 exerciseDatas.add(exerciseData);
             } while (cursor.moveToNext());
@@ -245,6 +320,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
                     exerciseData.setAimWeight(cursor.getString(5));
                     exerciseData.setRecordWeight(cursor.getString(6));
                     exerciseData.setColorNumber(cursor.getInt(7));
+                    exerciseData.setStatus(cursor.getInt(8));
 
                 } while (cursor.moveToNext());
             }
@@ -364,6 +440,22 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
         db.delete(TABLE_EXERCISE_CHART_WEIGHT, COL_INDEX_EXERCISE + "=" + nIdExercise, null);
         db.close();
         setRecordWeightForExerciseById(nIdExercise);
+    }
+
+    public void deleteAllExercisesChartWeightsByIds(ArrayList<Long> arrIds) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String strIn = "";
+        for(int i=0;i<arrIds.size();i++){
+            strIn+=arrIds.get(i)+"";
+            if(i<arrIds.size()-1){
+                strIn+=",";
+            }
+        }
+        db.delete(TABLE_EXERCISE_CHART_WEIGHT, COL_INDEX_EXERCISE + " IN (" + strIn+")", null);
+        db.close();
+        for(Long l : arrIds) {
+            setRecordWeightForExerciseById(l);
+        }
     }
 
     public void deleteAllExerciseChartWeights() {

@@ -2,6 +2,8 @@ package dev.obidos.wrd.assistantfortrainingmethod531.database.entity;
 
 import java.util.concurrent.TimeUnit;
 
+import dev.obidos.wrd.assistantfortrainingmethod531.database.DatabaseHelper;
+
 /**
  * Created by vobideyko on 8/17/15.
  */
@@ -20,6 +22,7 @@ public class ExerciseData {
     private String m_strRecordWeight = "0";
     private int m_nNumberCycle = 0;
     private int m_nColorNumber;
+    private int m_nStatus = DatabaseHelper.STATUS_NORMAL;
 
     public int getId() {
         return m_nId;
@@ -83,5 +86,19 @@ public class ExerciseData {
 
     public void setColorNumber(int nColorNumber) {
         this.m_nColorNumber = nColorNumber;
+    }
+
+    public int getStatus() {
+        return m_nStatus;
+    }
+
+    public void setStatus(int nStatus) {
+        if(nStatus == DatabaseHelper.STATUS_NORMAL || nStatus == DatabaseHelper.STATUS_DELETED) {
+            this.m_nStatus = nStatus;
+        } else {
+            throw new IllegalArgumentException("Status of exercise must be from {"
+                    + DatabaseHelper.STATUS_NORMAL + ", "
+                    + DatabaseHelper.STATUS_DELETED + "}, but nStatus = " + nStatus);
+        }
     }
 }
