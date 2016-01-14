@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_light">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llExercises"
+            android:clickable="true"
+            android:background="@drawable/btn_bg_main_menu_states"
+            android:paddingTop="@dimen/titleBar_usual_margin"
+            android:paddingBottom="@dimen/titleBar_usual_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/titleBar_height">
+
+            <ImageView
+                android:id="@+id/ivNotes"
+                android:layout_width="@dimen/menu_icon_size"
+                android:layout_height="@dimen/menu_icon_size"
+                android:src="@drawable/png_six_week"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="@dimen/titleBar_margin"
+                android:layout_marginRight="@dimen/titleBar_margin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/titleBar_subtitle_textSize"
+                android:text="@string/exercises_title"
+                android:id="@+id/tvExercises" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/divider"/>
+
+        <LinearLayout
+            android:id="@+id/llBodyWeight"
+            android:clickable="true"
+            android:background="@drawable/btn_bg_main_menu_states"
+            android:paddingTop="@dimen/titleBar_usual_margin"
+            android:paddingBottom="@dimen/titleBar_usual_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/titleBar_height">
+
+            <ImageView
+                android:id="@+id/ivCalendar"
+                android:layout_width="@dimen/menu_icon_size"
+                android:layout_height="@dimen/menu_icon_size"
+                android:src="@drawable/png_weight_green"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="@dimen/titleBar_margin"
+                android:layout_marginRight="@dimen/titleBar_margin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/titleBar_subtitle_textSize"
+                android:text="@string/weight_chart_title"
+                android:id="@+id/tvBodyWeight" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/divider"/>
+
+        <LinearLayout
+            android:id="@+id/llSettings"
+            android:clickable="true"
+            android:background="@drawable/btn_bg_main_menu_states"
+            android:paddingTop="@dimen/titleBar_usual_margin"
+            android:paddingBottom="@dimen/titleBar_usual_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/titleBar_height">
+
+            <ImageView
+                android:id="@+id/ivArchive"
+                android:layout_width="@dimen/menu_icon_size"
+                android:layout_height="@dimen/menu_icon_size"
+                android:src="@drawable/png_settings_green"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="@dimen/titleBar_margin"
+                android:layout_marginRight="@dimen/titleBar_margin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/titleBar_subtitle_textSize"
+                android:text="@string/title_settings"
+                android:id="@+id/tvSettings" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/divider"/>
+
+        <LinearLayout
+            android:id="@+id/llTrash"
+            android:clickable="true"
+            android:background="@drawable/btn_bg_main_menu_states"
+            android:paddingTop="@dimen/titleBar_usual_margin"
+            android:paddingBottom="@dimen/titleBar_usual_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/titleBar_height">
+
+            <ImageView
+                android:id="@+id/ivTrash"
+                android:layout_width="@dimen/menu_icon_size"
+                android:layout_height="@dimen/menu_icon_size"
+                android:src="@drawable/png_trash"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="@dimen/titleBar_margin"
+                android:layout_marginRight="@dimen/titleBar_margin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/titleBar_subtitle_textSize"
+                android:text="@string/trash_title"
+                android:id="@+id/tvTrash" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/divider"/>
+
+
+    </LinearLayout>
+</ScrollView>

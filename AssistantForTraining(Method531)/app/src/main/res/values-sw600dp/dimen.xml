@@ -13,6 +13,8 @@
     <dimen name="titleBar_textSize">21sp</dimen>
     <dimen name="titleBar_subtitle_textSize">15sp</dimen>
 
+    <dimen name="menu_icon_size">30dp</dimen>
+
     <dimen name="padding_exercise_list">10dp</dimen>
 
     <dimen name="padding_settings">16dp</dimen>

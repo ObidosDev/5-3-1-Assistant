@@ -28,7 +28,7 @@
     <string name="info_exercise_weight_label">Вага в останньому підході:</string>
     <string name="min_plate_weight">Вага найменшого млинця</string>
     <string name="question_delete_all_exercises">Видалити всі вправи?</string>
-    <string name="question_delete_exercise">Видалити вправу?</string>
+    <string name="question_delete_exercise">Ви впевнені, що бажаєте безповоротно видалити цю вправу?</string>
     <string name="question_delete_record">Видалити запис?</string>
     <string name="question_do_not_save">Зберегти вправу?</string>
     <string name="question_do_not_save_changes">Зберегти зміни?</string>
@@ -57,7 +57,7 @@
     <string name="text_cycle_number">Цикл №</string>
     <string name="text_delete">Видалити</string>
     <string name="text_edit">Редагувати</string>
-    <string name="text_get_stuck">Дуже тяжко</string>
+    <string name="text_get_stuck">Дуже важко</string>
     <string name="timer_end_phrase">Підхід!</string>
     <string name="timer_next_set">Наступний підхід:</string>
     <string name="title_about">Інформація</string>
@@ -91,6 +91,12 @@
     <string name="select_start_date">Оберіть дату початку циклу:</string>
     <string name="start_date">Дата початку циклу</string>
     <string name="question_change_cycle_start_date">Ви впевнені? Відмінити буде неможливо!</string>
+    <string name="trash_title">Кошик</string>
+    <string name="trash_is_empty">Кошик порожній</string>
+    <string name="question_restore_exercise">Відновити вправу?</string>
+    <string name="text_restore">Відновити</string>
+    <string name="question_delete_all_from_trash">Ви впевнені, що бажаєте повністю видалити всі вправи з кошика?</string>
+    <string name="question_move_to_trash">Помістити в кошик?</string>
 
     <string-array name="weeks">
         <item name="week_easy">(Легкий) 1</item>

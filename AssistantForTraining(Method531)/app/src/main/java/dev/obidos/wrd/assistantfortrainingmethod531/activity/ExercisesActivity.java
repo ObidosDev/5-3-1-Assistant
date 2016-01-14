@@ -6,10 +6,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import dev.obidos.wrd.assistantfortrainingmethod531.R;
 import dev.obidos.wrd.assistantfortrainingmethod531.adapter.ExercisesRecyclerViewAdapter;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.DatabaseHelper;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseData;
+import dev.obidos.wrd.assistantfortrainingmethod531.dialog.QuestionDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.views.DividerItemDecoration;
 
 /**
@@ -25,9 +28,13 @@ import dev.obidos.wrd.assistantfortrainingmethod531.views.DividerItemDecoration;
  */
 public class ExercisesActivity extends BaseActivity implements DialogInterface.OnDismissListener, View.OnClickListener{
 
+    private DrawerLayout m_drawerLayout;
+    private LinearLayout m_leftDrawerLinearLayout;
+    private ImageView m_ivMainMenu;
+
     private RecyclerView m_exercisesRecyclerView;
     private ExercisesRecyclerViewAdapter m_exercisesRecyclerViewAdapter;
-    private ImageView m_ivBodyWeight, m_ivSettings;
+    private TextView m_tvTitle;
     private TextView m_tvSubTitleWeek;
     private TextView m_tvEmpty;
     private ArrayList<ExerciseData> m_exerciseDataArrayList;
@@ -48,6 +55,7 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
             m_fabAddExercise.setLayoutParams(p);
         }
 
+        m_tvTitle = (TextView) findViewById(R.id.tvTitleActivity);
         m_tvSubTitleWeek = (TextView) findViewById(R.id.tvWeek);
         m_tvEmpty = (TextView) findViewById(R.id.tvEmpty);
 
@@ -70,22 +78,70 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         m_exercisesRecyclerView.addItemDecoration(itemDecoration);
 
-        m_ivBodyWeight = (ImageView) findViewById(R.id.ivBodyWeight);
-        m_ivBodyWeight.setOnClickListener(this);
+        hideFab();
 
-        m_ivSettings = (ImageView) findViewById(R.id.ivSettings);
-        m_ivSettings.setOnClickListener(this);
-
-        m_fabAddExercise.hide();
-
-        init();
+        initDrawerMenu();
+        initFonts();
     }
 
-    private void init(){
-        setMediumFont(findViewById(R.id.tvTitleActivity));
+    private void initDrawerMenu(){
+        m_ivMainMenu = (ImageView) findViewById(R.id.ivMainMenu);
+        m_ivMainMenu.setOnClickListener(this);
+
+        findViewById(R.id.llExercises).setOnClickListener(this);
+        findViewById(R.id.llBodyWeight).setOnClickListener(this);
+        findViewById(R.id.llSettings).setOnClickListener(this);
+        findViewById(R.id.llTrash).setOnClickListener(this);
+
+        m_drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        m_leftDrawerLinearLayout = (LinearLayout) findViewById(R.id.leftDrawer);
+        m_drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                hideFab();
+                m_exercisesRecyclerViewAdapter.closeMenu(true);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                showFab();
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                switch (newState) {
+                    case DrawerLayout.STATE_IDLE:
+                        if (!m_drawerLayout.isDrawerOpen(m_leftDrawerLinearLayout)) {
+                            showFab();
+                        }
+                        break;
+                    case DrawerLayout.STATE_DRAGGING:
+                        hideFab();
+                        m_exercisesRecyclerViewAdapter.closeMenu(true);
+                        break;
+                    case DrawerLayout.STATE_SETTLING:
+                        hideFab();
+                        break;
+                }
+            }
+        });
+    }
+
+    private void initFonts(){
+        setMediumFont(m_tvTitle);
         setMediumFont(m_tvSubTitleWeek);
 
         setRegularFont(m_tvEmpty);
+
+        setMediumFont(findViewById(R.id.tvExercises));
+        setMediumFont(findViewById(R.id.tvBodyWeight));
+        setMediumFont(findViewById(R.id.tvSettings));
+        setMediumFont(findViewById(R.id.tvTrash));
     }
 
     @Override
@@ -109,7 +165,7 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
         m_fabAddExercise.postDelayed(new Runnable() {
             @Override
             public void run() {
-                m_fabAddExercise.show();
+                showFab();
             }
         }, 500);
     }
@@ -118,7 +174,8 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
     protected void onPause() {
         super.onPause();
         m_exercisesRecyclerViewAdapter.closeMenu(true);
-        m_fabAddExercise.hide();
+        m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
+        hideFab();
     }
 
     @Override
@@ -128,6 +185,14 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
 
     private void checkCountExercises(){
         if(m_exercisesRecyclerViewAdapter.getItemCount()==0){
+            switch (m_nStatusOfExercises){
+                case DatabaseHelper.STATUS_NORMAL:
+                    m_tvEmpty.setText(R.string.tap_to_add_new_exercise);
+                    break;
+                case DatabaseHelper.STATUS_DELETED:
+                    m_tvEmpty.setText(R.string.trash_is_empty);
+                    break;
+            }
             ((View) m_tvSubTitleWeek.getParent()).setVisibility(View.GONE);
             m_tvEmpty.setVisibility(View.VISIBLE);
             m_exercisesRecyclerView.setVisibility(View.GONE);
@@ -138,24 +203,93 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
         }
     }
 
+    private void showFab(){
+        switch (m_nStatusOfExercises){
+            case DatabaseHelper.STATUS_NORMAL:
+                m_fabAddExercise.show();
+                break;
+            case DatabaseHelper.STATUS_DELETED:
+                if(m_exercisesRecyclerViewAdapter.getItemCount()!=0){
+                    m_fabAddExercise.show();
+                } else {
+                    m_fabAddExercise.hide();
+                }
+                break;
+        }
+    }
+
+    private void hideFab(){
+        m_fabAddExercise.hide();
+    }
+
     @Override
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()){
-            case R.id.ivSettings:
-                intent = new Intent(ExercisesActivity.this,SettingsActivity.class);
-                startActivity(intent);
+            case R.id.fabAddExercise:
+                switch (m_nStatusOfExercises){
+                    case DatabaseHelper.STATUS_NORMAL:
+                        intent = new Intent(ExercisesActivity.this, AddExerciseActivity.class);
+                        startActivity(intent);
+                        break;
+                    case DatabaseHelper.STATUS_DELETED:
+                        QuestionDialog questionDialogRestore = new QuestionDialog(ExercisesActivity.this,
+                                getResources().getString(R.string.question_delete_all_from_trash), new Runnable() {
+                            @Override
+                            public void run() {
+                                DatabaseHelper databaseHandler = new DatabaseHelper(getApplicationContext());
+                                databaseHandler.deleteAllExercisesByStatus(DatabaseHelper.STATUS_DELETED);
+                                databaseHandler.close();
+                                setStatusOfExercises(DatabaseHelper.STATUS_DELETED);
+                            }
+                        });
+                        questionDialogRestore.show();
+                        break;
+                }
                 break;
-            case R.id.ivBodyWeight:
+            case R.id.ivDelete:
+                showFab();
+                break;
+            case R.id.ivRestore:
+                showFab();
+                break;
+            case R.id.ivMainMenu:
+                if(m_drawerLayout.isDrawerOpen(m_leftDrawerLinearLayout)){
+                    m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
+                } else {
+                    m_drawerLayout.openDrawer(m_leftDrawerLinearLayout);
+                }
+                break;
+            case R.id.llExercises:
+                m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
+                setStatusOfExercises(DatabaseHelper.STATUS_NORMAL);
+                break;
+            case R.id.llBodyWeight:
+                m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
                 intent = new Intent(ExercisesActivity.this, WeightChartActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.fabAddExercise:
-                intent = new Intent(ExercisesActivity.this, AddExerciseActivity.class);
+            case R.id.llSettings:
+                m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
+                intent = new Intent(ExercisesActivity.this,SettingsActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.ivDelete:
-                m_fabAddExercise.show();
+            case R.id.llTrash:
+                m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
+                setStatusOfExercises(DatabaseHelper.STATUS_DELETED);
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        switch (m_nStatusOfExercises){
+            case DatabaseHelper.STATUS_NORMAL:
+                finish();
+                break;
+            case DatabaseHelper.STATUS_DELETED:
+                setStatusOfExercises(DatabaseHelper.STATUS_NORMAL);
                 break;
         }
     }
@@ -163,25 +297,26 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
     private void setStatusOfExercises(int nStatus){
         m_nStatusOfExercises = nStatus;
         m_exercisesRecyclerViewAdapter.closeMenu(true);
-        m_fabAddExercise.hide();
+        hideFab();
         DatabaseHelper databaseHandler = new DatabaseHelper(this);
         m_exerciseDataArrayList = databaseHandler.getAllExercisesByStatus(nStatus);
         databaseHandler.close();
         m_exercisesRecyclerViewAdapter.setExerciseDataArrayList(m_exerciseDataArrayList);
         checkCountExercises();
-        // TODO: 1/14/16 change fab
         switch (nStatus){
             case DatabaseHelper.STATUS_NORMAL:
+                m_tvTitle.setText(getResources().getString(R.string.exercises_title));
                 m_fabAddExercise.setImageResource(R.drawable.png_add_fab);
                 break;
             case DatabaseHelper.STATUS_DELETED:
+                m_tvTitle.setText(getResources().getString(R.string.trash_title));
                 m_fabAddExercise.setImageResource(R.drawable.png_trash_white);
                 break;
         }
         m_fabAddExercise.postDelayed(new Runnable() {
             @Override
             public void run() {
-                m_fabAddExercise.show();
+                showFab();
             }
         }, 500);
     }

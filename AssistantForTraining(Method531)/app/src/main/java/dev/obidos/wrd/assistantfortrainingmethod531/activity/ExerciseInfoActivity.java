@@ -45,7 +45,7 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
     private TextView m_tvTitleName;
     private TextView m_tvWeekType,m_tvCycleNumber,m_tvMaxWeight,m_tvRecordWeight;
 
-    private int[] m_nArrRepsWarmUp = {5, 5, 3};//default warm up
+    private int[] m_nArrRepsWarmUp = {5, 5, 5};//default warm up
     private int[] m_nArrRepsWarmUpDeload = {5, 5, 5};//warm up deload
 
     private int[] m_nArrRepsWorkout1 = {5, 5, 5};// 555 week reps
@@ -63,8 +63,8 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
 
     private float[] m_fArrWeightWorkoutDeload = {0.5f, 0.6f, 0.6f};
 
-    private float m_fCoefficientBbb = 0.5f; //BBB weight coefficient
-    private int[] m_nArrIntBbbReps = {10, 10, 10, 10, 10};// BBB reps
+    private float m_fCoefficientBbb = 0.5f; //BigButBoring weight coefficient
+    private int[] m_nArrIntBbbReps = {10, 10, 10, 10, 10};// BigButBoring reps
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -309,7 +309,7 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
      * @param nRepsArrayWorkout int array consist of 3 items, reps count in workout
      * @param deload flag which marks week as deload or not
      */
-    private void setWeek(float[] fWeightArrayWarmup, float[] fWeightArrayWorkout,int[] nRepsArrayWarmup, int[] nRepsArrayWorkout,boolean deload){
+    private void setWeek(float[] fWeightArrayWarmup, float[] fWeightArrayWorkout,int[] nRepsArrayWarmup, int[] nRepsArrayWorkout, boolean deload){
         m_arrayListTVWeights.get(0).setText(formatWeight(m_exerciseData.getWeight() * fWeightArrayWarmup[0]));
         m_arrayListTVWeights.get(1).setText(formatWeight(m_exerciseData.getWeight() * fWeightArrayWarmup[1]));
         m_arrayListTVWeights.get(2).setText(formatWeight(m_exerciseData.getWeight() * fWeightArrayWarmup[2]));
@@ -350,7 +350,14 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
             case R.id.ivMenu:
                 PopupMenu popupMenu = new PopupMenu(this, v);
                 popupMenu.setOnMenuItemClickListener(this);
-                popupMenu.inflate(R.menu.popup_menu);
+                switch (m_exerciseData.getStatus()){
+                    case DatabaseHelper.STATUS_NORMAL:
+                        popupMenu.inflate(R.menu.popup_menu);
+                        break;
+                    case DatabaseHelper.STATUS_DELETED:
+                        popupMenu.inflate(R.menu.popup_menu_with_restore);
+                        break;
+                }
                 popupMenu.show();
                 break;
             case R.id.ivBack:
@@ -445,16 +452,47 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 return true;
             case R.id.item_delete:
-                QuestionDialog questionDialog = new QuestionDialog(ExerciseInfoActivity.this, getResources().getString(R.string.question_delete_exercise), new Runnable() {
+                String strQuestion = "";
+                switch (m_exerciseData.getStatus()){
+                    case DatabaseHelper.STATUS_NORMAL:
+                        strQuestion = getResources().getString(R.string.question_move_to_trash);
+                        break;
+                    case DatabaseHelper.STATUS_DELETED:
+                        strQuestion = getResources().getString(R.string.question_delete_exercise);
+                        break;
+                }
+                QuestionDialog questionDialog = new QuestionDialog(ExerciseInfoActivity.this, strQuestion, new Runnable() {
                     @Override
                     public void run() {
                         DatabaseHelper databaseHandler = new DatabaseHelper(getApplicationContext());
-                        databaseHandler.deleteExercise(m_exerciseData.getId());
+                        switch (m_exerciseData.getStatus()){
+                            case DatabaseHelper.STATUS_NORMAL:
+                                m_exerciseData.setStatus(DatabaseHelper.STATUS_DELETED);
+                                databaseHandler.updateExercise(m_exerciseData);
+                                break;
+                            case DatabaseHelper.STATUS_DELETED:
+                                databaseHandler.deleteExercise(m_exerciseData.getId());
+                                break;
+                        }
                         databaseHandler.close();
                         finish();
                     }
                 });
                 questionDialog.show();
+                return true;
+            case R.id.item_restore:
+                QuestionDialog questionDialogRestore = new QuestionDialog(ExerciseInfoActivity.this,
+                        getResources().getString(R.string.question_restore_exercise), new Runnable() {
+                    @Override
+                    public void run() {
+                        DatabaseHelper databaseHandler = new DatabaseHelper(getApplicationContext());
+                        m_exerciseData.setStatus(DatabaseHelper.STATUS_NORMAL);
+                        databaseHandler.updateExercise(m_exerciseData);
+                        databaseHandler.close();
+                        finish();
+                    }
+                });
+                questionDialogRestore.show();
                 return true;
             case R.id.item_get_stuck:
                 QuestionDialog questionDialog1 = new QuestionDialog(ExerciseInfoActivity.this, getString(R.string.question_get_stuck), new Runnable() {

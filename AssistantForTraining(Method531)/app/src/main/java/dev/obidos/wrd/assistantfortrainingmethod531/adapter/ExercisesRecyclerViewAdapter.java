@@ -36,6 +36,7 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ImageView ivEdit;
+        public ImageView ivRestore;
         public HorizontalScrollView horizontalScrollView;
         public ImageView ivDelete;
         public ImageView ivMarker;
@@ -51,6 +52,8 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
             super(v);
             ivEdit = (ImageView) v.findViewById(R.id.ivEdit);
             ivEdit.setOnClickListener(this);
+            ivRestore = (ImageView) v.findViewById(R.id.ivRestore);
+            ivRestore.setOnClickListener(this);
             ivDelete = (ImageView) v.findViewById(R.id.ivDelete);
             ivDelete.setOnClickListener(this);
             tvNameExercise = (TextView) v.findViewById(R.id.tvNameExercise);
@@ -71,10 +74,38 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
                     intentEdit.putExtra("id",m_Dataset.get(m_nPosition).getId());
                     m_activity.startActivity(intentEdit);
                     break;
+                case R.id.ivRestore:
+                    closeMenu(true);
+                    QuestionDialog questionDialogRestore = new QuestionDialog(m_activity,
+                            m_activity.getResources().getString(R.string.question_restore_exercise), new Runnable() {
+                        @Override
+                        public void run() {
+                            DatabaseHelper databaseHandler = new DatabaseHelper(m_activity);
+                            m_Dataset.get(m_nPosition).setStatus(DatabaseHelper.STATUS_NORMAL);
+                            databaseHandler.updateExercise(m_Dataset.get(m_nPosition));
+                            databaseHandler.close();
+                            ExercisesRecyclerViewAdapter.this.notifyItemRemoved(m_nPosition);
+                            m_Dataset.remove(m_nPosition);
+                            ExercisesRecyclerViewAdapter.this.notifyItemRangeChanged(m_nPosition,m_Dataset.size()-m_nPosition);
+                            m_activity.onClick(v);
+                        }
+                    });
+                    questionDialogRestore.setOnDismissListener(m_activity);
+                    questionDialogRestore.show();
+                    break;
                 case R.id.ivDelete:
                     closeMenu(true);
+                    String strQuestion ="";
+                    switch (m_Dataset.get(m_nPosition).getStatus()){
+                        case DatabaseHelper.STATUS_NORMAL:
+                            strQuestion = m_activity.getResources().getString(R.string.question_move_to_trash);
+                            break;
+                        case DatabaseHelper.STATUS_DELETED:
+                            strQuestion = m_activity.getResources().getString(R.string.question_delete_exercise);
+                            break;
+                    }
                     QuestionDialog questionDialog = new QuestionDialog(m_activity,
-                            m_activity.getResources().getString(R.string.question_delete_exercise), new Runnable() {
+                            strQuestion, new Runnable() {
                         @Override
                         public void run() {
                             DatabaseHelper databaseHandler = new DatabaseHelper(m_activity);
@@ -117,6 +148,9 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
         TextView tv1tm = (TextView) v.findViewById(R.id.tv1tm);
         m_activity.setMediumFont(tv1tm);
 
+        ImageView imageView = (ImageView) v.findViewById(R.id.ivRestore);
+        imageView.setVisibility(View.GONE);
+
         LinearLayout relativeLayoutItem = (LinearLayout) v.findViewById(R.id.llItemContent);
         int width = getScreenWidth(v.getContext().getApplicationContext());
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) relativeLayoutItem.getLayoutParams();
@@ -139,6 +173,12 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
         holder.tv1tm.setText(m_activity.getResources().getString(R.string.tm) + " " + m_activity.formatWeight(m_Dataset.get(position).getWeight()));
         int[] markerColors = m_activity.getResources().getIntArray(R.array.marker_colors);
         holder.ivMarker.setBackgroundColor(markerColors[m_Dataset.get(position).getColorNumber()]);
+
+        if(m_Dataset.get(position).getStatus()==DatabaseHelper.STATUS_DELETED){
+            holder.ivRestore.setVisibility(View.VISIBLE);
+        } else {
+            holder.ivRestore.setVisibility(View.GONE);
+        }
     }
 
     private void setHorizontalScrollViewSettings(final ViewHolder holder,final int position){

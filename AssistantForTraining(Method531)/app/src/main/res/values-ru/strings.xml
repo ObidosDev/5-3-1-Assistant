@@ -28,7 +28,7 @@
     <string name="info_exercise_weight_label">Вес в последнем подходе:</string>
     <string name="min_plate_weight">Вес самого маленького блина</string>
     <string name="question_delete_all_exercises">Удалить все упражнения?</string>
-    <string name="question_delete_exercise">Удалить упражнение?</string>
+    <string name="question_delete_exercise">Вы уверены, что хотите безвозвратно удалить это упражнение?</string>
     <string name="question_delete_record">Удалить запись?</string>
     <string name="question_do_not_save">Сохранить упражнение?</string>
     <string name="question_do_not_save_changes">Сохранить изменения?</string>
@@ -92,6 +92,12 @@
     <string name="select_start_date">Выберите дату начала цикла:</string>
     <string name="start_date">Дата начала цикла</string>
     <string name="question_change_cycle_start_date">Вы уверены? Отменить невозможно!</string>
+    <string name="trash_title">Корзина</string>
+    <string name="trash_is_empty">Корзина пустая</string>
+    <string name="question_restore_exercise">Восстановить упражнение?</string>
+    <string name="text_restore">Восстановить</string>
+    <string name="question_delete_all_from_trash">Вы уверены, что хотите полностью удалить все упражнения из корзины?</string>
+    <string name="question_move_to_trash">Переместить в корзину?</string>
 
 
     <string-array name="weeks">
