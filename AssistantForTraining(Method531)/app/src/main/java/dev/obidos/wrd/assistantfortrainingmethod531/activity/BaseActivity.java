@@ -362,6 +362,13 @@ public class BaseActivity extends AppCompatActivity {
                 break;
             }
         }
+        f=true;
+        for(int i=strValue.length()-1;i>=0;i--){
+            if(strValue.charAt(i)=='.'){
+                f=false;
+                break;
+            }
+        }
         if(j!=-1 && !f){
             strValue = strValue.substring(0,j);
         }
