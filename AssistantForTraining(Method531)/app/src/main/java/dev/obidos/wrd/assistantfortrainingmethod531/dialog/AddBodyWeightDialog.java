@@ -50,7 +50,7 @@ public class AddBodyWeightDialog extends Dialog implements
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(0));
         this.setCancelable(false);
-        setContentView(R.layout.add_body_weight_dialog);
+        setContentView(R.layout.dialog_add_body_weight);
 
         m_tilBodyWeight = (TextInputLayout) findViewById(R.id.tilBodyWeight);
         removeErrorFromTIL(m_tilBodyWeight);

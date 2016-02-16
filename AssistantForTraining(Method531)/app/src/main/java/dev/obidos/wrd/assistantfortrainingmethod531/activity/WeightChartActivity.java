@@ -42,7 +42,7 @@ public class WeightChartActivity extends BaseActivity implements OnChartValueSel
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.weight_chart_activity);
+        setContentView(R.layout.activity_weight_chart);
         setMediumFont(findViewById(R.id.tvTitleActivity));
 
         m_ivBack = (ImageView) findViewById(R.id.ivBack);

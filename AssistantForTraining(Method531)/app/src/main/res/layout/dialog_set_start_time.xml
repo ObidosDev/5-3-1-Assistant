@@ -14,41 +14,49 @@
         android:padding="@dimen/dialog_padding">
 
         <TextView
+            android:singleLine="true"
+            android:ellipsize="end"
             android:layout_marginBottom="@dimen/dialog_padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_vertical"
             android:background="@drawable/btn_dialog_bg_states"
-            android:text="Title of the dialog"
+            android:text="@string/select_start_date"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/titleBar_textSize"
             android:id="@+id/tvTitleDialog" />
 
-
-        <EditText
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:maxLength="4"
-            android:inputType="numberDecimal"
-            android:textSize="@dimen/info_textsize"
-            android:textColor="@color/primary_text"
-            android:gravity="center"
-            android:text="Text message"
-            android:id="@+id/edtValue"/>
+            android:gravity="center">
+
+            <DatePicker
+                android:theme="@style/Theme.SelectDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:datePickerMode="spinner"
+                android:calendarViewShown="false"
+                android:spinnersShown="true"
+                android:headerBackground="@color/primary_dark"
+                android:calendarTextColor="@color/primary_text"
+                android:yearListSelectorColor="@color/primary_text"
+                android:id="@+id/datePicker" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/info_dialog_btn_height"
-        android:layout_margin="@dimen/titleBar_double_usual_margin"
+        android:layout_margin="@dimen/info_dialog_margin_btn"
         android:gravity="right">
 
         <TextView
-            android:text="@string/btn_cancel"
             android:id="@+id/btnCancel"
+            android:text="@string/btn_cancel"
             android:layout_width="wrap_content"
             android:paddingLeft="@dimen/info_dialog_margin_btn"
             android:paddingRight="@dimen/info_dialog_margin_btn"
@@ -57,11 +65,11 @@
             android:gravity="center"
             android:background="@drawable/btn_dialog_bg_states"
             android:textColor="@color/primary_dark"
-            android:textSize="@dimen/info_btn_textsize" />
+            android:textSize="@dimen/text_size_info_btn" />
 
         <TextView
             android:text="@string/btn_save"
-            android:id="@+id/btnOk"
+            android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:paddingLeft="@dimen/info_dialog_margin_btn"
             android:paddingRight="@dimen/info_dialog_margin_btn"
@@ -71,7 +79,7 @@
             android:gravity="center"
             android:background="@drawable/btn_dialog_bg_states"
             android:textColor="@color/primary_dark"
-            android:textSize="@dimen/info_btn_textsize"/>
+            android:textSize="@dimen/text_size_info_btn"/>
     </LinearLayout>
 
 </LinearLayout>

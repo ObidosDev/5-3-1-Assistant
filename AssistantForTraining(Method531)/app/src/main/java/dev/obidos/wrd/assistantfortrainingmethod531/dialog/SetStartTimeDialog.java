@@ -3,12 +3,9 @@ package dev.obidos.wrd.assistantfortrainingmethod531.dialog;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import dev.obidos.wrd.assistantfortrainingmethod531.R;
@@ -36,7 +33,7 @@ public class SetStartTimeDialog extends Dialog implements View.OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(0));
         this.setCancelable(true);
-        setContentView(R.layout.set_start_time_dialog);
+        setContentView(R.layout.dialog_set_start_time);
 
         m_datePicker = (DatePicker) findViewById(R.id.datePicker);
 

@@ -1,10 +1,12 @@
 package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import dev.obidos.wrd.assistantfortrainingmethod531.R;
 
@@ -17,7 +19,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.about_activity);
+        setContentView(R.layout.activity_about);
 
         findViewById(R.id.ivBack).setOnClickListener(this);
         findViewById(R.id.ivDo4a).setOnClickListener(this);
@@ -27,11 +29,26 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void init() {
+
+        PackageInfo pInfo = null;
+        String strVersionApp = "0.0e";
+        int nVersionCode = 0;
+        try {
+            pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            strVersionApp = pInfo.versionName;
+            nVersionCode = pInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        TextView tvVersion = (TextView) findViewById(R.id.tvAppVersion);
+        tvVersion.setText(getResources().getString(R.string.app_version) + " " + strVersionApp + " (" + nVersionCode + ")");
+
         setMediumFont(findViewById(R.id.tvTitleActivity));
         setMediumFont(findViewById(R.id.tvTitleThanksTo));
-        setMediumFont(findViewById(R.id.tvAppVersion));
+        setMediumFont(tvVersion);
+        setMediumFont(findViewById(R.id.tvAppName));
 
-        setRegularFont(findViewById(R.id.tvAppName));
         setRegularFont(findViewById(R.id.tvAuthorName));
     }
 

@@ -129,5 +129,9 @@
         <item name="week_hard2">6 (Тяжкий)</item>
         <item name="week_light">7 (Розвантажувальний)</item>
     </string-array>
+    <string name="app_author_name">© Обідейко Віталій, 2016</string>
+    <string name="title_mail_chooser">Написати e-mail...</string>
+    <string name="info_no_mail_clients">На вашому пристрої не встановлено поштові програми.</string>
+    <string name="app_version" translatable="false">Версія</string>
 
 </resources>

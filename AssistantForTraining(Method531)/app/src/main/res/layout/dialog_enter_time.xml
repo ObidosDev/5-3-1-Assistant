@@ -13,13 +13,15 @@
         android:orientation="vertical"
         android:padding="@dimen/dialog_padding">
         <TextView
+            android:singleLine="true"
+            android:ellipsize="end"
             android:layout_marginBottom="@dimen/dialog_padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_vertical"
             android:background="@drawable/btn_dialog_bg_states"
-            android:text="@string/select_start_date"
+            android:text="@string/settings_time_between_sets"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/titleBar_textSize"
             android:id="@+id/tvTitleDialog" />
@@ -30,17 +32,57 @@
             android:layout_height="wrap_content"
             android:gravity="center">
 
-            <DatePicker
-                android:theme="@style/Theme.SelectDate"
-                android:layout_width="match_parent"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilMinutes"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:datePickerMode="spinner"
-                android:calendarViewShown="false"
-                android:spinnersShown="true"
-                android:headerBackground="@color/primary_dark"
-                android:calendarTextColor="@color/primary_text"
-                android:yearListSelectorColor="@color/primary_text"
-                android:id="@+id/datePicker" />
+                android:layout_marginRight="@dimen/info_dialog_margin_btn">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:maxLength="2"
+                    android:inputType="number"
+                    android:hint="@string/minutes"
+                    android:textColorHint="@color/secondary_text"
+                    android:textSize="@dimen/text_size_info"
+                    android:textColor="@color/primary_text"
+                    android:gravity="center"
+                    android:text="01"
+                    android:id="@+id/edtMinutes" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text=":"
+                android:textSize="@dimen/text_size_info"
+                android:textColor="@color/primary_text"
+                android:gravity="center"
+                android:id="@+id/tvSig"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilSeconds"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/info_dialog_margin_btn">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:maxLength="2"
+                    android:hint="@string/seconds"
+                    android:textColorHint="@color/secondary_text"
+                    android:inputType="number"
+                    android:textSize="@dimen/text_size_info"
+                    android:textColor="@color/primary_text"
+                    android:gravity="center"
+                    android:text="30"
+                    android:id="@+id/edtSeconds" />
+            </android.support.design.widget.TextInputLayout>
+
         </LinearLayout>
     </LinearLayout>
 
@@ -62,7 +104,7 @@
             android:gravity="center"
             android:background="@drawable/btn_dialog_bg_states"
             android:textColor="@color/primary_dark"
-            android:textSize="@dimen/info_btn_textsize" />
+            android:textSize="@dimen/text_size_info_btn" />
 
         <TextView
             android:text="@string/btn_save"
@@ -76,7 +118,7 @@
             android:gravity="center"
             android:background="@drawable/btn_dialog_bg_states"
             android:textColor="@color/primary_dark"
-            android:textSize="@dimen/info_btn_textsize"/>
+            android:textSize="@dimen/text_size_info_btn"/>
     </LinearLayout>
 
 </LinearLayout>

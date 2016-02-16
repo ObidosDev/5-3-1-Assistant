@@ -13,7 +13,7 @@
     <dimen name="sub_titleBar_height">56dp</dimen>
 
     <dimen name="titleBar_textSize">22sp</dimen>
-    <dimen name="titleBar_subtitle_textSize">16sp</dimen>
+    <dimen name="text_size_titleBar_subtitle">16sp</dimen>
 
     <dimen name="menu_icon_size">30dp</dimen>
 
@@ -27,21 +27,20 @@
     <dimen name="divider_big_settings">0.5dp</dimen>
     <dimen name="items_settings">72dp</dimen>
     <dimen name="items_subtitle_settings">48dp</dimen>
-    <dimen name="settings_main_textsize">18sp</dimen>
-    <dimen name="settings_secondary_textsize">16sp</dimen>
+    <dimen name="text_size_settings_main">18sp</dimen>
+    <dimen name="text_size_settings_secondary">16sp</dimen>
     <dimen name="settings_icon_size">40dp</dimen>
     <dimen name="settings_icon_item_size">30dp</dimen>
     <dimen name="settings_icon_margin">16dp</dimen>
 
-    <dimen name="btn_back_size">60dp</dimen>
-    <dimen name="btn_back_size_width">68dp</dimen>
+    <dimen name="btn_back_size">64dp</dimen>
 
 
-    <dimen name="item_recyclerview_subtitle_textSize">19sp</dimen>
-    <dimen name="item_recyclerview_body2_textSize">14sp</dimen>
-    <dimen name="item_recyclerview_padding_top_bottom">10dp</dimen>
-    <dimen name="item_recyclerview_height">72dp</dimen>
-    <dimen name="item_recyclerview_marker_size">24dp</dimen>
+    <dimen name="text_size_item_recyclerView_subtitle">19sp</dimen>
+    <dimen name="text_size_item_recyclerView_body2">14sp</dimen>
+    <dimen name="item_recyclerView_padding_top_bottom">10dp</dimen>
+    <dimen name="item_recyclerView_height">72dp</dimen>
+    <dimen name="item_recyclerView_marker_size">24dp</dimen>
 
     <dimen name="btn_textSize">15sp</dimen>
 
@@ -56,28 +55,28 @@
     <dimen name="info_dialog_margin_btn">8dp</dimen>
     <dimen name="dialog_padding">24dp</dimen>
     <dimen name="info_dialog_padding_title">6dp</dimen>
-    <dimen name="info_textsize">20sp</dimen>
-    <dimen name="info_btn_textsize">16sp</dimen>
+    <dimen name="text_size_info">20sp</dimen>
+    <dimen name="text_size_info_btn">16sp</dimen>
 
     <dimen name="info_text_dialog_height">200dp</dimen>
     <dimen name="info_text_dialog_width">500dp</dimen>
     <dimen name="dialog_margin">10dp</dimen>
 
 
-    <dimen name="add_exercise_textsize">19sp</dimen>
+    <dimen name="text_size_add_exercise">19sp</dimen>
     <dimen name="add_exercise_padding_all">5sp</dimen>
 
 
     <dimen name="margin_table_exercise_info">0.5dp</dimen>
-    <dimen name="padding_icon_titlebar">16dp</dimen>
+    <dimen name="padding_icon_titleBar">16dp</dimen>
     <dimen name="margin_around_table_exercise_info">1dp</dimen>
     <dimen name="margin_item_table_exercise_info">10dp</dimen>
     <dimen name="info_exercise_table_item_height">56dp</dimen>
     <dimen name="margin_title_table_exercise_info">5dp</dimen>
-    <dimen name="table_exercise_info_textsize">17sp</dimen>
-    <dimen name="table_exercise_body2_textsize">16sp</dimen>
+    <dimen name="text_size_table_exercise_info">17sp</dimen>
+    <dimen name="text_size_table_exercise_body2">16sp</dimen>
 
     <dimen name="about_icon_height">150dp</dimen>
 
-    <dimen name="timer_time_textsize">60sp</dimen>
+    <dimen name="text_size_timer_time">60sp</dimen>
 </resources>

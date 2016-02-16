@@ -1,8 +1,8 @@
 <resources>
     <string name="my_email" translatable="false">assistant531@gmail.com</string>
     <string name="app_name" translatable="false">5/3/1 Assistant</string>
-    <string name="app_version" translatable="false">Version 1.0</string>
-    <string name="app_author_name" translatable="false">© ObidosDEV, 2015</string>
+    <string name="app_version">Version</string>
+    <string name="app_author_name">© Vitalii Obideiko, 2016</string>
 
 
     <string name="exercises_title">Exercises</string>
@@ -158,5 +158,7 @@
     <string name="text_restore">Restore</string>
     <string name="question_delete_all_from_trash">Are you sure you want to permanently delete the exercises from the Trash?</string>
     <string name="question_move_to_trash">Move to trash?</string>
+    <string name="title_mail_chooser">Send mail...</string>
+    <string name="info_no_mail_clients">There are no email clients installed.</string>
 
 </resources>

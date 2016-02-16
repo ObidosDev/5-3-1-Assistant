@@ -2,6 +2,8 @@ package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -35,7 +37,7 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
+        setContentView(R.layout.activity_settings);
 
         m_ivBack = (ImageView) findViewById(R.id.ivBack);
         m_ivBack.setOnClickListener(this);
@@ -266,15 +268,26 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
                 startActivity(intent);
                 break;
             case R.id.llWriteToAuthor:
+                PackageInfo pInfo = null;
+                String strVersionApp = "0.0e";
+                int nVersionCode = 0;
+                try {
+                    pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+                    strVersionApp = pInfo.versionName;
+                    nVersionCode = pInfo.versionCode;
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto", getResources().getString(R.string.my_email), null));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.app_name) + " " + getResources().getString(R.string.app_version));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.app_name) + " "
+                        + getResources().getString(R.string.app_version)+ " " + strVersionApp + " (" + nVersionCode + ")");
                 emailIntent.putExtra(Intent.EXTRA_TEXT, "");
                 try {
-                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                    startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.title_mail_chooser)));
                 } catch (android.content.ActivityNotFoundException ex) {
                     Toast.makeText(this,
-                            "There are no email clients installed.",
+                            R.string.info_no_mail_clients,
                             Toast.LENGTH_SHORT).show();
                 }
                 break;

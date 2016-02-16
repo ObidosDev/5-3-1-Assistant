@@ -22,6 +22,8 @@
             android:padding="@dimen/titleBar_margin"/>
 
         <TextView
+            android:singleLine="true"
+            android:ellipsize="end"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -76,7 +78,7 @@
                             android:text="@string/settings_general"
                             android:id="@+id/tvTitleGeneral"
                             android:textColor="@color/primary_dark"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -121,7 +123,7 @@
                             android:text="@string/settings_cycles_calculation"
                             android:id="@+id/tvStartStop"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                         <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
                             android:layout_width="@dimen/settings_icon_size"
@@ -179,7 +181,7 @@
                                 android:id="@+id/tvSetStartDate"
                                 android:clickable="false"
                                 android:textColor="@color/primary_text"
-                                android:textSize="@dimen/settings_main_textsize"/>
+                                android:textSize="@dimen/text_size_settings_main"/>
 
                             <TextView
                                 android:paddingLeft="@dimen/padding_text_settings"
@@ -189,7 +191,7 @@
                                 android:clickable="false"
                                 android:id="@+id/tvSetStartDateValue"
                                 android:textColor="@color/secondary_text"
-                                android:textSize="@dimen/settings_secondary_textsize"/>
+                                android:textSize="@dimen/text_size_settings_secondary"/>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -233,7 +235,7 @@
                             android:text="@string/reset_all_btn"
                             android:id="@+id/tvResetAll"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -276,7 +278,7 @@
                             android:text="@string/reset_chart_btn"
                             android:id="@+id/tvResetChart"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -319,7 +321,7 @@
                             android:text="@string/settings_reset_all_charts_exercises"
                             android:id="@+id/tvResetExerciseChart"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -362,7 +364,7 @@
                             android:text="@string/delete_all_exercises"
                             android:id="@+id/tvDeleteAllExercises"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -393,7 +395,7 @@
                             android:text="@string/settings_workout"
                             android:id="@+id/tvTitleWorkout"
                             android:textColor="@color/primary_dark"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -436,7 +438,7 @@
                             android:text="@string/boring_but_big_settings"
                             android:id="@+id/tvBoringButBig"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                         <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
                             android:layout_width="@dimen/settings_icon_size"
@@ -494,7 +496,7 @@
                                 android:id="@+id/tvPlateWeight"
                                 android:clickable="false"
                                 android:textColor="@color/primary_text"
-                                android:textSize="@dimen/settings_main_textsize"/>
+                                android:textSize="@dimen/text_size_settings_main"/>
 
                             <TextView
                                 android:paddingLeft="@dimen/padding_text_settings"
@@ -504,7 +506,7 @@
                                 android:clickable="false"
                                 android:id="@+id/tvPlateWeightValue"
                                 android:textColor="@color/secondary_text"
-                                android:textSize="@dimen/settings_secondary_textsize"/>
+                                android:textSize="@dimen/text_size_settings_secondary"/>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -552,7 +554,7 @@
                                 android:text="@string/settings_time_between_sets"
                                 android:id="@+id/tvTimer"
                                 android:textColor="@color/primary_text"
-                                android:textSize="@dimen/settings_main_textsize"/>
+                                android:textSize="@dimen/text_size_settings_main"/>
 
                             <TextView
                                 android:paddingLeft="@dimen/padding_text_settings"
@@ -561,7 +563,7 @@
                                 android:text="00:30"
                                 android:id="@+id/tvTimerValue"
                                 android:textColor="@color/secondary_text"
-                                android:textSize="@dimen/settings_secondary_textsize"/>
+                                android:textSize="@dimen/text_size_settings_secondary"/>
                             </LinearLayout>
 
                     </LinearLayout>
@@ -605,7 +607,7 @@
                             android:text="@string/settings_vibration"
                             android:id="@+id/tvVibration"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                         <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
                             android:layout_width="@dimen/settings_icon_size"
@@ -645,7 +647,7 @@
                             android:text="@string/settings_cycle"
                             android:id="@+id/tvTitleCycle"
                             android:textColor="@color/primary_dark"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -688,7 +690,7 @@
                             android:text="@string/six_week_cycle_settings"
                             android:id="@+id/tvSixWeekCycle"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                         <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
                             android:layout_width="@dimen/settings_icon_size"
@@ -740,7 +742,7 @@
                             android:text="@string/settings_skip_deload"
                             android:id="@+id/tvSkipDeload"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                         <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
                             android:layout_width="@dimen/settings_icon_size"
@@ -795,7 +797,7 @@
                                 android:text="@string/additional_weight_for_top"
                                 android:id="@+id/tvAddWeightTop"
                                 android:textColor="@color/primary_text"
-                                android:textSize="@dimen/settings_main_textsize"/>
+                                android:textSize="@dimen/text_size_settings_main"/>
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -803,7 +805,7 @@
                                 android:text="2.5"
                                 android:id="@+id/tvAddWeightTopValue"
                                 android:textColor="@color/secondary_text"
-                                android:textSize="@dimen/settings_secondary_textsize"/>
+                                android:textSize="@dimen/text_size_settings_secondary"/>
                             </LinearLayout>
 
                     </LinearLayout>
@@ -851,7 +853,7 @@
                                 android:text="@string/additional_weight_for_bottom"
                                 android:id="@+id/tvAddWeightBottom"
                                 android:textColor="@color/primary_text"
-                                android:textSize="@dimen/settings_main_textsize"/>
+                                android:textSize="@dimen/text_size_settings_main"/>
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -859,7 +861,7 @@
                                 android:text="2.5"
                                 android:id="@+id/tvAddWeightBottomValue"
                                 android:textColor="@color/secondary_text"
-                                android:textSize="@dimen/settings_secondary_textsize"/>
+                                android:textSize="@dimen/text_size_settings_secondary"/>
                             </LinearLayout>
 
                     </LinearLayout>
@@ -892,7 +894,7 @@
                             android:text="@string/settings_other"
                             android:id="@+id/tvTitleOther"
                             android:textColor="@color/primary_dark"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -935,7 +937,7 @@
                             android:text="@string/write_to_author"
                             android:id="@+id/tvWriteToAuthor"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -978,7 +980,7 @@
                             android:text="@string/about_app_btn"
                             android:id="@+id/tvAbout"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/settings_main_textsize"/>
+                            android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
                 </LinearLayout>

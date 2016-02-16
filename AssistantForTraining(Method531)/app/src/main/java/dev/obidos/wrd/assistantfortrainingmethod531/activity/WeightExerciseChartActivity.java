@@ -38,7 +38,7 @@ public class WeightExerciseChartActivity extends BaseActivity implements OnChart
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.weight_exercise_chart_activity);
+        setContentView(R.layout.activity_weight_exercise_chart);
 
         m_tvTitle = (TextView) findViewById(R.id.tvTitleActivity);
         setMediumFont(m_tvTitle);

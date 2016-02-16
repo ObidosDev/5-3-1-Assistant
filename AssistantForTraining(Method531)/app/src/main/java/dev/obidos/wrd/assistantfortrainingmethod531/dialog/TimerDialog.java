@@ -41,7 +41,7 @@ public class TimerDialog extends Dialog implements View.OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(0));
         this.setCancelable(false);
-        setContentView(R.layout.timer_dialog);
+        setContentView(R.layout.dialog_timer);
 
         m_tvTitle = (TextView) findViewById(R.id.tvTitleDialog);
 

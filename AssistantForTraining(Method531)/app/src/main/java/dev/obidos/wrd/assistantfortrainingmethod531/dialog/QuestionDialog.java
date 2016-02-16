@@ -50,7 +50,7 @@ public class QuestionDialog extends Dialog implements
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(0));
         this.setCancelable(true);
-        setContentView(R.layout.question_dialog);
+        setContentView(R.layout.dialog_question);
 
         m_tvQuestion = (TextView) findViewById(R.id.tvQuestion);
         m_tvQuestion.setText(m_strQuestion);

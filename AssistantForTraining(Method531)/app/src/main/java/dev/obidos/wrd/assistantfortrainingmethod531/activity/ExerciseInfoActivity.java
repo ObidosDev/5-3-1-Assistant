@@ -1,7 +1,5 @@
 package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +7,6 @@ import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -69,7 +65,7 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.exercise_info_activity);
+        setContentView(R.layout.activity_exercise_info);
 
         m_arrayListLLMain = new ArrayList<>();
         m_arrayListChkImageView = new ArrayList<>();

@@ -19,7 +19,7 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/info_textsize"
+                    android:textSize="@dimen/text_size_info"
                     android:textColor="@color/primary_text"
                     android:gravity="left"
                     android:text="Text message"
@@ -46,7 +46,7 @@
             android:gravity="center"
             android:background="@drawable/btn_dialog_bg_states"
             android:textColor="@color/primary_dark"
-            android:textSize="@dimen/info_btn_textsize"/>
+            android:textSize="@dimen/text_size_info_btn"/>
     </LinearLayout>
 
 

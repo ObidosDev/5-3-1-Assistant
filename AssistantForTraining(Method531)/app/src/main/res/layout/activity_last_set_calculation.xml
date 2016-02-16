@@ -24,6 +24,8 @@
             android:padding="@dimen/titleBar_margin"/>
 
         <TextView
+            android:singleLine="true"
+            android:ellipsize="end"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -48,7 +50,7 @@
             android:clickable="true"
             android:background="@drawable/btn_bg_states"
             android:textColor="@color/white"
-            android:textSize="@dimen/info_btn_textsize"/>
+            android:textSize="@dimen/text_size_info_btn"/>
 
     </LinearLayout>
 
@@ -86,7 +88,7 @@
                     android:id="@+id/tvRepsLastSetLabel"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/add_exercise_textsize"
+                    android:textSize="@dimen/text_size_add_exercise"
                     android:gravity="center_vertical"/>
 
                 <android.support.design.widget.TextInputLayout
@@ -105,7 +107,7 @@
                         android:textColor="@color/primary_text"
                         android:inputType="number"
                         android:maxLength="2"
-                        android:textSize="@dimen/add_exercise_textsize"/>
+                        android:textSize="@dimen/text_size_add_exercise"/>
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -125,7 +127,7 @@
                     android:id="@+id/tvWeightLastSetLabel"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/add_exercise_textsize"
+                    android:textSize="@dimen/text_size_add_exercise"
                     android:gravity="center_vertical"/>
 
                 <TextView
@@ -135,7 +137,7 @@
                     android:text="0"
                     android:id="@+id/tvWeightLastSet"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/add_exercise_textsize"
+                    android:textSize="@dimen/text_size_add_exercise"
                     android:gravity="right|center"/>
 
             </LinearLayout>
@@ -156,7 +158,7 @@
                     android:id="@+id/tvCalcWeightLastSetLabel"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/add_exercise_textsize"
+                    android:textSize="@dimen/text_size_add_exercise"
                     android:gravity="center_vertical"/>
 
                 <TextView
@@ -166,7 +168,7 @@
                     android:text="0"
                     android:id="@+id/tvCalcWeightLastSet"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/add_exercise_textsize"
+                    android:textSize="@dimen/text_size_add_exercise"
                     android:gravity="right|center"/>
 
             </LinearLayout>
@@ -187,7 +189,7 @@
                     android:id="@+id/tvAimWeightLabel"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/add_exercise_textsize"
+                    android:textSize="@dimen/text_size_add_exercise"
                     android:gravity="center_vertical"/>
 
                 <TextView
@@ -197,7 +199,7 @@
                     android:text="120"
                     android:id="@+id/tvAimWeight"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/add_exercise_textsize"
+                    android:textSize="@dimen/text_size_add_exercise"
                     android:gravity="right|center"/>
             </LinearLayout>
 
@@ -217,7 +219,7 @@
                     android:id="@+id/tvPercentLabel"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/add_exercise_textsize"
+                    android:textSize="@dimen/text_size_add_exercise"
                     android:gravity="center_vertical"/>
 
                 <TextView
@@ -227,7 +229,7 @@
                     android:text="0%"
                     android:id="@+id/tvPercent"
                     android:textColor="@color/primary_text"
-                    android:textSize="@dimen/add_exercise_textsize"
+                    android:textSize="@dimen/text_size_add_exercise"
                     android:gravity="right|center"/>
             </LinearLayout>
 

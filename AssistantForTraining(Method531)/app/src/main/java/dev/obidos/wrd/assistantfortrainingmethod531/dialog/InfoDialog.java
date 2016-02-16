@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.TextView;
 
 import dev.obidos.wrd.assistantfortrainingmethod531.R;
@@ -34,7 +33,7 @@ public class InfoDialog extends Dialog implements
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(0));
         this.setCancelable(true);
-        setContentView(R.layout.info_dialog);
+        setContentView(R.layout.dialog_info);
 
         m_tvInfo = (TextView) findViewById(R.id.tvInfo);
         m_tvInfo.setText(getContext().getResources().getString(m_nIdInfoString));

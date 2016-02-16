@@ -37,7 +37,7 @@ public class LastSetCalculationActivity extends BaseActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.last_set_calculation_activity);
+        setContentView(R.layout.activity_last_set_calculation);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 

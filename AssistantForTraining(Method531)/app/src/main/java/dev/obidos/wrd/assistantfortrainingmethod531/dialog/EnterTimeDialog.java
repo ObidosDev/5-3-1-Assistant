@@ -34,7 +34,7 @@ public class EnterTimeDialog extends Dialog implements View.OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(0));
         this.setCancelable(false);
-        setContentView(R.layout.enter_time_dialog);
+        setContentView(R.layout.dialog_enter_time);
 
         m_tvTitle = (TextView) findViewById(R.id.tvTitleDialog);
 

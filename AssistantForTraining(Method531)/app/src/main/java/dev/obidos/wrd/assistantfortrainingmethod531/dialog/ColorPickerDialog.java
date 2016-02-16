@@ -1,11 +1,8 @@
 package dev.obidos.wrd.assistantfortrainingmethod531.dialog;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Vibrator;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -13,7 +10,6 @@ import android.widget.TextView;
 
 import dev.obidos.wrd.assistantfortrainingmethod531.R;
 import dev.obidos.wrd.assistantfortrainingmethod531.activity.AddExerciseActivity;
-import dev.obidos.wrd.assistantfortrainingmethod531.activity.BaseActivity;
 
 /**
  * Created by vobideyko on 8/31/15.
@@ -37,7 +33,7 @@ public class ColorPickerDialog extends Dialog implements View.OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(0));
         this.setCancelable(true);
-        setContentView(R.layout.color_picker_dialog);
+        setContentView(R.layout.dialog_color_picker);
 
         m_tvTitle = (TextView) findViewById(R.id.tvTitleDialog);
 

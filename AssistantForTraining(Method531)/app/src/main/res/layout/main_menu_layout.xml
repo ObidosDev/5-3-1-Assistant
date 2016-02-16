@@ -32,9 +32,42 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/titleBar_subtitle_textSize"
+                android:textSize="@dimen/text_size_titleBar_subtitle"
                 android:text="@string/exercises_title"
                 android:id="@+id/tvExercises" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/divider"/>
+
+        <LinearLayout
+            android:id="@+id/llTrash"
+            android:clickable="true"
+            android:background="@drawable/btn_bg_main_menu_states"
+            android:paddingTop="@dimen/titleBar_usual_margin"
+            android:paddingBottom="@dimen/titleBar_usual_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/titleBar_height">
+
+            <ImageView
+                android:id="@+id/ivTrash"
+                android:layout_width="@dimen/menu_icon_size"
+                android:layout_height="@dimen/menu_icon_size"
+                android:src="@drawable/png_trash"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="@dimen/titleBar_margin"
+                android:layout_marginRight="@dimen/titleBar_margin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_titleBar_subtitle"
+                android:text="@string/trash_title"
+                android:id="@+id/tvTrash" />
         </LinearLayout>
 
         <View
@@ -65,7 +98,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/titleBar_subtitle_textSize"
+                android:textSize="@dimen/text_size_titleBar_subtitle"
                 android:text="@string/weight_chart_title"
                 android:id="@+id/tvBodyWeight" />
         </LinearLayout>
@@ -98,7 +131,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/titleBar_subtitle_textSize"
+                android:textSize="@dimen/text_size_titleBar_subtitle"
                 android:text="@string/title_settings"
                 android:id="@+id/tvSettings" />
         </LinearLayout>
@@ -109,7 +142,7 @@
             android:background="@color/divider"/>
 
         <LinearLayout
-            android:id="@+id/llTrash"
+            android:id="@+id/llEmail"
             android:clickable="true"
             android:background="@drawable/btn_bg_main_menu_states"
             android:paddingTop="@dimen/titleBar_usual_margin"
@@ -120,10 +153,10 @@
             android:layout_height="@dimen/titleBar_height">
 
             <ImageView
-                android:id="@+id/ivTrash"
+                android:id="@+id/ivEmail"
                 android:layout_width="@dimen/menu_icon_size"
                 android:layout_height="@dimen/menu_icon_size"
-                android:src="@drawable/png_trash"
+                android:src="@drawable/png_mail_menu"
                 android:scaleType="fitCenter"
                 android:layout_marginLeft="@dimen/titleBar_margin"
                 android:layout_marginRight="@dimen/titleBar_margin"/>
@@ -131,9 +164,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/titleBar_subtitle_textSize"
-                android:text="@string/trash_title"
-                android:id="@+id/tvTrash" />
+                android:textSize="@dimen/text_size_titleBar_subtitle"
+                android:text="@string/write_to_author"
+                android:id="@+id/tvEmail" />
         </LinearLayout>
 
         <View
@@ -141,6 +174,38 @@
             android:layout_height="0.7dp"
             android:background="@color/divider"/>
 
+        <LinearLayout
+            android:id="@+id/llInfo"
+            android:clickable="true"
+            android:background="@drawable/btn_bg_main_menu_states"
+            android:paddingTop="@dimen/titleBar_usual_margin"
+            android:paddingBottom="@dimen/titleBar_usual_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/titleBar_height">
+
+            <ImageView
+                android:id="@+id/ivInfo"
+                android:layout_width="@dimen/menu_icon_size"
+                android:layout_height="@dimen/menu_icon_size"
+                android:src="@drawable/png_about_menu"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="@dimen/titleBar_margin"
+                android:layout_marginRight="@dimen/titleBar_margin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_titleBar_subtitle"
+                android:text="@string/about_app_btn"
+                android:id="@+id/tvInfo" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/divider"/>
 
     </LinearLayout>
 </ScrollView>

@@ -64,7 +64,7 @@
     <string name="title_dialog_add_body_weight">Добавьте ваш вес</string>
     <string name="title_dialog_change_body_weight">Редактирование записи</string>
     <string name="title_edit_exercise">Изменение</string>
-    <string name="title_new_exercise">Новое</string>
+    <string name="title_new_exercise">Новое упражнение</string>
     <string name="title_settings">Настройки</string>
     <string name="title_timer">Приготовьтесь к следующему подходу</string>
     <string name="tm">1ТМ (Тренировочный Максимум):</string>
@@ -131,4 +131,8 @@
         <item name="week_hard2">6 (Тяжелая)</item>
         <item name="week_light">7 (Разгрузочная)</item>
     </string-array>
+    <string name="app_author_name">© Обидейко Виталий, 2016</string>
+    <string name="title_mail_chooser">Написать e-mail...</string>
+    <string name="info_no_mail_clients">На вашем устройстве нет почтовых клиентов.</string>
+    <string name="app_version" translatable="false">Версия</string>
 </resources>

@@ -2,6 +2,9 @@ package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -13,6 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -45,7 +49,7 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.exercises_activity);
+        setContentView(R.layout.activity_exercises);
 
         m_fabAddExercise = (FloatingActionButton) findViewById(R.id.fabAddExercise);
         m_fabAddExercise.setOnClickListener(this);
@@ -92,6 +96,8 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
         findViewById(R.id.llBodyWeight).setOnClickListener(this);
         findViewById(R.id.llSettings).setOnClickListener(this);
         findViewById(R.id.llTrash).setOnClickListener(this);
+        findViewById(R.id.llEmail).setOnClickListener(this);
+        findViewById(R.id.llInfo).setOnClickListener(this);
 
         m_drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         m_leftDrawerLinearLayout = (LinearLayout) findViewById(R.id.leftDrawer);
@@ -142,6 +148,8 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
         setMediumFont(findViewById(R.id.tvBodyWeight));
         setMediumFont(findViewById(R.id.tvSettings));
         setMediumFont(findViewById(R.id.tvTrash));
+        setMediumFont(findViewById(R.id.tvEmail));
+        setMediumFont(findViewById(R.id.tvInfo));
     }
 
     @Override
@@ -271,12 +279,42 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
                 break;
             case R.id.llSettings:
                 m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
-                intent = new Intent(ExercisesActivity.this,SettingsActivity.class);
+                intent = new Intent(ExercisesActivity.this, SettingsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.llTrash:
                 m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
                 setStatusOfExercises(DatabaseHelper.STATUS_DELETED);
+                break;
+            case R.id.llEmail:
+                m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
+                PackageInfo pInfo = null;
+                String strVersionApp = "0.0e";
+                int nVersionCode = 0;
+                try {
+                    pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+                    strVersionApp = pInfo.versionName;
+                    nVersionCode = pInfo.versionCode;
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", getResources().getString(R.string.my_email), null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.app_name) + " "
+                        + getResources().getString(R.string.app_version)+ " " + strVersionApp + " (" + nVersionCode + ")");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+                try {
+                    startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.title_mail_chooser)));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(this,
+                            R.string.info_no_mail_clients,
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.llInfo:
+                m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
+                intent = new Intent(ExercisesActivity.this, AboutActivity.class);
+                startActivity(intent);
                 break;
         }
     }

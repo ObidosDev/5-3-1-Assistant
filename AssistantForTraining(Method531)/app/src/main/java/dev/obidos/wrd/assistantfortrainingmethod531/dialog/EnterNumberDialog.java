@@ -41,7 +41,7 @@ public class EnterNumberDialog extends Dialog implements
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(0));
         this.setCancelable(false);
-        setContentView(R.layout.enter_number_dialog);
+        setContentView(R.layout.dialog_enter_number);
 
         m_tvTitle = (TextView) findViewById(R.id.tvTitleDialog);
 

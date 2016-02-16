@@ -12,15 +12,10 @@ import dev.obidos.wrd.assistantfortrainingmethod531.R;
 public class SplashActivity extends BaseActivity {
 
     @Override
-
-
-
-
-
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_activity);
+        setContentView(R.layout.activity_splash);
     }
 
     @Override
