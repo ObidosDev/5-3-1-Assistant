@@ -12,8 +12,6 @@
         android:padding="@dimen/dialog_padding">
 
         <TextView
-            android:singleLine="true"
-            android:ellipsize="end"
             android:layout_marginBottom="@dimen/dialog_padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
