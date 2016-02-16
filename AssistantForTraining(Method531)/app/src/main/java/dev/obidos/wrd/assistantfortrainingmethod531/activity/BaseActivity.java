@@ -3,6 +3,7 @@ package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
@@ -317,7 +318,7 @@ public class BaseActivity extends AppCompatActivity {
                 }
                 exerciseData.setNumberCycle((int) (exerciseData.getNumberCycle() + localCycles));
 
-            databaseHandler.updateExercise(exerciseData);
+                databaseHandler.updateExercise(exerciseData);
             }
             databaseHandler.close();
         } else {
@@ -361,7 +362,7 @@ public class BaseActivity extends AppCompatActivity {
                 break;
             }
         }
-        if(j!=-1){
+        if(j!=-1 && !f){
             strValue = strValue.substring(0,j);
         }
         return strValue;
@@ -371,7 +372,7 @@ public class BaseActivity extends AppCompatActivity {
         //Log.e("MuTag", fWeight+"");
 
         BigDecimal minWeight = new BigDecimal(getMinWeightPlateInGym());//min plate
-        //Log.e("MyTag","minWeight " + minWeight.toString());
+        //Log.e("MyTag", "minWeight " + minWeight.toString());
 
         minWeight = minWeight.add(minWeight);//From 2 sides
         //Log.e("MyTag","minWeight*2 " + minWeight.toString());
