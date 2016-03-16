@@ -104,7 +104,7 @@
                     android:text="@string/text_cycle_number"
                     android:id="@+id/tvCycleNumberLabel" />
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -130,7 +130,7 @@
                     android:text="@string/week_type_text"
                     android:id="@+id/tvWeekTypeLabel" />
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
