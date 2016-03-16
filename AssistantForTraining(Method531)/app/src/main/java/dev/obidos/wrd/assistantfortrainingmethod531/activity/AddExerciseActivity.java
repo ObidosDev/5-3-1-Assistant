@@ -19,6 +19,7 @@ import dev.obidos.wrd.assistantfortrainingmethod531.dialog.ColorPickerDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.InfoDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.QuestionDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.tools.DateConverter;
+import dev.obidos.wrd.assistantfortrainingmethod531.tools.TrainingConstants;
 
 /**
  * Created by vobideyko on 8/18/15.
@@ -55,7 +56,7 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
         removeErrorFromTIL(m_tilReps);
         removeErrorFromTIL(m_tilAimWeight);
 
-        m_nExerciseId = getIntent().getIntExtra("id", -2);
+        m_nExerciseId = getIntent().getIntExtra(TrainingConstants.EXTRA_ID_EXERCISE, -2);
 
         m_ivColorChange = (ImageView) findViewById(R.id.ivColorChange);
         m_ivColorChange.setOnClickListener(this);
@@ -76,7 +77,7 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
 
         m_exerciseData = new ExerciseData();
         if(m_nExerciseId!=-2){
-            m_bFromInfoActivity = getIntent().getBooleanExtra("info", false);
+            m_bFromInfoActivity = getIntent().getBooleanExtra(TrainingConstants.EXTRA_FROM_INFO_EXERCISE_ACTIVITY, false);
             DatabaseHelper databaseHandler = new DatabaseHelper(this);
             m_exerciseData = databaseHandler.getExercise(m_nExerciseId);
             databaseHandler.close();
@@ -219,7 +220,7 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
     private void returnToInfoActivityIfNeed(){
         if(m_bFromInfoActivity){
             Intent intent = new Intent(AddExerciseActivity.this, ExerciseInfoActivity.class);
-            intent.putExtra("id", m_nExerciseId);
+            intent.putExtra(TrainingConstants.EXTRA_ID_EXERCISE, m_nExerciseId);
             startActivity(intent);
         }
     }

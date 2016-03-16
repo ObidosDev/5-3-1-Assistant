@@ -39,7 +39,7 @@
     <string name="question_skip_deload_start_new_cycle">Start next cycle? Undo impossible!</string>
 
 
-    <string name="text_tip_how_fill_out_the_form">Enter the name of new exercise. Choose it\'s type. Than enter the weight, with which you can do this exercise less than 10 reps and count of reps which you do with this weight. At the end enter the weight which you want to do in 1RM and press save.</string>
+    <string name="text_tip_how_fill_out_the_form">Enter the name of new exercise. Choose type of the exercise. Than enter the weight, with which you can do this exercise less than 10 reps and count of reps which you do with this weight. At the end enter the weight which you want to do in 1RM and press save.</string>
     <string name="text_tip_how_use_chart">This chart show the changes of your body weight. Bars of different seasons have different colors. Add new record about your body weight minimum one time per cycle, it helps you better see and understand changes. You can delete selected record or edit it after double-click on record.</string>
     <string name="text_tip_how_use_chart_exercise">This chart show progress of 1RM which calculated via weight in last set of workout and count of reps which you enter after doing last set. Every workout except deload week you enter count of reps in last set, than calculated data displayed on this chart. You can remove selected record if you want.</string>
 

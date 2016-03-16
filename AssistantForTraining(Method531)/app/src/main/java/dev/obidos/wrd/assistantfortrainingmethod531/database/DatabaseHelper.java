@@ -304,34 +304,32 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     }
 
     public ExerciseData getExercise(long nId) {
-        ExerciseData exerciseData = null;
-            String selectQuery = "SELECT  * FROM " + TABLE_EXERCISES
-                    + " WHERE " + COL_INDEX + " = " + nId + ";";
-            SQLiteDatabase db = this.getWritableDatabase();
-            Cursor cursor = db.rawQuery(selectQuery, null);
-            exerciseData = new ExerciseData();
-            if (cursor.moveToFirst()) {
-                do {
-                    exerciseData.setId(Integer.parseInt(cursor.getString(0)));
-                    exerciseData.setName(cursor.getString(1));
-                    exerciseData.setType(cursor.getInt(2));
-                    exerciseData.setWeight(cursor.getDouble(3));
-                    exerciseData.setNumberCycle(cursor.getInt(4));
-                    exerciseData.setAimWeight(cursor.getString(5));
-                    exerciseData.setRecordWeight(cursor.getString(6));
-                    exerciseData.setColorNumber(cursor.getInt(7));
-                    exerciseData.setStatus(cursor.getInt(8));
+        String selectQuery = "SELECT  * FROM " + TABLE_EXERCISES
+                + " WHERE " + COL_INDEX + " = " + nId + ";";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        ExerciseData exerciseData = new ExerciseData();
+        if (cursor.moveToFirst()) {
+            do {
+                exerciseData.setId(Integer.parseInt(cursor.getString(0)));
+                exerciseData.setName(cursor.getString(1));
+                exerciseData.setType(cursor.getInt(2));
+                exerciseData.setWeight(cursor.getDouble(3));
+                exerciseData.setNumberCycle(cursor.getInt(4));
+                exerciseData.setAimWeight(cursor.getString(5));
+                exerciseData.setRecordWeight(cursor.getString(6));
+                exerciseData.setColorNumber(cursor.getInt(7));
+                exerciseData.setStatus(cursor.getInt(8));
 
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-            db.close();
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
         return exerciseData;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////Body weight
     public long addBodyWeight(BodyWeightData bodyWeightData) {
-        long nId = -1;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_WEIGHT, bodyWeightData.getWeight());
@@ -340,15 +338,15 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
         values.put(COL_DATE_MONTH, Integer.valueOf(strDates[1]));
         values.put(COL_DATE_YEAR, Integer.valueOf(strDates[2]));
 
-        nId = db.insert(TABLE_BODY_WEIGHT, null, values);
+        long nId = db.insert(TABLE_BODY_WEIGHT, null, values);
         db.close();
         return nId;
     }
 
     public void deleteAllBodyWeights() {
-            SQLiteDatabase db = this.getWritableDatabase();
-            db.delete(TABLE_BODY_WEIGHT, null, null);
-            db.close();
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_BODY_WEIGHT, null, null);
+        db.close();
     }
 
     public void deleteBodyWeight(long nId) {
@@ -358,66 +356,65 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     }
 
     public void updateBodyWeight(BodyWeightData bodyWeightData) {
-            SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
 
-            String updateQuery = "UPDATE " + TABLE_BODY_WEIGHT
-                    + " SET "
-                    + COL_WEIGHT + " = " + bodyWeightData.getWeight()
-                    + " WHERE " + COL_INDEX + " = " + bodyWeightData.getId() + ";";
-            db.execSQL(updateQuery);
+        String updateQuery = "UPDATE " + TABLE_BODY_WEIGHT
+                + " SET "
+                + COL_WEIGHT + " = " + bodyWeightData.getWeight()
+                + " WHERE " + COL_INDEX + " = " + bodyWeightData.getId() + ";";
+        db.execSQL(updateQuery);
 
-            String[] strDates = bodyWeightData.getStrDate().split("\\.");
+        String[] strDates = bodyWeightData.getStrDate().split("\\.");
 
-            updateQuery = "UPDATE " + TABLE_BODY_WEIGHT
-                    + " SET "
-                    + COL_DATE_DAY + " = " + strDates[0]
-                    + " WHERE " + COL_INDEX + " = " + bodyWeightData.getId() + ";";
-            db.execSQL(updateQuery);
+        updateQuery = "UPDATE " + TABLE_BODY_WEIGHT
+                + " SET "
+                + COL_DATE_DAY + " = " + strDates[0]
+                + " WHERE " + COL_INDEX + " = " + bodyWeightData.getId() + ";";
+        db.execSQL(updateQuery);
 
-            updateQuery = "UPDATE " + TABLE_BODY_WEIGHT
-                    + " SET "
-                    + COL_DATE_MONTH + " = " + strDates[1]
-                    + " WHERE " + COL_INDEX + " = " + bodyWeightData.getId() + ";";
-            db.execSQL(updateQuery);
+        updateQuery = "UPDATE " + TABLE_BODY_WEIGHT
+                + " SET "
+                + COL_DATE_MONTH + " = " + strDates[1]
+                + " WHERE " + COL_INDEX + " = " + bodyWeightData.getId() + ";";
+        db.execSQL(updateQuery);
 
-            updateQuery = "UPDATE " + TABLE_BODY_WEIGHT
-                    + " SET "
-                    + COL_DATE_YEAR + " = " + strDates[2]
-                    + " WHERE " + COL_INDEX + " = " + bodyWeightData.getId() + ";";
-            db.execSQL(updateQuery);
+        updateQuery = "UPDATE " + TABLE_BODY_WEIGHT
+                + " SET "
+                + COL_DATE_YEAR + " = " + strDates[2]
+                + " WHERE " + COL_INDEX + " = " + bodyWeightData.getId() + ";";
+        db.execSQL(updateQuery);
 
-            db.close();
+        db.close();
     }
 
     public ArrayList<BodyWeightData> getAllBodyWeights() {
         ArrayList<BodyWeightData> bodyWeightDatas = new ArrayList<BodyWeightData>();
-            String selectQuery = "SELECT  * FROM " + TABLE_BODY_WEIGHT
-                    + " ORDER BY " + COL_DATE_YEAR + ", "
-                    + COL_DATE_MONTH + ", "
-                    + COL_DATE_DAY + ";";
-            SQLiteDatabase db = this.getWritableDatabase();
-            Cursor cursor = db.rawQuery(selectQuery, null);
+        String selectQuery = "SELECT  * FROM " + TABLE_BODY_WEIGHT
+                + " ORDER BY " + COL_DATE_YEAR + ", "
+                + COL_DATE_MONTH + ", "
+                + COL_DATE_DAY + ";";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
-            if (cursor.moveToFirst()) {
-                do {
-                    BodyWeightData bodyWeightData = new BodyWeightData();
+        if (cursor.moveToFirst()) {
+            do {
+                BodyWeightData bodyWeightData = new BodyWeightData();
 
-                    bodyWeightData.setId(cursor.getInt(0));
-                    bodyWeightData.setWeight(cursor.getDouble(1));
-                    String strDate = cursor.getInt(2) + "." + cursor.getInt(3) + "." + cursor.getInt(4);
-                    bodyWeightData.setStrDate(strDate);
+                bodyWeightData.setId(cursor.getInt(0));
+                bodyWeightData.setWeight(cursor.getDouble(1));
+                String strDate = cursor.getInt(2) + "." + cursor.getInt(3) + "." + cursor.getInt(4);
+                bodyWeightData.setStrDate(strDate);
 
-                    bodyWeightDatas.add(bodyWeightData);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-            db.close();
+                bodyWeightDatas.add(bodyWeightData);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
         return bodyWeightDatas;
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////Exercise progress weight
     public long addExerciseChartWeight(ExerciseWeightData exerciseWeightData) {
-        long nId = -1;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_WEIGHT, exerciseWeightData.getWeight());
@@ -427,7 +424,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
         values.put(COL_DATE_MONTH, Integer.valueOf(strDates[1]));
         values.put(COL_DATE_YEAR, Integer.valueOf(strDates[2]));
 
-        nId = db.insert(TABLE_EXERCISE_CHART_WEIGHT, null, values);
+        long nId = db.insert(TABLE_EXERCISE_CHART_WEIGHT, null, values);
         db.close();
 
         setRecordWeightForExerciseById(exerciseWeightData.getIdExercise());
@@ -481,6 +478,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
                 nIdExercise = cursor.getInt(0);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         db.delete(TABLE_EXERCISE_CHART_WEIGHT, COL_INDEX + " = " + nId, null);
         db.close();
 
@@ -490,31 +488,30 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     }
 
     public ArrayList<ExerciseWeightData> getAllExerciseChartWeights(int nIdExercise) {
-
         ArrayList<ExerciseWeightData> exerciseWeightDatas = new ArrayList<ExerciseWeightData>();
-            String selectQuery = "SELECT  * FROM " + TABLE_EXERCISE_CHART_WEIGHT
-                    + " WHERE " + COL_INDEX_EXERCISE + "=" + nIdExercise
-                    + " ORDER BY " + COL_DATE_YEAR + ", "
-                    + COL_DATE_MONTH + ", "
-                    + COL_DATE_DAY + ";";
-            SQLiteDatabase db = this.getWritableDatabase();
-            Cursor cursor = db.rawQuery(selectQuery, null);
+        String selectQuery = "SELECT  * FROM " + TABLE_EXERCISE_CHART_WEIGHT
+                + " WHERE " + COL_INDEX_EXERCISE + "=" + nIdExercise
+                + " ORDER BY " + COL_DATE_YEAR + ", "
+                + COL_DATE_MONTH + ", "
+                + COL_DATE_DAY + ";";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
-            if (cursor.moveToFirst()) {
-                do {
-                    ExerciseWeightData bodyWeightData = new ExerciseWeightData();
+        if (cursor.moveToFirst()) {
+            do {
+                ExerciseWeightData bodyWeightData = new ExerciseWeightData();
 
-                    bodyWeightData.setId(cursor.getInt(0));
-                    bodyWeightData.setIdExercise(cursor.getInt(1));
-                    bodyWeightData.setWeight(cursor.getDouble(2));
-                    String strDate = cursor.getInt(3) + "." + cursor.getInt(4) + "." + cursor.getInt(5);
-                    bodyWeightData.setStrDate(strDate);
+                bodyWeightData.setId(cursor.getInt(0));
+                bodyWeightData.setIdExercise(cursor.getInt(1));
+                bodyWeightData.setWeight(cursor.getDouble(2));
+                String strDate = cursor.getInt(3) + "." + cursor.getInt(4) + "." + cursor.getInt(5);
+                bodyWeightData.setStrDate(strDate);
 
-                    exerciseWeightDatas.add(bodyWeightData);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-            db.close();
+                exerciseWeightDatas.add(bodyWeightData);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
         return exerciseWeightDatas;
     }
 

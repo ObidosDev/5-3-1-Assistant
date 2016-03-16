@@ -13,7 +13,7 @@ public class AssistantApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        m_sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_NAME,MODE_PRIVATE);
+        m_sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);
 
     }
 

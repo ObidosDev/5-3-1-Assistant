@@ -24,6 +24,7 @@ import dev.obidos.wrd.assistantfortrainingmethod531.activity.ExercisesActivity;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.DatabaseHelper;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseData;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.QuestionDialog;
+import dev.obidos.wrd.assistantfortrainingmethod531.tools.TrainingConstants;
 
 /**
  * Created by vobideyko on 8/14/15.
@@ -71,7 +72,7 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
                 case R.id.ivEdit:
                     closeMenu(true);
                     Intent intentEdit = new Intent(m_activity, AddExerciseActivity.class);
-                    intentEdit.putExtra("id",m_Dataset.get(m_nPosition).getId());
+                    intentEdit.putExtra(TrainingConstants.EXTRA_ID_EXERCISE, m_Dataset.get(m_nPosition).getId());
                     m_activity.startActivity(intentEdit);
                     break;
                 case R.id.ivRestore:
@@ -210,7 +211,7 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
                     holder.bMoved = false;
                     boolean find = positionInArrayList(position);
                     if (!find && !holder.bOpend
-                            && ((HorizontalScrollView) v).getScrollX() != 0) {
+                            && v.getScrollX() != 0) {
                         holder.horizontalScrollView.postDelayed(new Runnable() {
                             public void run() {
                                 m_arrayListPositionOpenMenu.add(position);
@@ -219,7 +220,7 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
                                 holder.bOpend = true;
                             }
                         }, 70L);
-                    } else if (find && ((HorizontalScrollView) v).getScrollX() != ((HorizontalScrollView) v).getChildAt(0).getWidth() - getScreenWidth(v.getContext().getApplicationContext())) {
+                    } else if (find && v.getScrollX() != ((HorizontalScrollView) v).getChildAt(0).getWidth() - getScreenWidth(v.getContext().getApplicationContext())) {
                         holder.bOpend = false;
                         closeMenu(true);
                     }
@@ -239,14 +240,13 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
         Display display = wm.getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
-        int width = metrics.widthPixels;
 
-        return width;
+        return metrics.widthPixels;
     }
 
     private boolean positionInArrayList(int position){
         for(Integer i : m_arrayListPositionOpenMenu){
-            if(i.intValue() == position){
+            if(i == position){
                 return true;
             }
         }

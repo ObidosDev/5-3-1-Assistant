@@ -13,6 +13,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import dev.obidos.wrd.assistantfortrainingmethod531.database.DatabaseHelper;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseWeightData;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.InfoDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.QuestionDialog;
+import dev.obidos.wrd.assistantfortrainingmethod531.tools.TrainingConstants;
 
 /**
  * Created by vobideyko on 8/18/15.
@@ -42,7 +44,7 @@ public class WeightExerciseChartActivity extends BaseActivity implements OnChart
 
         m_tvTitle = (TextView) findViewById(R.id.tvTitleActivity);
         setMediumFont(m_tvTitle);
-        m_tvTitle.setText(formatName(getString(R.string.exercise_chart_progress) + " '" +getIntent().getStringExtra("name") +"'",getResources().getInteger(R.integer.exercise_chart_title_length)));
+        m_tvTitle.setText(formatName(getString(R.string.exercise_chart_progress) + " '" +getIntent().getStringExtra(TrainingConstants.EXTRA_NAME_EXERCISE) +"'",getResources().getInteger(R.integer.exercise_chart_title_length)));
 
         m_ivBack = (ImageView) findViewById(R.id.ivBack);
         m_ivBack.setOnClickListener(this);
@@ -102,24 +104,24 @@ public class WeightExerciseChartActivity extends BaseActivity implements OnChart
 
     private void setData() {
         DatabaseHelper databaseHandler = new DatabaseHelper(this);
-        m_exerciseWeightDataArrayList = databaseHandler.getAllExerciseChartWeights(getIntent().getIntExtra("id",-1));
+        m_exerciseWeightDataArrayList = databaseHandler.getAllExerciseChartWeights(getIntent().getIntExtra(TrainingConstants.EXTRA_ID_EXERCISE,-1));
         databaseHandler.close();
         mChart.clear();
 
-        ArrayList<String> xVals = new ArrayList<String>();
+        ArrayList<String> xValues = new ArrayList<>();
         for (ExerciseWeightData exerciseWeightData : m_exerciseWeightDataArrayList) {
-            xVals.add(exerciseWeightData.getStrDate());
+            xValues.add(exerciseWeightData.getStrDate());
         }
 
-        ArrayList<Entry> yValsYear = new ArrayList<Entry>();
+        ArrayList<Entry> yValuesYear = new ArrayList<>();
 
         for (int i = 0; i < m_exerciseWeightDataArrayList.size(); i++) {
-            yValsYear.add(new BarEntry((float) m_exerciseWeightDataArrayList.get(i).getWeight(), i));
+            yValuesYear.add(new BarEntry((float) m_exerciseWeightDataArrayList.get(i).getWeight(), i));
         }
 
-        LineDataSet weightSet = new LineDataSet(yValsYear, "Weight");
+        LineDataSet weightSet = new LineDataSet(yValuesYear, "Weight");
 
-        ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
 
         ArrayList<Integer> colorsArrayList = new ArrayList<>();
         colorsArrayList.add(getResources().getColor(R.color.accent));
@@ -127,7 +129,7 @@ public class WeightExerciseChartActivity extends BaseActivity implements OnChart
         weightSet.setColors(colorsArrayList);
         dataSets.add(weightSet);
 
-        LineData data = new LineData(xVals, dataSets);
+        LineData data = new LineData(xValues, dataSets);
         data.setValueTextSize(13f);
         data.setValueTypeface(getTypeFace());
 
@@ -139,7 +141,6 @@ public class WeightExerciseChartActivity extends BaseActivity implements OnChart
         setData();
     }
 
-    @SuppressLint("NewApi")
     @Override
     public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
 

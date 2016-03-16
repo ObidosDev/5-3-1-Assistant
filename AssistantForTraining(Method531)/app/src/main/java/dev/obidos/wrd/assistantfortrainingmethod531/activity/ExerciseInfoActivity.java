@@ -4,7 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
-import android.util.Log;
+import android.text.SpannableString;
+import android.text.style.StrikethroughSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,6 +22,7 @@ import dev.obidos.wrd.assistantfortrainingmethod531.database.DatabaseHelper;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseData;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.QuestionDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.TimerDialog;
+import dev.obidos.wrd.assistantfortrainingmethod531.tools.TrainingConstants;
 import dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView;
 
 /**
@@ -41,27 +43,6 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
 
     private TextView m_tvTitleName;
     private TextView m_tvWeekType,m_tvCycleNumber,m_tvMaxWeight,m_tvRecordWeight;
-
-    private int[] m_nArrRepsWarmUp = {5, 5, 5};//default warm up
-    private int[] m_nArrRepsWarmUpDeload = {5, 5, 5};//warm up deload
-
-    private int[] m_nArrRepsWorkout1 = {5, 5, 5};// 555 week reps
-    private int[] m_nArrRepsWorkout2 = {3, 3, 3};// 333 week reps
-    private int[] m_nArrRepsWorkout3 = {5, 3, 1};// 531 week reps
-
-    private int[] m_nArrRepsWorkoutDeload = {5, 5, 5};// deload reps
-
-    private float[] m_fArrWeightWarmUp = {0.4f, 0.5f, 0.6f};
-    private float[] m_fArrWeightWarmUpDeload = {0.4f, 0.4f, 0.5f};
-
-    private float[] m_fArrWeightWorkout1 = {0.65f, 0.75f, 0.85f};// 555 week weight
-    private float[] m_fArrWeightWorkout2 = {0.70f, 0.80f, 0.90f};// 333 week weight
-    private float[] m_fArrWeightWorkout3 = {0.75f, 0.85f, 0.95f};// 531 week weight
-
-    private float[] m_fArrWeightWorkoutDeload = {0.5f, 0.6f, 0.6f};
-
-    private float m_fCoefficientBbb = 0.5f; //BigButBoring weight coefficient
-    private int[] m_nArrIntBbbReps = {10, 10, 10, 10, 10};// BigButBoring reps
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +65,7 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
     protected void onResume() {
         super.onResume();
         DatabaseHelper databaseHandler = new DatabaseHelper(this);
-        m_exerciseData = databaseHandler.getExercise(getIntent().getIntExtra("id",-1));
+        m_exerciseData = databaseHandler.getExercise(getIntent().getIntExtra(TrainingConstants.EXTRA_ID_EXERCISE, -1));
         databaseHandler.close();
         m_tvRecordWeight.setText(m_exerciseData.getRecordWeight());
     }
@@ -188,7 +169,7 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
 
     private void initData(){
         DatabaseHelper databaseHandler = new DatabaseHelper(this);
-        m_exerciseData = databaseHandler.getExercise(getIntent().getIntExtra("id",-1));
+        m_exerciseData = databaseHandler.getExercise(getIntent().getIntExtra(TrainingConstants.EXTRA_ID_EXERCISE,-1));
         databaseHandler.close();
         m_tvTitleName.setText(formatName(m_exerciseData.getName(), getResources().getInteger(R.integer.exercise_info_title_length)));
 
@@ -236,64 +217,64 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
                 case 0:
                 case 3:
                     setBoringButBigVisible(isBoringButBigEnable());
-                    setWeek(m_fArrWeightWarmUp,
-                            m_fArrWeightWorkout1,
-                            m_nArrRepsWarmUp,
-                            m_nArrRepsWorkout1,false);
+                    setWeek(TrainingConstants.ARRAY_WEIGHT_WARM_UP,
+                            TrainingConstants.ARRAY_WEIGHT_WORKOUT_1,
+                            TrainingConstants.ARRAY_REPS_WARM_UP,
+                            TrainingConstants.ARRAY_REPS_WORKOUT_1,false);
                     break;
                 case 1:
                 case 4:
                     setBoringButBigVisible(isBoringButBigEnable());
-                    setWeek(m_fArrWeightWarmUp,
-                            m_fArrWeightWorkout2,
-                            m_nArrRepsWarmUp,
-                            m_nArrRepsWorkout2, false);
+                    setWeek(TrainingConstants.ARRAY_WEIGHT_WARM_UP,
+                            TrainingConstants.ARRAY_WEIGHT_WORKOUT_2,
+                            TrainingConstants.ARRAY_REPS_WARM_UP,
+                            TrainingConstants.ARRAY_REPS_WORKOUT_2, false);
                     break;
                 case 2:
                 case 5:
                     setBoringButBigVisible(isBoringButBigEnable());
-                    setWeek(m_fArrWeightWarmUp,
-                            m_fArrWeightWorkout3,
-                            m_nArrRepsWarmUp,
-                            m_nArrRepsWorkout3, false);
+                    setWeek(TrainingConstants.ARRAY_WEIGHT_WARM_UP,
+                            TrainingConstants.ARRAY_WEIGHT_WORKOUT_3,
+                            TrainingConstants.ARRAY_REPS_WARM_UP,
+                            TrainingConstants.ARRAY_REPS_WORKOUT_3, false);
                     break;
                 case 6:
                     setBoringButBigVisible(false);
-                    setWeek(m_fArrWeightWarmUpDeload,
-                            m_fArrWeightWorkoutDeload,
-                            m_nArrRepsWarmUpDeload,
-                            m_nArrRepsWorkoutDeload,true);
+                    setWeek(TrainingConstants.ARRAY_WEIGHT_WARM_UP_DELOAD,
+                            TrainingConstants.ARRAY_WEIGHT_WORKOUT_DELOAD,
+                            TrainingConstants.ARRAY_REPS_WARM_UP_DELOAD,
+                            TrainingConstants.ARRAY_REPS_WORKOUT_DELOAD,true);
                     break;
             }
         } else {
             switch (getWeekOfCycle()) {
                 case 0:
                     setBoringButBigVisible(isBoringButBigEnable());
-                    setWeek(m_fArrWeightWarmUp,
-                            m_fArrWeightWorkout1,
-                            m_nArrRepsWarmUp,
-                            m_nArrRepsWorkout1,false);
+                    setWeek(TrainingConstants.ARRAY_WEIGHT_WARM_UP,
+                            TrainingConstants.ARRAY_WEIGHT_WORKOUT_1,
+                            TrainingConstants.ARRAY_REPS_WARM_UP,
+                            TrainingConstants.ARRAY_REPS_WORKOUT_1,false);
                     break;
                 case 1:
                     setBoringButBigVisible(isBoringButBigEnable());
-                    setWeek(m_fArrWeightWarmUp,
-                            m_fArrWeightWorkout2,
-                            m_nArrRepsWarmUp,
-                            m_nArrRepsWorkout2, false);
+                    setWeek(TrainingConstants.ARRAY_WEIGHT_WARM_UP,
+                            TrainingConstants.ARRAY_WEIGHT_WORKOUT_2,
+                            TrainingConstants.ARRAY_REPS_WARM_UP,
+                            TrainingConstants.ARRAY_REPS_WORKOUT_2, false);
                     break;
                 case 2:
                     setBoringButBigVisible(isBoringButBigEnable());
-                    setWeek(m_fArrWeightWarmUp,
-                            m_fArrWeightWorkout3,
-                            m_nArrRepsWarmUp,
-                            m_nArrRepsWorkout3, false);
+                    setWeek(TrainingConstants.ARRAY_WEIGHT_WARM_UP,
+                            TrainingConstants.ARRAY_WEIGHT_WORKOUT_3,
+                            TrainingConstants.ARRAY_REPS_WARM_UP,
+                            TrainingConstants.ARRAY_REPS_WORKOUT_3, false);
                     break;
                 case 3:
                     setBoringButBigVisible(false);
-                    setWeek(m_fArrWeightWarmUpDeload,
-                            m_fArrWeightWorkoutDeload,
-                            m_nArrRepsWarmUpDeload,
-                            m_nArrRepsWorkoutDeload,true);
+                    setWeek(TrainingConstants.ARRAY_WEIGHT_WARM_UP_DELOAD,
+                            TrainingConstants.ARRAY_WEIGHT_WORKOUT_DELOAD,
+                            TrainingConstants.ARRAY_REPS_WARM_UP_DELOAD,
+                            TrainingConstants.ARRAY_REPS_WORKOUT_DELOAD,true);
                     break;
             }
         }
@@ -332,7 +313,7 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
                 BigDecimal bdWeightOldRecord = new BigDecimal(strWeightOldRecord);
                 bdWeightOldRecord = bdWeightOldRecord.subtract(bdWeightLastSet);
                 bdWeightOldRecord = bdWeightOldRecord.divide(bdWeightLastSet, 10, RoundingMode.HALF_DOWN);
-                bdWeightOldRecord = (bdWeightOldRecord.divide(new BigDecimal("0.0333"), 0, RoundingMode.HALF_DOWN)).add(BigDecimal.ONE);
+                bdWeightOldRecord = (bdWeightOldRecord.divide(new BigDecimal(TrainingConstants.SPECIAL_CONST_FOR_RM_CALCULATION), 0, RoundingMode.HALF_DOWN)).add(BigDecimal.ONE);
                 String strCountRepsForNewRecord = String.valueOf(bdWeightOldRecord.intValue());
                 strHowManyRepsToRecord = "(x" + strCountRepsForNewRecord + "+)";
             }
@@ -362,8 +343,8 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.ivChart:
                 Intent chartIntent = new Intent(this, WeightExerciseChartActivity.class);
-                chartIntent.putExtra("name", m_exerciseData.getName());
-                chartIntent.putExtra("id", m_exerciseData.getId());
+                chartIntent.putExtra(TrainingConstants.EXTRA_NAME_EXERCISE, m_exerciseData.getName());
+                chartIntent.putExtra(TrainingConstants.EXTRA_ID_EXERCISE, m_exerciseData.getId());
                 startActivity(chartIntent);
                 break;
             case R.id.ivTimer:
@@ -374,61 +355,85 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.llWarmUpSet1:
                 ind = 0;
-                m_arrayListChkImageView.get(ind).changeCheckState();
+                changeStateOfSetLine(ind);
                 break;
             case R.id.llWarmUpSet2:
                 ind = 1;
-                m_arrayListChkImageView.get(ind).changeCheckState();
+                changeStateOfSetLine(ind);
                 break;
             case R.id.llWarmUpSet3:
                 ind = 2;
-                m_arrayListChkImageView.get(ind).changeCheckState();
+                changeStateOfSetLine(ind);
                 break;
             case R.id.llWorkoutSet1:
                 ind = 3;
-                m_arrayListChkImageView.get(ind).changeCheckState();
+                changeStateOfSetLine(ind);
                 break;
             case R.id.llWorkoutSet2:
                 ind = 4;
-                m_arrayListChkImageView.get(ind).changeCheckState();
+                changeStateOfSetLine(ind);
                 break;
             case R.id.llWorkoutSet3:
                 ind = 5;
-                m_arrayListChkImageView.get(ind).changeCheckState();
+                changeStateOfSetLine(ind);
                 if(m_arrayListChkImageView.get(ind).isChecked() && ((!isSixWeekCycle() && getWeekOfCycle()!=3) || (isSixWeekCycle() && getWeekOfCycle()!=6))){
                     Intent lastSetCalc = new Intent(this,LastSetCalculationActivity.class);
-                    lastSetCalc.putExtra("id", m_exerciseData.getId());
-                    lastSetCalc.putExtra("last_set_weight", m_arrayListTVWeights.get(5).getText().toString());
-                    lastSetCalc.putExtra("aim_weight", m_exerciseData.getAimWeight());
+                    lastSetCalc.putExtra(TrainingConstants.EXTRA_ID_EXERCISE, m_exerciseData.getId());
+                    lastSetCalc.putExtra(TrainingConstants.EXTRA_LAST_SET_WEIGHT_EXERCISE, m_arrayListTVWeights.get(5).getText().toString());
+                    lastSetCalc.putExtra(TrainingConstants.EXTRA_AIM_WEIGHT_EXERCISE, m_exerciseData.getAimWeight());
                     startActivity(lastSetCalc);
                 }
                 break;
             case R.id.llBoringButBigSet1:
                 ind = 6;
-                m_arrayListChkImageView.get(ind).changeCheckState();
+                changeStateOfSetLine(ind);
                 break;
             case R.id.llBoringButBigSet2:
                 ind = 7;
-                m_arrayListChkImageView.get(ind).changeCheckState();
+                changeStateOfSetLine(ind);
                 break;
             case R.id.llBoringButBigSet3:
                 ind = 8;
-                m_arrayListChkImageView.get(ind).changeCheckState();
+                changeStateOfSetLine(ind);
                 break;
             case R.id.llBoringButBigSet4:
                 ind = 9;
-                m_arrayListChkImageView.get(ind).changeCheckState();
+                changeStateOfSetLine(ind);
                 break;
             case R.id.llBoringButBigSet5:
                 ind = 10;
-                m_arrayListChkImageView.get(ind).changeCheckState();
+                changeStateOfSetLine(ind);
                 break;
         }
     }
 
+    private void changeStateOfSetLine(int ind){
+        m_arrayListChkImageView.get(ind).changeCheckState();
+
+        String charSequenceReps = m_arrayListTVReps.get(ind).getText().toString();
+        SpannableString spannableStringReps = new SpannableString(charSequenceReps);
+
+        String charSequenceWeight = m_arrayListTVWeights.get(ind).getText().toString();
+        SpannableString spannableStringWeight = new SpannableString(charSequenceWeight);
+
+        if(m_arrayListChkImageView.get(ind).isChecked()){
+            m_arrayListTVWeights.get(ind).setTextColor(getResources().getColor(R.color.secondary_text));
+            m_arrayListTVReps.get(ind).setTextColor(getResources().getColor(R.color.secondary_text));
+
+            spannableStringReps.setSpan(new StrikethroughSpan(), 0, spannableStringReps.length(), 0);
+            spannableStringWeight.setSpan(new StrikethroughSpan(), 0, spannableStringWeight.length(), 0);
+        } else {
+            m_arrayListTVWeights.get(ind).setTextColor(getResources().getColor(R.color.primary_text));
+            m_arrayListTVReps.get(ind).setTextColor(getResources().getColor(R.color.primary_text));
+        }
+
+        m_arrayListTVReps.get(ind).setText(spannableStringReps, TextView.BufferType.SPANNABLE);
+        m_arrayListTVWeights.get(ind).setText(spannableStringWeight, TextView.BufferType.SPANNABLE);
+    }
+
     private void getStuckCalc(){
         BigDecimal weightB = new BigDecimal(m_exerciseData.getWeight());
-        weightB = weightB.multiply(new BigDecimal("0.9"));
+        weightB = weightB.multiply(new BigDecimal(TrainingConstants.GET_STUCK_CONST));
         double newWeight = weightB.doubleValue();
         m_exerciseData.setWeight(newWeight);
     }
@@ -443,8 +448,8 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
         switch (item.getItemId()) {
             case R.id.item_edit:
                 Intent intent = new Intent(ExerciseInfoActivity.this, AddExerciseActivity.class);
-                intent.putExtra("id",m_exerciseData.getId());
-                intent.putExtra("info",true);
+                intent.putExtra(TrainingConstants.EXTRA_ID_EXERCISE,m_exerciseData.getId());
+                intent.putExtra(TrainingConstants.EXTRA_FROM_INFO_EXERCISE_ACTIVITY,true);
                 startActivity(intent);
                 finish();
                 return true;
@@ -535,8 +540,8 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
     private void setBoringButBigVisible(boolean isVisible){
         if(isVisible){
             m_llBoringButBigContent.setVisibility(View.VISIBLE);
-            setBoringButBigWeight(m_fCoefficientBbb);
-            setBoringButBigReps(m_nArrIntBbbReps);
+            setBoringButBigWeight(TrainingConstants.COEFFICIENT_BORING_BUT_BIG);
+            setBoringButBigReps(TrainingConstants.ARRAY_REPS_BORING_BUT_BIG);
         } else {
             m_llBoringButBigContent.setVisibility(View.GONE);
             for (int i = 6; i < 11; i++) {

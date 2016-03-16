@@ -1,6 +1,7 @@
 package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -10,14 +11,19 @@ import android.widget.ImageView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dev.obidos.wrd.assistantfortrainingmethod531.R;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.BodyWeightData;
@@ -142,21 +148,21 @@ public class WeightChartActivity extends BaseActivity implements OnChartValueSel
         databaseHandler.close();
         mChart.clear();
 
-        ArrayList<String> xVals = new ArrayList<String>();
+        ArrayList<String> xValues = new ArrayList<>();
         for (BodyWeightData bodyWeightData : m_bodyWeightDataArrayList) {
-            xVals.add(bodyWeightData.getStrDate());
+            xValues.add(bodyWeightData.getStrDate());
         }
 
-        ArrayList<BarEntry> yValsYear = new ArrayList<BarEntry>();
+        ArrayList<BarEntry> yValuesYear = new ArrayList<>();
 
         for (int i = 0; i < m_bodyWeightDataArrayList.size(); i++) {
-            yValsYear.add(new BarEntry((float) m_bodyWeightDataArrayList.get(i).getWeight(), i));
+            yValuesYear.add(new BarEntry((float) m_bodyWeightDataArrayList.get(i).getWeight(), i));
         }
 
-        BarDataSet weightSet = new BarDataSet(yValsYear, "Weight");
-        weightSet.setBarSpacePercent(20f);
+        BarDataSet weightSet = new BarDataSet(yValuesYear, "Weight");
+        weightSet.setBarSpacePercent(10f);
 
-        ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
+        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
 
         ArrayList<Integer> colorsArrayList = new ArrayList<>();
         for (BodyWeightData bodyWeightData : m_bodyWeightDataArrayList) {
@@ -190,7 +196,7 @@ public class WeightChartActivity extends BaseActivity implements OnChartValueSel
         weightSet.setColors(colorsArrayList);
         dataSets.add(weightSet);
 
-        BarData data = new BarData(xVals, dataSets);
+        BarData data = new BarData(xValues, dataSets);
         data.setValueTextSize(13f);
         data.setValueTypeface(getTypeFace());
         data.setGroupSpace(0f);
@@ -203,7 +209,6 @@ public class WeightChartActivity extends BaseActivity implements OnChartValueSel
         setData();
     }
 
-    @SuppressLint("NewApi")
     @Override
     public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
 

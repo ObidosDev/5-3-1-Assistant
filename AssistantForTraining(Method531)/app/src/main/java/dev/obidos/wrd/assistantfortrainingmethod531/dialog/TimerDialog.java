@@ -58,7 +58,7 @@ public class TimerDialog extends Dialog implements View.OnClickListener {
         m_Activity.setRegularFont(m_tvTitle);
         m_Activity.setRegularFont(m_tvTimerValue);
 
-        timer = new TimerRest(m_Activity.getTimeBetweenSets(),500);
+        timer = new TimerRest(m_Activity.getTimeBetweenSets(), 500);
         timer.start();
     }
 

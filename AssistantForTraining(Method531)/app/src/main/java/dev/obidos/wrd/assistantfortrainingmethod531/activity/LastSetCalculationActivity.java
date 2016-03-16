@@ -19,6 +19,7 @@ import dev.obidos.wrd.assistantfortrainingmethod531.R;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.DatabaseHelper;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseWeightData;
 import dev.obidos.wrd.assistantfortrainingmethod531.tools.DateConverter;
+import dev.obidos.wrd.assistantfortrainingmethod531.tools.TrainingConstants;
 
 /**
  * Created by vobideyko on 8/18/15.
@@ -41,7 +42,7 @@ public class LastSetCalculationActivity extends BaseActivity implements View.OnC
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
-        m_nExerciseId = getIntent().getIntExtra("id", -2);
+        m_nExerciseId = getIntent().getIntExtra(TrainingConstants.EXTRA_ID_EXERCISE, -2);
         if(m_nExerciseId==-2){
             finish();
         }
@@ -57,13 +58,13 @@ public class LastSetCalculationActivity extends BaseActivity implements View.OnC
         m_ivCancel.setOnClickListener(this);
 
         m_tvAimWeight = (TextView) findViewById(R.id.tvAimWeight);
-        m_tvAimWeight.setText(getIntent().getStringExtra("aim_weight"));
+        m_tvAimWeight.setText(getIntent().getStringExtra(TrainingConstants.EXTRA_AIM_WEIGHT_EXERCISE));
 
         m_tvCalcWeightLastSet = (TextView) findViewById(R.id.tvCalcWeightLastSet);
         m_tvPercentage = (TextView) findViewById(R.id.tvPercent);
 
         m_tvWeightLastSet = (TextView) findViewById(R.id.tvWeightLastSet);
-        m_tvWeightLastSet.setText(getIntent().getStringExtra("last_set_weight"));
+        m_tvWeightLastSet.setText(getIntent().getStringExtra(TrainingConstants.EXTRA_LAST_SET_WEIGHT_EXERCISE));
 
         m_edtRepeatCount = (EditText) findViewById(R.id.edtCountRepsLastSet);
         m_edtRepeatCount.addTextChangedListener(new TextWatcher() {
@@ -160,9 +161,9 @@ public class LastSetCalculationActivity extends BaseActivity implements View.OnC
 
         BigDecimal calcWeight = new BigDecimal(strWorkWeight);
         BigDecimal coef = new BigDecimal(strRepsCount);
-        coef = (coef.multiply(new BigDecimal("0.0333"))).add(BigDecimal.ONE);
+        coef = (coef.multiply(new BigDecimal(TrainingConstants.SPECIAL_CONST_FOR_RM_CALCULATION))).add(BigDecimal.ONE);
 
-        //coef = coef.multiply(new BigDecimal("0.9"));//if add it than we obtain TM instead RM
+        //coef = coef.multiply(new BigDecimal("0.9"));//if add it than we obtain TM (Training maximum) instead RM (Rep maximum)
 
         calcWeight = calcWeight.multiply(coef);
         calcWeight = calcWeight.setScale(2, RoundingMode.HALF_UP);
