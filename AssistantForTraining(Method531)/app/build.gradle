@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "dev.obidos.wrd.assistantfortrainingmethod531"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 23
     }
     buildTypes {

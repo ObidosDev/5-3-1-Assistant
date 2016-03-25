@@ -90,7 +90,7 @@
                     android:fadeScrollbars="true"
                     android:divider="@color/divider"
                     android:visibility="visible"
-                    android:dividerHeight="5dp" />
+                    android:dividerHeight="1dp" />
 
                 <TextView
                     android:layout_width="match_parent"

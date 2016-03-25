@@ -2,6 +2,10 @@ package dev.obidos.wrd.assistantfortrainingmethod531.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -48,7 +52,7 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
         public int m_nPosition;
 
         public boolean bMoved = false;
-        public boolean bOpend = false;
+        public boolean bOpened = false;
         public ViewHolder(View v) {
             super(v);
             ivEdit = (ImageView) v.findViewById(R.id.ivEdit);
@@ -172,8 +176,10 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
         holder.tvNameExercise.setText(m_Dataset.get(position).getName());
         holder.tvCycleNumber.setText(m_activity.getResources().getString(R.string.text_cycle_number) + m_Dataset.get(position).getNumberCycle());
         holder.tv1tm.setText(m_activity.getResources().getString(R.string.tm) + " " + m_activity.formatWeight(m_Dataset.get(position).getWeight()));
-        int[] markerColors = m_activity.getResources().getIntArray(R.array.marker_colors);
-        holder.ivMarker.setBackgroundColor(markerColors[m_Dataset.get(position).getColorNumber()]);
+        int markerColor = m_activity.getResources().getIntArray(R.array.marker_colors)[m_Dataset.get(position).getColorNumber()];
+        holder.ivMarker.setBackgroundColor(markerColor);
+
+        holder.linearLayoutItem.setBackground(makeSelector(markerColor));
 
         if(m_Dataset.get(position).getStatus()==DatabaseHelper.STATUS_DELETED){
             holder.ivRestore.setVisibility(View.VISIBLE);
@@ -184,14 +190,14 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
 
     private void setHorizontalScrollViewSettings(final ViewHolder holder,final int position){
         if(!m_arrayListPositionOpenMenu.isEmpty() && positionInArrayList(position)){
-            holder.bOpend = true;
+            holder.bOpened = true;
             holder.horizontalScrollView.postDelayed(new Runnable() {
                 public void run() {
                     holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
                 }
             }, 10L);
         } else {
-            holder.bOpend = false;
+            holder.bOpened = false;
             holder.horizontalScrollView.postDelayed(new Runnable() {
                 public void run() {
                     holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_LEFT);
@@ -210,18 +216,18 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
                         && holder.bMoved) {
                     holder.bMoved = false;
                     boolean find = positionInArrayList(position);
-                    if (!find && !holder.bOpend
+                    if (!find && !holder.bOpened
                             && v.getScrollX() != 0) {
                         holder.horizontalScrollView.postDelayed(new Runnable() {
                             public void run() {
                                 m_arrayListPositionOpenMenu.add(position);
                                 closeMenu(false);
                                 holder.horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
-                                holder.bOpend = true;
+                                holder.bOpened = true;
                             }
                         }, 70L);
                     } else if (find && v.getScrollX() != ((HorizontalScrollView) v).getChildAt(0).getWidth() - getScreenWidth(v.getContext().getApplicationContext())) {
-                        holder.bOpend = false;
+                        holder.bOpened = false;
                         closeMenu(true);
                     }
                 }
@@ -270,5 +276,13 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
     public void setExerciseDataArrayList(ArrayList<ExerciseData> exerciseDataArrayList){
         m_Dataset = exerciseDataArrayList;
         this.notifyDataSetChanged();
+    }
+
+    private StateListDrawable makeSelector(int color) {
+        StateListDrawable res = new StateListDrawable();
+        res.setAlpha(80);
+        res.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(color));
+        res.addState(new int[]{}, new ColorDrawable(Color.WHITE));
+        return res;
     }
 }
