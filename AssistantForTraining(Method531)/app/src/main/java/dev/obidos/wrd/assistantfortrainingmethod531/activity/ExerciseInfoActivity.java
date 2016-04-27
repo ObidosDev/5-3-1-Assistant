@@ -117,7 +117,7 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
 
         for(CheckableImageView checkableImageView : m_arrayListChkImageView){
             checkableImageView.setChecked(false);
-            checkableImageView.setDrawable(R.drawable.png_checkmark, -1);
+            checkableImageView.setDrawable(R.drawable.svg_checkbox_on, R.drawable.svg_checkbox_off, this);
         }
 
         //Weight
@@ -417,14 +417,14 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
         SpannableString spannableStringWeight = new SpannableString(charSequenceWeight);
 
         if(m_arrayListChkImageView.get(ind).isChecked()){
-            m_arrayListTVWeights.get(ind).setTextColor(getResources().getColor(R.color.secondary_text));
-            m_arrayListTVReps.get(ind).setTextColor(getResources().getColor(R.color.secondary_text));
+            m_arrayListTVWeights.get(ind).setTextColor(getResources().getColor(R.color.colorSecondaryText));
+            m_arrayListTVReps.get(ind).setTextColor(getResources().getColor(R.color.colorSecondaryText));
 
             spannableStringReps.setSpan(new StrikethroughSpan(), 0, spannableStringReps.length(), 0);
             spannableStringWeight.setSpan(new StrikethroughSpan(), 0, spannableStringWeight.length(), 0);
         } else {
-            m_arrayListTVWeights.get(ind).setTextColor(getResources().getColor(R.color.primary_text));
-            m_arrayListTVReps.get(ind).setTextColor(getResources().getColor(R.color.primary_text));
+            m_arrayListTVWeights.get(ind).setTextColor(getResources().getColor(R.color.colorPrimaryText));
+            m_arrayListTVReps.get(ind).setTextColor(getResources().getColor(R.color.colorPrimaryText));
         }
 
         m_arrayListTVReps.get(ind).setText(spannableStringReps, TextView.BufferType.SPANNABLE);

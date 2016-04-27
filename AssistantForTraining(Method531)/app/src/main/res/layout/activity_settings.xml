@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/titleBar_height"
         android:layout_weight="0"
-        android:background="@color/primary"
+        android:background="@color/colorPrimary"
         android:gravity="center">
 
         <ImageView
@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_big_settings">
 
                     <LinearLayout
@@ -68,7 +68,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minHeight="@dimen/items_subtitle_settings"
-                        android:background="@color/primary_light"
+                        android:background="@color/colorPrimaryLight"
                         android:clickable="true"
                         android:gravity="center">
 
@@ -77,7 +77,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/settings_general"
                             android:id="@+id/tvTitleGeneral"
-                            android:textColor="@color/primary_dark"
+                            android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/items_settings"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_settings">
 
                     <LinearLayout
@@ -122,7 +122,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/settings_cycles_calculation"
                             android:id="@+id/tvStartStop"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                         <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
@@ -142,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/titleBar_height"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_settings">
 
                     <LinearLayout
@@ -180,7 +180,7 @@
                                 android:text="@string/start_date"
                                 android:id="@+id/tvSetStartDate"
                                 android:clickable="false"
-                                android:textColor="@color/primary_text"
+                                android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_size_settings_main"/>
 
                             <TextView
@@ -190,7 +190,7 @@
                                 android:text="9.7.15"
                                 android:clickable="false"
                                 android:id="@+id/tvSetStartDateValue"
-                                android:textColor="@color/secondary_text"
+                                android:textColor="@color/colorSecondaryText"
                                 android:textSize="@dimen/text_size_settings_secondary"/>
                         </LinearLayout>
 
@@ -203,7 +203,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/titleBar_height"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_settings">
 
                     <LinearLayout
@@ -234,7 +234,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/reset_all_btn"
                             android:id="@+id/tvResetAll"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
@@ -246,7 +246,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/titleBar_height"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_settings">
 
                     <LinearLayout
@@ -277,7 +277,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/reset_chart_btn"
                             android:id="@+id/tvResetChart"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
@@ -289,7 +289,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/titleBar_height"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_settings">
 
                     <LinearLayout
@@ -320,7 +320,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/settings_reset_all_charts_exercises"
                             android:id="@+id/tvResetExerciseChart"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
@@ -332,7 +332,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/titleBar_height"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_big_settings">
 
                     <LinearLayout
@@ -363,7 +363,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/delete_all_exercises"
                             android:id="@+id/tvDeleteAllExercises"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
@@ -374,7 +374,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_big_settings">
 
                     <LinearLayout
@@ -385,7 +385,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minHeight="@dimen/items_subtitle_settings"
-                        android:background="@color/primary_light"
+                        android:background="@color/colorPrimaryLight"
                         android:clickable="true"
                         android:gravity="center">
 
@@ -394,7 +394,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/settings_workout"
                             android:id="@+id/tvTitleWorkout"
-                            android:textColor="@color/primary_dark"
+                            android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
@@ -406,7 +406,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/items_settings"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_settings">
 
                     <LinearLayout
@@ -437,7 +437,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/boring_but_big_settings"
                             android:id="@+id/tvBoringButBig"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                         <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
@@ -457,7 +457,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/titleBar_height"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_settings">
 
                     <LinearLayout
@@ -495,7 +495,7 @@
                                 android:text="@string/min_plate_weight"
                                 android:id="@+id/tvPlateWeight"
                                 android:clickable="false"
-                                android:textColor="@color/primary_text"
+                                android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_size_settings_main"/>
 
                             <TextView
@@ -505,7 +505,7 @@
                                 android:text="2.5"
                                 android:clickable="false"
                                 android:id="@+id/tvPlateWeightValue"
-                                android:textColor="@color/secondary_text"
+                                android:textColor="@color/colorSecondaryText"
                                 android:textSize="@dimen/text_size_settings_secondary"/>
                         </LinearLayout>
 
@@ -518,7 +518,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/titleBar_height"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_big_settings">
 
                     <LinearLayout
@@ -553,7 +553,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/settings_time_between_sets"
                                 android:id="@+id/tvTimer"
-                                android:textColor="@color/primary_text"
+                                android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_size_settings_main"/>
 
                             <TextView
@@ -562,7 +562,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="00:30"
                                 android:id="@+id/tvTimerValue"
-                                android:textColor="@color/secondary_text"
+                                android:textColor="@color/colorSecondaryText"
                                 android:textSize="@dimen/text_size_settings_secondary"/>
                             </LinearLayout>
 
@@ -575,7 +575,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/items_settings"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_settings">
 
                     <LinearLayout
@@ -606,7 +606,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/settings_vibration"
                             android:id="@+id/tvVibration"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                         <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
@@ -625,7 +625,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_big_settings">
 
                     <LinearLayout
@@ -637,7 +637,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minHeight="@dimen/items_subtitle_settings"
-                        android:background="@color/primary_light"
+                        android:background="@color/colorPrimaryLight"
                         android:clickable="true"
                         android:gravity="center">
 
@@ -646,7 +646,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/settings_cycle"
                             android:id="@+id/tvTitleCycle"
-                            android:textColor="@color/primary_dark"
+                            android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
@@ -658,7 +658,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/items_settings"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_settings">
 
                     <LinearLayout
@@ -689,7 +689,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/six_week_cycle_settings"
                             android:id="@+id/tvSixWeekCycle"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                         <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
@@ -710,7 +710,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/items_settings"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_settings">
 
                     <LinearLayout
@@ -741,7 +741,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/settings_skip_deload"
                             android:id="@+id/tvSkipDeload"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                         <dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView
@@ -761,7 +761,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/titleBar_height"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_settings">
 
                     <LinearLayout
@@ -796,7 +796,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/additional_weight_for_top"
                                 android:id="@+id/tvAddWeightTop"
-                                android:textColor="@color/primary_text"
+                                android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_size_settings_main"/>
 
                             <TextView
@@ -804,7 +804,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="2.5"
                                 android:id="@+id/tvAddWeightTopValue"
-                                android:textColor="@color/secondary_text"
+                                android:textColor="@color/colorSecondaryText"
                                 android:textSize="@dimen/text_size_settings_secondary"/>
                             </LinearLayout>
 
@@ -817,7 +817,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/titleBar_height"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_big_settings">
 
                     <LinearLayout
@@ -852,7 +852,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/additional_weight_for_bottom"
                                 android:id="@+id/tvAddWeightBottom"
-                                android:textColor="@color/primary_text"
+                                android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_size_settings_main"/>
 
                             <TextView
@@ -860,7 +860,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="2.5"
                                 android:id="@+id/tvAddWeightBottomValue"
-                                android:textColor="@color/secondary_text"
+                                android:textColor="@color/colorSecondaryText"
                                 android:textSize="@dimen/text_size_settings_secondary"/>
                             </LinearLayout>
 
@@ -872,7 +872,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_big_settings">
 
                     <LinearLayout
@@ -884,7 +884,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minHeight="@dimen/items_subtitle_settings"
-                        android:background="@color/primary_light"
+                        android:background="@color/colorPrimaryLight"
                         android:clickable="true"
                         android:gravity="center">
 
@@ -893,7 +893,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/settings_other"
                             android:id="@+id/tvTitleOther"
-                            android:textColor="@color/primary_dark"
+                            android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
@@ -905,7 +905,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/titleBar_height"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_settings">
 
                     <LinearLayout
@@ -936,7 +936,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/write_to_author"
                             android:id="@+id/tvWriteToAuthor"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>
@@ -948,7 +948,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/titleBar_height"
                     android:gravity="center"
-                    android:background="@color/divider"
+                    android:background="@color/colorDivider"
                     android:paddingBottom="@dimen/divider_big_settings">
 
                     <LinearLayout
@@ -979,7 +979,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/about_app_btn"
                             android:id="@+id/tvAbout"
-                            android:textColor="@color/primary_text"
+                            android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>
 
                     </LinearLayout>

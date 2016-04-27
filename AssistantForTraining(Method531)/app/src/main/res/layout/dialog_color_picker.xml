@@ -21,7 +21,7 @@
             android:gravity="center_vertical"
             android:background="@drawable/btn_dialog_bg_states"
             android:text="@string/dialog_pick_color"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/titleBar_textSize"
             android:id="@+id/tvTitleDialog" />
 
@@ -102,7 +102,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@drawable/btn_dialog_bg_states"
-            android:textColor="@color/primary_dark"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/text_size_info_btn"/>
     </LinearLayout>
 

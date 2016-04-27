@@ -61,7 +61,7 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
         m_ivColorChange = (ImageView) findViewById(R.id.ivColorChange);
         m_ivColorChange.setOnClickListener(this);
 
-        m_ivInfo = (ImageView) findViewById(R.id.ivInfo);
+        m_ivInfo = (ImageView) findViewById(R.id.ivInfoMenu);
         m_ivInfo.setOnClickListener(this);
 
         m_tvBtnSave = (TextView) findViewById(R.id.btnSave);
@@ -161,7 +161,7 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
             case R.id.ivBack:
                 onBackPressed();
                 break;
-            case R.id.ivInfo:
+            case R.id.ivInfoMenu:
                 InfoDialog infoDialog = new InfoDialog(AddExerciseActivity.this,R.string.text_tip_how_fill_out_the_form);
                 infoDialog.show();
                 break;

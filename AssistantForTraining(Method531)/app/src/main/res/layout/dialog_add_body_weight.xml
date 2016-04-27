@@ -24,7 +24,7 @@
             android:gravity="center_vertical"
             android:background="@drawable/btn_dialog_bg_states"
             android:text="@string/title_dialog_add_body_weight"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/titleBar_textSize"
             android:id="@+id/tvTitleDialog" />
 
@@ -35,9 +35,9 @@
             android:datePickerMode="spinner"
             android:calendarViewShown="false"
             android:spinnersShown="true"
-            android:headerBackground="@color/primary_dark"
-            android:calendarTextColor="@color/primary_text"
-            android:yearListSelectorColor="@color/primary_text"
+            android:headerBackground="@color/colorPrimaryDark"
+            android:calendarTextColor="@color/colorPrimaryText"
+            android:yearListSelectorColor="@color/colorPrimaryText"
             android:id="@+id/datePicker" />
 
         <android.support.design.widget.TextInputLayout
@@ -53,8 +53,8 @@
                 android:textSize="@dimen/text_size_info"
                 android:id="@+id/edtWeight"
                 android:hint="@string/hint_edit_text_weight"
-                android:textColorHint="@color/secondary_text"
-                android:textColor="@color/primary_text"/>
+                android:textColorHint="@color/colorSecondaryText"
+                android:textColor="@color/colorPrimaryText"/>
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
@@ -75,7 +75,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@drawable/btn_dialog_bg_states"
-            android:textColor="@color/primary_dark"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/text_size_info_btn" />
 
         <TextView
@@ -89,7 +89,7 @@
             android:layout_marginLeft="@dimen/info_dialog_margin_btn"
             android:gravity="center"
             android:background="@drawable/btn_dialog_bg_states"
-            android:textColor="@color/primary_dark"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/text_size_info_btn"/>
     </LinearLayout>
 

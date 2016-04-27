@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/titleBar_height"
         android:layout_weight="0"
-        android:background="@color/primary"
+        android:background="@color/colorPrimary"
         android:gravity="center">
 
         <ImageView
@@ -44,7 +44,7 @@
             android:clickable="true"
             android:scaleType="fitCenter"
             android:layout_weight="0"
-            android:id="@+id/ivInfo" />
+            android:id="@+id/ivInfoMenu" />
 
         <TextView
             android:text="@string/btn_save"
@@ -68,7 +68,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/primary_light">
+            android:background="@color/colorPrimaryLight">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -100,9 +100,9 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/hint_enter_name"
                                 android:focusable="true"
-                                android:textColorHint="@color/secondary_text"
+                                android:textColorHint="@color/colorSecondaryText"
                                 android:id="@+id/edtName"
-                                android:textColor="@color/primary_text"
+                                android:textColor="@color/colorPrimaryText"
                                 android:inputType="textCapSentences"
                                 android:textSize="@dimen/text_size_add_exercise"/>
                             </android.support.design.widget.TextInputLayout>
@@ -118,7 +118,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/bottom_part_body"
                                 android:id="@+id/rbtnBottom"
-                                android:textColor="@color/primary_text"
+                                android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_size_add_exercise"/>
 
                             <RadioButton
@@ -127,7 +127,7 @@
                                 android:text="@string/top_part_body"
                                 android:checked="true"
                                 android:id="@+id/rbtnTop"
-                                android:textColor="@color/primary_text"
+                                android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_size_add_exercise"/>
 
                         </RadioGroup>
@@ -148,10 +148,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/hint_enter_weight"
-                                android:textColorHint="@color/secondary_text"
+                                android:textColorHint="@color/colorSecondaryText"
                                 android:id="@+id/edtWeight"
                                 android:focusable="true"
-                                android:textColor="@color/primary_text"
+                                android:textColor="@color/colorPrimaryText"
                                 android:inputType="numberDecimal"
                                 android:maxLength="6"
                                 android:textSize="@dimen/text_size_add_exercise"/>
@@ -161,7 +161,7 @@
                                 android:layout_gravity="center"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/primary_text"
+                                android:textColor="@color/colorPrimaryText"
                                 android:textSize="@dimen/text_size_add_exercise"
                                 android:id="@+id/tvX"
                                 android:text="x"/>
@@ -176,10 +176,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/hint_enter_repeat_count"
-                                android:textColorHint="@color/secondary_text"
+                                android:textColorHint="@color/colorSecondaryText"
                                 android:id="@+id/edtCount"
                                 android:focusable="true"
-                                android:textColor="@color/primary_text"
+                                android:textColor="@color/colorPrimaryText"
                                 android:inputType="number"
                                 android:maxLength="2"
                                 android:textSize="@dimen/text_size_add_exercise"/>
@@ -196,10 +196,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/hint_enter_aim_weight"
-                                android:textColorHint="@color/secondary_text"
+                                android:textColorHint="@color/colorSecondaryText"
                                 android:id="@+id/edtAimWeight"
                                 android:focusable="true"
-                                android:textColor="@color/primary_text"
+                                android:textColor="@color/colorPrimaryText"
                                 android:inputType="numberDecimal"
                                 android:maxLength="6"
                                 android:textSize="@dimen/text_size_add_exercise"/>

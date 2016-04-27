@@ -4,11 +4,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -98,6 +102,22 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
         findViewById(R.id.llTrash).setOnClickListener(this);
         findViewById(R.id.llEmail).setOnClickListener(this);
         findViewById(R.id.llInfo).setOnClickListener(this);
+        findViewById(R.id.llSync).setOnClickListener(this);
+
+        //init icons states
+        ImageView ivExercises = (ImageView) findViewById(R.id.ivExercisesMenu);
+        ImageView ivTrash = (ImageView) findViewById(R.id.ivTrashMenu);
+        ImageView ivWeight = (ImageView) findViewById(R.id.ivWeightMenu);
+        ImageView ivSettings = (ImageView) findViewById(R.id.ivSettingsMenu);
+        ImageView ivEmail = (ImageView) findViewById(R.id.ivEmailMenu);
+        ImageView ivAbout = (ImageView) findViewById(R.id.ivInfoMenu);
+
+        setSvgStateToImageView(ivExercises, R.drawable.svg_exercise_drawer);
+        setSvgStateToImageView(ivTrash, R.drawable.svg_trash_drawer);
+        setSvgStateToImageView(ivWeight, R.drawable.svg_weight_drawer);
+        setSvgStateToImageView(ivSettings, R.drawable.svg_settings_drawer);
+        setSvgStateToImageView(ivEmail, R.drawable.svg_email_drawer);
+        setSvgStateToImageView(ivAbout, R.drawable.svg_info_drawer);
 
         m_drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         m_leftDrawerLinearLayout = (LinearLayout) findViewById(R.id.leftDrawer);
@@ -150,6 +170,7 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
         setMediumFont(findViewById(R.id.tvTrash));
         setMediumFont(findViewById(R.id.tvEmail));
         setMediumFont(findViewById(R.id.tvInfo));
+        setMediumFont(findViewById(R.id.tvSync));
     }
 
     @Override
@@ -316,6 +337,11 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
                 intent = new Intent(ExercisesActivity.this, AboutActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.llSync:
+                m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
+                intent = new Intent(ExercisesActivity.this, SyncActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -357,5 +383,18 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
                 showFab();
             }
         }, 500);
+    }
+
+    private void setSvgStateToImageView(ImageView imageView, int resIdSvg){
+        Drawable drawableIcon;
+
+        StateListDrawable states = new StateListDrawable();
+        drawableIcon = ContextCompat.getDrawable(this, resIdSvg);
+        drawableIcon.setColorFilter(this.getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+        states.addState(new int[] {android.R.attr.state_pressed}, drawableIcon);
+        drawableIcon = ContextCompat.getDrawable(this, R.drawable.svg_exercise_drawer);
+        drawableIcon.setColorFilter(this.getResources().getColor(R.color.colorSecondaryText), PorterDuff.Mode.SRC_ATOP);
+        states.addState(new int[] { }, drawableIcon);
+        imageView.setImageDrawable(states);
     }
 }

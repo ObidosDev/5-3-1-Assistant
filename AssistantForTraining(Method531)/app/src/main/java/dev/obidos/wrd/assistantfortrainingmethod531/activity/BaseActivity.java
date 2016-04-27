@@ -3,7 +3,6 @@ package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;

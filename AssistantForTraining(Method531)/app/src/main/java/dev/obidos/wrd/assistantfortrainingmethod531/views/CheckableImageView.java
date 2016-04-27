@@ -1,7 +1,12 @@
 package dev.obidos.wrd.assistantfortrainingmethod531.views;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 
 import dev.obidos.wrd.assistantfortrainingmethod531.R;
@@ -11,9 +16,8 @@ import dev.obidos.wrd.assistantfortrainingmethod531.R;
  */
 public class CheckableImageView extends ImageView {
     private boolean m_bChecked = false;
-    private boolean m_bNewDrawable = false;
-    private int m_nDrawableChecked = R.drawable.png_check_on;
-    private int m_nDrawableNoChecked = R.drawable.png_check_off;
+    private Drawable m_nDrawableChecked = null;
+    private Drawable m_nDrawableNoChecked = null;
 
     public CheckableImageView(Context context) {
         super(context);
@@ -37,27 +41,36 @@ public class CheckableImageView extends ImageView {
     public void setChecked(boolean isChecked){
         m_bChecked = isChecked;
         if(isChecked){
-            this.setImageResource(m_nDrawableChecked);
-            if(m_bNewDrawable){
-                this.setBackgroundColor(getResources().getColor(R.color.primary_light));
+            if(m_nDrawableChecked != null) {
+                this.setImageDrawable(m_nDrawableChecked);
+            } else {
+                this.setImageResource(R.drawable.png_check_on);
             }
         } else {
-            if(m_nDrawableNoChecked!=-1) {
-                this.setImageResource(m_nDrawableNoChecked);
+            if(m_nDrawableNoChecked != null) {
+                this.setImageDrawable(m_nDrawableNoChecked);
             } else {
-                this.setImageDrawable(null);
-            }
-            if(m_bNewDrawable){
-                this.setBackgroundColor(getResources().getColor(R.color.white));
+                this.setImageResource(R.drawable.png_check_off);
             }
         }
         this.invalidate();
     }
 
-    public void setDrawable(int idDrawableOn, int idDrawableOff){
-        m_nDrawableChecked = idDrawableOn;
-        m_nDrawableNoChecked = idDrawableOff;
-        m_bNewDrawable = true;
+    public void setDrawable(int idDrawableOn, int idDrawableOff, Context context){
+        if(idDrawableOn != -1) {
+            m_nDrawableChecked = ContextCompat.getDrawable(context, idDrawableOn);
+            m_nDrawableChecked.setColorFilter(context.getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+        } else {
+            m_nDrawableChecked = null;
+        }
+
+        if(idDrawableOff != -1) {
+            m_nDrawableNoChecked = ContextCompat.getDrawable(context, idDrawableOff);
+            m_nDrawableNoChecked.setColorFilter(context.getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+        } else {
+            m_nDrawableNoChecked = null;
+        }
+
         setChecked(m_bChecked);
     }
 

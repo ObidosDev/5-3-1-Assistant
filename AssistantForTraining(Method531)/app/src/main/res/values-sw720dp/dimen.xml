@@ -15,7 +15,9 @@
     <dimen name="titleBar_textSize">22sp</dimen>
     <dimen name="text_size_titleBar_subtitle">16sp</dimen>
 
-    <dimen name="menu_icon_size">30dp</dimen>
+    <dimen name="drawer_item_height">48dp</dimen>
+    <dimen name="drawer_item_margin">32dp</dimen>
+    <dimen name="menu_icon_size">24dp</dimen>
 
     <dimen name="padding_exercise_list">10dp</dimen>
 

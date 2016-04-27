@@ -5,10 +5,6 @@ import android.content.SharedPreferences;
 import java.util.Calendar;
 
 import dev.obidos.wrd.assistantfortrainingmethod531.AssistantApp;
-import dev.obidos.wrd.assistantfortrainingmethod531.R;
-import dev.obidos.wrd.assistantfortrainingmethod531.activity.SettingsActivity;
-import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseData;
-import dev.obidos.wrd.assistantfortrainingmethod531.dialog.QuestionDialog;
 
 /**
  * Created by vobideyko on 9/11/15.

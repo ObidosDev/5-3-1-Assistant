@@ -1,6 +1,5 @@
 package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -54,7 +53,7 @@ public class WeightExerciseChartActivity extends BaseActivity implements OnChart
         m_ivDelete = (ImageView) findViewById(R.id.ivDelete);
         m_ivDelete.setOnClickListener(this);
 
-        m_ivInfo = (ImageView) findViewById(R.id.ivInfo);
+        m_ivInfo = (ImageView) findViewById(R.id.ivInfoMenu);
         m_ivInfo.setOnClickListener(this);
     }
 
@@ -78,28 +77,28 @@ public class WeightExerciseChartActivity extends BaseActivity implements OnChart
         xAxis.setSpaceBetweenLabels(0);
         xAxis.setDrawGridLines(false);
         xAxis.setTypeface(getTypeFace());
-        xAxis.setAxisLineColor(getResources().getColor(R.color.divider));
-        xAxis.setTextColor(getResources().getColor(R.color.primary_text));
+        xAxis.setAxisLineColor(getResources().getColor(R.color.colorDivider));
+        xAxis.setTextColor(getResources().getColor(R.color.colorPrimaryText));
 
         mChart.getAxisLeft().setDrawGridLines(true);
 
         mChart.getAxisLeft().setTypeface(getTypeFace());
         mChart.getAxisLeft().setTextSize(10f);
-        mChart.getAxisLeft().setAxisLineColor(getResources().getColor(R.color.divider));
-        mChart.getAxisLeft().setTextColor(getResources().getColor(R.color.primary_text));
+        mChart.getAxisLeft().setAxisLineColor(getResources().getColor(R.color.colorDivider));
+        mChart.getAxisLeft().setTextColor(getResources().getColor(R.color.colorPrimaryText));
         mChart.getAxisLeft().setStartAtZero(false);
 
         mChart.getAxisRight().setTypeface(getTypeFace());
         mChart.getAxisRight().setTextSize(10f);
-        mChart.getAxisRight().setAxisLineColor(getResources().getColor(R.color.divider));
-        mChart.getAxisRight().setTextColor(getResources().getColor(R.color.primary_text));
+        mChart.getAxisRight().setAxisLineColor(getResources().getColor(R.color.colorDivider));
+        mChart.getAxisRight().setTextColor(getResources().getColor(R.color.colorPrimaryText));
         mChart.getAxisRight().setStartAtZero(false);
 
         mChart.getLegend().setEnabled(false);
         mChart.setNoDataText("");
         mChart.setNoDataTextDescription(getResources().getString(R.string.add_new_exercise_weight));
         mChart.setDescriptionTextSize(50f);
-        mChart.setDescriptionColor(getResources().getColor(R.color.primary_text));
+        mChart.setDescriptionColor(getResources().getColor(R.color.colorPrimaryText));
     }
 
     private void setData() {
@@ -124,7 +123,7 @@ public class WeightExerciseChartActivity extends BaseActivity implements OnChart
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
 
         ArrayList<Integer> colorsArrayList = new ArrayList<>();
-        colorsArrayList.add(getResources().getColor(R.color.accent));
+        colorsArrayList.add(getResources().getColor(R.color.colorAccent));
 
         weightSet.setColors(colorsArrayList);
         dataSets.add(weightSet);
@@ -162,7 +161,7 @@ public class WeightExerciseChartActivity extends BaseActivity implements OnChart
             case R.id.ivBack:
                 finish();
                 break;
-            case R.id.ivInfo:
+            case R.id.ivInfoMenu:
                 InfoDialog infoDialog = new InfoDialog(WeightExerciseChartActivity.this,R.string.text_tip_how_use_chart_exercise);
                 infoDialog.show();
                 break;

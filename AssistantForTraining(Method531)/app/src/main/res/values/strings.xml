@@ -160,5 +160,6 @@
     <string name="question_move_to_trash">Move to trash?</string>
     <string name="title_mail_chooser">Send mail...</string>
     <string name="info_no_mail_clients">There are no email clients installed.</string>
+    <string name="text_sync">Sync</string>
 
 </resources>

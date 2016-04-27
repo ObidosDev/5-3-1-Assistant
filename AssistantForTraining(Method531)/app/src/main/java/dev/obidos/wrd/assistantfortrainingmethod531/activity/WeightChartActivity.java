@@ -1,7 +1,5 @@
 package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 
-import android.annotation.SuppressLint;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -11,19 +9,15 @@ import android.widget.ImageView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import dev.obidos.wrd.assistantfortrainingmethod531.R;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.BodyWeightData;
@@ -73,7 +67,7 @@ public class WeightChartActivity extends BaseActivity implements OnChartValueSel
         m_ivDelete = (ImageView) findViewById(R.id.ivDelete);
         m_ivDelete.setOnClickListener(this);
 
-        m_ivInfo = (ImageView) findViewById(R.id.ivInfo);
+        m_ivInfo = (ImageView) findViewById(R.id.ivInfoMenu);
         m_ivInfo.setOnClickListener(this);
     }
 
@@ -117,21 +111,21 @@ public class WeightChartActivity extends BaseActivity implements OnChartValueSel
         xAxis.setSpaceBetweenLabels(0);
         xAxis.setDrawGridLines(false);
         xAxis.setTypeface(getTypeFace());
-        xAxis.setAxisLineColor(getResources().getColor(R.color.divider));
-        xAxis.setTextColor(getResources().getColor(R.color.primary_text));
+        xAxis.setAxisLineColor(getResources().getColor(R.color.colorDivider));
+        xAxis.setTextColor(getResources().getColor(R.color.colorPrimaryText));
 
         mChart.getAxisLeft().setDrawGridLines(true);
 
         mChart.getAxisLeft().setTypeface(getTypeFace());
         mChart.getAxisLeft().setTextSize(10f);
-        mChart.getAxisLeft().setAxisLineColor(getResources().getColor(R.color.divider));
-        mChart.getAxisLeft().setTextColor(getResources().getColor(R.color.primary_text));
+        mChart.getAxisLeft().setAxisLineColor(getResources().getColor(R.color.colorDivider));
+        mChart.getAxisLeft().setTextColor(getResources().getColor(R.color.colorPrimaryText));
         mChart.getAxisLeft().setStartAtZero(false);
 
         mChart.getAxisRight().setTypeface(getTypeFace());
         mChart.getAxisRight().setTextSize(10f);
-        mChart.getAxisRight().setAxisLineColor(getResources().getColor(R.color.divider));
-        mChart.getAxisRight().setTextColor(getResources().getColor(R.color.primary_text));
+        mChart.getAxisRight().setAxisLineColor(getResources().getColor(R.color.colorDivider));
+        mChart.getAxisRight().setTextColor(getResources().getColor(R.color.colorPrimaryText));
         mChart.getAxisRight().setStartAtZero(false);
 
 
@@ -139,7 +133,7 @@ public class WeightChartActivity extends BaseActivity implements OnChartValueSel
         mChart.setNoDataText("");
         mChart.setNoDataTextDescription(getResources().getString(R.string.tap_to_add_new_body_weight));
         mChart.setDescriptionTextSize(50f);
-        mChart.setDescriptionColor(getResources().getColor(R.color.primary_text));
+        mChart.setDescriptionColor(getResources().getColor(R.color.colorPrimaryText));
     }
 
     private void setData() {
@@ -235,7 +229,7 @@ public class WeightChartActivity extends BaseActivity implements OnChartValueSel
             case R.id.ivBack:
                 finish();
                 break;
-            case R.id.ivInfo:
+            case R.id.ivInfoMenu:
                 InfoDialog infoDialog = new InfoDialog(WeightChartActivity.this,R.string.text_tip_how_use_chart);
                 infoDialog.show();
                 break;

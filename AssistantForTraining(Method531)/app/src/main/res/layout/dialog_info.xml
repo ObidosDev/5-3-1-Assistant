@@ -20,7 +20,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_size_info"
-                    android:textColor="@color/primary_text"
+                    android:textColor="@color/colorPrimaryText"
                     android:gravity="left"
                     android:text="Text message"
                     android:id="@+id/tvInfo" />
@@ -45,7 +45,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@drawable/btn_dialog_bg_states"
-            android:textColor="@color/primary_dark"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/text_size_info_btn"/>
     </LinearLayout>
 

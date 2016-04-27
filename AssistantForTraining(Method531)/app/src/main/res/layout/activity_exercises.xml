@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/titleBar_height"
         android:layout_weight="0"
-        android:background="@color/primary"
+        android:background="@color/colorPrimary"
         android:gravity="center">
 
         <ImageView
@@ -60,14 +60,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="1dp"
-                android:background="@color/divider">
+                android:background="@color/colorDivider">
                     <TextView
                         android:paddingLeft="@dimen/titleBar_margin"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/sub_titleBar_height"
                         android:gravity="center_vertical"
-                        android:textColor="@color/secondary_text"
-                        android:background="@color/primary_light"
+                        android:textColor="@color/colorSecondaryText"
+                        android:background="@color/colorDividerLight"
                         android:textSize="@dimen/text_size_titleBar_subtitle"
                         android:text="@string/week_type_text"
                         android:id="@+id/tvWeek" />
@@ -78,8 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:gravity="center"
-                android:layout_weight="1"
-                android:background="@color/white">
+                android:layout_weight="1">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/exercisesRecyclerView"
@@ -88,7 +87,8 @@
                     android:layout_height="match_parent"
                     android:overScrollMode="never"
                     android:fadeScrollbars="true"
-                    android:divider="@color/divider"
+                    android:background="@color/colorPrimaryLight"
+                    android:divider="@color/colorDivider"
                     android:visibility="visible"
                     android:dividerHeight="1dp" />
 
@@ -96,11 +96,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/tap_to_add_new_exercise"
-                    android:background="@color/primary_light"
+                    android:background="@color/colorPrimaryLight"
                     android:visibility="gone"
                     android:gravity="center"
                     android:textSize="@dimen/text_size_titleBar_subtitle"
-                    android:textColor="@color/primary_text"
+                    android:textColor="@color/colorPrimaryText"
                     android:id="@+id/tvEmpty"/>
 
                 <android.support.design.widget.FloatingActionButton
@@ -111,7 +111,8 @@
                     android:layout_margin="16dp"
                     android:src="@drawable/png_add_fab"
                     app:elevation="6dp"
-                    app:rippleColor="@color/primary_dark"
+                    app:rippleColor="@color/colorAccentDark"
+                    app:backgroundTint="@color/colorAccent"
                     app:layout_anchor="@id/exercisesRecyclerView"
                     app:layout_anchorGravity="bottom|right|end"
                     app:layout_behavior="dev.obidos.wrd.assistantfortrainingmethod531.views.fab.ScrollAwareFABBehavior"/>

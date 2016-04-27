@@ -133,5 +133,6 @@
     <string name="title_mail_chooser">Написати e-mail...</string>
     <string name="info_no_mail_clients">На вашому пристрої не встановлено поштові програми.</string>
     <string name="app_version">Версія</string>
+    <string name="text_sync">Sync</string>
 
 </resources>
