@@ -196,6 +196,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/llSync"
             android:clickable="true"
             android:background="@drawable/btn_bg_main_menu_states"

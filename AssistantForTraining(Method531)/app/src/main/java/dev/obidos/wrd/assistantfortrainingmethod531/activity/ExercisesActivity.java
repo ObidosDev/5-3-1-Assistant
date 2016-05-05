@@ -16,6 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,13 +37,12 @@ import dev.obidos.wrd.assistantfortrainingmethod531.views.DividerItemDecoration;
  */
 public class ExercisesActivity extends BaseActivity implements DialogInterface.OnDismissListener, View.OnClickListener{
 
+    private Toolbar mToolbar;
     private DrawerLayout m_drawerLayout;
     private LinearLayout m_leftDrawerLinearLayout;
-    private ImageView m_ivMainMenu;
 
     private RecyclerView m_exercisesRecyclerView;
     private ExercisesRecyclerViewAdapter m_exercisesRecyclerViewAdapter;
-    private TextView m_tvTitle;
     private TextView m_tvSubTitleWeek;
     private TextView m_tvEmpty;
     private ArrayList<ExerciseData> m_exerciseDataArrayList;
@@ -55,6 +55,24 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises);
 
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle(getResources().getString(R.string.exercises_title));
+
+        Drawable drawableIconNavigation = ContextCompat.getDrawable(this, R.drawable.svg_menu_hamburger);
+        drawableIconNavigation.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        mToolbar.setNavigationIcon(drawableIconNavigation);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(m_drawerLayout.isDrawerOpen(m_leftDrawerLinearLayout)){
+                    m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
+                } else {
+                    m_drawerLayout.openDrawer(m_leftDrawerLinearLayout);
+                }
+            }
+        });
+
         m_fabAddExercise = (FloatingActionButton) findViewById(R.id.fabAddExercise);
         m_fabAddExercise.setOnClickListener(this);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -63,7 +81,6 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
             m_fabAddExercise.setLayoutParams(p);
         }
 
-        m_tvTitle = (TextView) findViewById(R.id.tvTitleActivity);
         m_tvSubTitleWeek = (TextView) findViewById(R.id.tvWeek);
         m_tvEmpty = (TextView) findViewById(R.id.tvEmpty);
 
@@ -93,8 +110,6 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
     }
 
     private void initDrawerMenu(){
-        m_ivMainMenu = (ImageView) findViewById(R.id.ivMainMenu);
-        m_ivMainMenu.setOnClickListener(this);
 
         findViewById(R.id.llExercises).setOnClickListener(this);
         findViewById(R.id.llBodyWeight).setOnClickListener(this);
@@ -159,7 +174,6 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
     }
 
     private void initFonts(){
-        setMediumFont(m_tvTitle);
         setMediumFont(m_tvSubTitleWeek);
 
         setRegularFont(m_tvEmpty);
@@ -282,13 +296,6 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
             case R.id.ivRestore:
                 showFab();
                 break;
-            case R.id.ivMainMenu:
-                if(m_drawerLayout.isDrawerOpen(m_leftDrawerLinearLayout)){
-                    m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
-                } else {
-                    m_drawerLayout.openDrawer(m_leftDrawerLinearLayout);
-                }
-                break;
             case R.id.llExercises:
                 m_drawerLayout.closeDrawer(m_leftDrawerLinearLayout);
                 setStatusOfExercises(DatabaseHelper.STATUS_NORMAL);
@@ -347,10 +354,9 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
         switch (m_nStatusOfExercises){
             case DatabaseHelper.STATUS_NORMAL:
-                finish();
+                super.onBackPressed();
                 break;
             case DatabaseHelper.STATUS_DELETED:
                 setStatusOfExercises(DatabaseHelper.STATUS_NORMAL);
@@ -369,11 +375,11 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
         checkCountExercises();
         switch (nStatus){
             case DatabaseHelper.STATUS_NORMAL:
-                m_tvTitle.setText(getResources().getString(R.string.exercises_title));
+                getSupportActionBar().setTitle(getResources().getString(R.string.exercises_title));
                 m_fabAddExercise.setImageResource(R.drawable.png_add_fab);
                 break;
             case DatabaseHelper.STATUS_DELETED:
-                m_tvTitle.setText(getResources().getString(R.string.trash_title));
+                getSupportActionBar().setTitle(getResources().getString(R.string.trash_title));
                 m_fabAddExercise.setImageResource(R.drawable.png_trash_white);
                 break;
         }
@@ -387,14 +393,16 @@ public class ExercisesActivity extends BaseActivity implements DialogInterface.O
 
     private void setSvgStateToImageView(ImageView imageView, int resIdSvg){
         Drawable drawableIcon;
-
         StateListDrawable states = new StateListDrawable();
+
         drawableIcon = ContextCompat.getDrawable(this, resIdSvg);
         drawableIcon.setColorFilter(this.getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
         states.addState(new int[] {android.R.attr.state_pressed}, drawableIcon);
-        drawableIcon = ContextCompat.getDrawable(this, R.drawable.svg_exercise_drawer);
+
+        drawableIcon = ContextCompat.getDrawable(this, resIdSvg);
         drawableIcon.setColorFilter(this.getResources().getColor(R.color.colorSecondaryText), PorterDuff.Mode.SRC_ATOP);
         states.addState(new int[] { }, drawableIcon);
+
         imageView.setImageDrawable(states);
     }
 }

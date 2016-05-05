@@ -1,31 +1,36 @@
 <resources>
 
     <!-- Base application theme. -->
+    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorSecondary">@color/colorSecondaryText</item>
         <item name="android:textColorPrimary">@color/colorPrimaryText</item>
-        <item name="android:color">@color/colorPrimary</item>
+
         <item name="android:textColorHint">@color/colorSecondaryText</item>
-        <item name="colorControlNormal">@color/colorDivider</item>
-        <item name="colorControlActivated">@color/colorPrimary</item>
-        <item name="colorControlHighlight">@color/colorPrimary</item>
+         <item name="colorControlNormal">@color/colorDivider</item>
+         <item name="colorControlActivated">@color/colorPrimary</item>
+         <!--<item name="colorControlHighlight">@color/colorPrimary</item>-->
+     </style>
 
-    </style>
+     <style name="Theme.SelectDate"
+         parent="Theme.AppCompat.Light.NoActionBar">
+         <item name="android:editTextStyle">@style/Widget.EditText.Black</item>
+     </style>
 
-    <style name="Theme.SelectDate"
-        parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:editTextStyle">@style/Widget.EditText.Black</item>
-    </style>
+     <style name="Widget.EditText.Black" parent="@android:style/Widget.EditText">
+         <item name="android:textColor">@color/colorPrimaryText</item>
+     </style>
 
-    <style name="Widget.EditText.Black" parent="@android:style/Widget.EditText">
-        <item name="android:textColor">@color/colorPrimaryText</item>
-    </style>
-
-    <style name="TextLabel" parent="TextAppearance.AppCompat">
-        <item name="android:textColorHint">@color/colorSecondaryText</item>
-        <item name="colorControlNormal">@color/colorDivider</item>
-        <item name="colorControlActivated">@color/colorPrimary</item>
-        <item name="colorControlHighlight">@color/colorPrimary</item>
-        <item name="android:color">@color/colorPrimary</item>
-    </style>
+     <style name="TextLabel" parent="TextAppearance.AppCompat">
+         <item name="android:textColorHint">@color/colorSecondaryText</item>
+         <item name="colorControlNormal">@color/colorDivider</item>
+         <item name="colorControlActivated">@color/colorPrimary</item>
+         <item name="colorControlHighlight">@color/colorPrimary</item>
+         <item name="android:color">@color/colorPrimary</item>
+     </style>
 
 </resources>

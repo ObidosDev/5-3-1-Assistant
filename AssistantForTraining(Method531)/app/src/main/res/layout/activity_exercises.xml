@@ -5,42 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:elevation="6dp"
-        android:orientation="horizontal"
+    <android.support.v7.widget.Toolbar
+        android:elevation="4dp"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/titleBar_height"
-        android:layout_weight="0"
-        android:background="@color/colorPrimary"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/ivMainMenu"
-            android:layout_width="@dimen/btn_back_size"
-            android:layout_height="@dimen/btn_back_size"
-            android:scaleType="fitCenter"
-            android:clickable="true"
-            android:src="@drawable/btn_main_menu_states"
-            android:paddingTop="@dimen/titleBar_icons_padding"
-            android:paddingBottom="@dimen/titleBar_icons_padding"
-            android:paddingLeft="@dimen/titleBar_margin"
-            android:paddingRight="@dimen/titleBar_icons_padding"/>
-
-        <TextView
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/exercises_title"
-            android:gravity="center_vertical|left"
-            android:layout_marginLeft="@dimen/titleBar_margin"
-            android:layout_marginRight="@dimen/titleBar_margin"
-            android:textSize="@dimen/titleBar_textSize"
-            android:textColor="@color/white"
-            android:id="@+id/tvTitleActivity" />
-
-    </LinearLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@color/white" />
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawerLayout"
@@ -55,7 +26,7 @@
             android:layout_weight="1">
 
             <LinearLayout
-                android:elevation="5.5dp"
+                android:elevation="2dp"
                 android:id="@+id/llWeek"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +58,7 @@
                     android:layout_height="match_parent"
                     android:overScrollMode="never"
                     android:fadeScrollbars="true"
-                    android:background="@color/colorPrimaryLight"
+                    android:background="@color/colorDividerLight"
                     android:divider="@color/colorDivider"
                     android:visibility="visible"
                     android:dividerHeight="1dp" />
@@ -96,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/tap_to_add_new_exercise"
-                    android:background="@color/colorPrimaryLight"
+                    android:background="@color/colorDividerLight"
                     android:visibility="gone"
                     android:gravity="center"
                     android:textSize="@dimen/text_size_titleBar_subtitle"

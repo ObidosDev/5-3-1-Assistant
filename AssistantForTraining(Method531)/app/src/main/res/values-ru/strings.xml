@@ -136,4 +136,6 @@
     <string name="info_no_mail_clients">На вашем устройстве нет почтовых клиентов.</string>
     <string name="app_version">Версия</string>
     <string name="text_sync">Sync</string>
+    <string name="menu_timer">Таймер</string>
+    <string name="menu_chart">График</string>
 </resources>

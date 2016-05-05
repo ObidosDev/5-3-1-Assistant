@@ -161,5 +161,7 @@
     <string name="title_mail_chooser">Send mail...</string>
     <string name="info_no_mail_clients">There are no email clients installed.</string>
     <string name="text_sync">Sync</string>
+    <string name="menu_timer">Timer</string>
+    <string name="menu_chart">Chart</string>
 
 </resources>

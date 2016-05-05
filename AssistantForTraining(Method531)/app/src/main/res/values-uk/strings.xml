@@ -134,5 +134,7 @@
     <string name="info_no_mail_clients">На вашому пристрої не встановлено поштові програми.</string>
     <string name="app_version">Версія</string>
     <string name="text_sync">Sync</string>
+    <string name="menu_timer">Таймер</string>
+    <string name="menu_chart">Графік</string>
 
 </resources>

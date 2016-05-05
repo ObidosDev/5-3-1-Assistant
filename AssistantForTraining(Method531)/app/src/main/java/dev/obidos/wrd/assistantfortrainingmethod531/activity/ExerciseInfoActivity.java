@@ -2,10 +2,16 @@ package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.StrikethroughSpan;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,11 +34,18 @@ import dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView;
 /**
  * Created by vobideyko on 8/19/15.
  */
-public class ExerciseInfoActivity extends BaseActivity implements View.OnClickListener, DialogInterface.OnDismissListener, PopupMenu.OnMenuItemClickListener {
+public class ExerciseInfoActivity extends BaseActivity implements View.OnClickListener, DialogInterface.OnDismissListener {
+
+    private static final int MENU_CHART = 0;
+    private static final int MENU_TIMER = 1;
+    private static final int MENU_EDIT = 2;
+    private static final int MENU_DELETE = 3;
+    private static final int MENU_GET_STUCK = 4;
+    private static final int MENU_RESTORE = 5;
 
     private ExerciseData m_exerciseData;
 
-    private ImageView m_ivTimer, m_ivMenu, m_ivChart;
+    private Toolbar mToolbar;
 
     private ArrayList<LinearLayout> m_arrayListLLMain;
     private ArrayList<CheckableImageView> m_arrayListChkImageView;
@@ -41,13 +54,29 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
 
     private LinearLayout m_llBoringButBigContent;
 
-    private TextView m_tvTitleName;
     private TextView m_tvWeekType,m_tvCycleNumber,m_tvMaxWeight,m_tvRecordWeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_info);
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
+        Drawable drawableIconNavigation = ContextCompat.getDrawable(this, R.drawable.svg_back);
+        drawableIconNavigation.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        mToolbar.setNavigationIcon(drawableIconNavigation);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        Drawable drawableIconOverflow = ContextCompat.getDrawable(this, R.drawable.svg_menu_popup);
+        drawableIconOverflow.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        mToolbar.setOverflowIcon(drawableIconOverflow);
 
         m_arrayListLLMain = new ArrayList<>();
         m_arrayListChkImageView = new ArrayList<>();
@@ -62,6 +91,128 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.clear();
+
+        MenuItem itemTimer = menu.add(0, MENU_TIMER, Menu.NONE, R.string.menu_timer);
+        MenuItem itemChart = menu.add(1, MENU_CHART, Menu.NONE, R.string.menu_chart);
+        MenuItem itemEdit = menu.add(1, MENU_EDIT, Menu.NONE, R.string.text_edit);
+        itemEdit.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
+        if(m_exerciseData.getStatus() == DatabaseHelper.STATUS_DELETED) {
+            MenuItem itemRestore = menu.add(1, MENU_RESTORE, Menu.NONE, R.string.text_restore);
+            itemRestore.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        }
+
+        MenuItem itemDelete = menu.add(1, MENU_DELETE, Menu.NONE, R.string.text_delete);
+        itemDelete.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
+        MenuItem itemGetStuck = menu.add(1, MENU_GET_STUCK, Menu.NONE, R.string.text_get_stuck);
+        itemGetStuck.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
+        Drawable drawableIcon = ContextCompat.getDrawable(this, R.drawable.svg_timer);
+        drawableIcon.setColorFilter(this.getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        itemTimer.setIcon(drawableIcon);
+        itemTimer.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        itemTimer.setShortcut('0', 'a');
+
+        drawableIcon = ContextCompat.getDrawable(this, R.drawable.svg_chart);
+        drawableIcon.setColorFilter(this.getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        itemChart.setIcon(drawableIcon);
+        itemChart.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        itemChart.setShortcut('1', 'b');
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case MENU_CHART:
+                Intent chartIntent = new Intent(this, WeightExerciseChartActivity.class);
+                chartIntent.putExtra(TrainingConstants.EXTRA_NAME_EXERCISE, m_exerciseData.getName());
+                chartIntent.putExtra(TrainingConstants.EXTRA_ID_EXERCISE, m_exerciseData.getId());
+                startActivity(chartIntent);
+                break;
+            case MENU_TIMER:
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                TimerDialog timerDialog = new TimerDialog(ExerciseInfoActivity.this, getNextWeight(), getNextReps());
+                timerDialog.setOnDismissListener(this);
+                timerDialog.show();
+                break;
+            case MENU_EDIT:
+                Intent intent = new Intent(ExerciseInfoActivity.this, AddExerciseActivity.class);
+                intent.putExtra(TrainingConstants.EXTRA_ID_EXERCISE,m_exerciseData.getId());
+                intent.putExtra(TrainingConstants.EXTRA_FROM_INFO_EXERCISE_ACTIVITY,true);
+                startActivity(intent);
+                finish();
+                break;
+            case MENU_RESTORE:
+                QuestionDialog questionDialogRestore = new QuestionDialog(ExerciseInfoActivity.this,
+                        getResources().getString(R.string.question_restore_exercise), new Runnable() {
+                    @Override
+                    public void run() {
+                        DatabaseHelper databaseHandler = new DatabaseHelper(getApplicationContext());
+                        m_exerciseData.setStatus(DatabaseHelper.STATUS_NORMAL);
+                        databaseHandler.updateExercise(m_exerciseData);
+                        databaseHandler.close();
+                        finish();
+                    }
+                });
+                questionDialogRestore.show();
+                break;
+            case MENU_DELETE:
+                String strQuestion = "";
+                switch (m_exerciseData.getStatus()){
+                    case DatabaseHelper.STATUS_NORMAL:
+                        strQuestion = getResources().getString(R.string.question_move_to_trash);
+                        break;
+                    case DatabaseHelper.STATUS_DELETED:
+                        strQuestion = getResources().getString(R.string.question_delete_exercise);
+                        break;
+                }
+                QuestionDialog questionDialog = new QuestionDialog(ExerciseInfoActivity.this, strQuestion, new Runnable() {
+                    @Override
+                    public void run() {
+                        DatabaseHelper databaseHandler = new DatabaseHelper(getApplicationContext());
+                        switch (m_exerciseData.getStatus()){
+                            case DatabaseHelper.STATUS_NORMAL:
+                                m_exerciseData.setStatus(DatabaseHelper.STATUS_DELETED);
+                                databaseHandler.updateExercise(m_exerciseData);
+                                break;
+                            case DatabaseHelper.STATUS_DELETED:
+                                databaseHandler.deleteExercise(m_exerciseData.getId());
+                                break;
+                        }
+                        databaseHandler.close();
+                        finish();
+                    }
+                });
+                questionDialog.show();
+                break;
+            case MENU_GET_STUCK:
+                QuestionDialog questionDialog1 = new QuestionDialog(ExerciseInfoActivity.this, getString(R.string.question_get_stuck), new Runnable() {
+                    @Override
+                    public void run() {
+                        getStuckCalc();
+
+                        DatabaseHelper databaseHandler = new DatabaseHelper(getApplicationContext());
+                        databaseHandler.updateExercise(m_exerciseData);
+                        databaseHandler.close();
+
+                        initData();
+                    }
+                });
+                questionDialog1.show();
+                break;
+        }
+
+        return true;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         DatabaseHelper databaseHandler = new DatabaseHelper(this);
@@ -71,8 +222,6 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initViews(){
-        findViewById(R.id.ivBack).setOnClickListener(this);
-
         m_llBoringButBigContent = (LinearLayout) findViewById(R.id.llBoringButBigContent);
 
         //Warm-up
@@ -150,28 +299,18 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
         m_arrayListTVReps.add((TextView) findViewById(R.id.tvBoringButBigSet4Repeats));
         m_arrayListTVReps.add((TextView) findViewById(R.id.tvBoringButBigSet5Repeats));
 
-        m_tvTitleName = (TextView) findViewById(R.id.tvTitleActivity);
-
         m_tvWeekType = (TextView) findViewById(R.id.tvWeekType);
         m_tvCycleNumber = (TextView) findViewById(R.id.tvCycleNumber);
         m_tvMaxWeight = (TextView) findViewById(R.id.tvMaxWeight);
         m_tvRecordWeight = (TextView) findViewById(R.id.tvRecordWeight);
-
-        m_ivTimer = (ImageView) findViewById(R.id.ivTimer);
-        m_ivTimer.setOnClickListener(this);
-
-        m_ivMenu = (ImageView) findViewById(R.id.ivMenu);
-        m_ivMenu.setOnClickListener(this);
-
-        m_ivChart = (ImageView) findViewById(R.id.ivChart);
-        m_ivChart.setOnClickListener(this);
     }
 
     private void initData(){
         DatabaseHelper databaseHandler = new DatabaseHelper(this);
         m_exerciseData = databaseHandler.getExercise(getIntent().getIntExtra(TrainingConstants.EXTRA_ID_EXERCISE,-1));
         databaseHandler.close();
-        m_tvTitleName.setText(formatName(m_exerciseData.getName(), getResources().getInteger(R.integer.exercise_info_title_length)));
+
+        getSupportActionBar().setTitle(m_exerciseData.getName());
 
         if(isSixWeekCycle()){
             m_tvWeekType.setText("" + getResources().getStringArray(R.array.weeks6)[getWeekOfCycle()]);
@@ -207,8 +346,6 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
         for(TextView textView : m_arrayListTVReps){
             setRegularFont(textView);
         }
-
-        setMediumFont(m_tvTitleName);
     }
 
     private void setCurrentWeek(){
@@ -325,34 +462,6 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
     public void onClick(final View v) {
         int ind;
         switch (v.getId()){
-            case R.id.ivMenu:
-                PopupMenu popupMenu = new PopupMenu(this, v);
-                popupMenu.setOnMenuItemClickListener(this);
-                switch (m_exerciseData.getStatus()){
-                    case DatabaseHelper.STATUS_NORMAL:
-                        popupMenu.inflate(R.menu.popup_menu);
-                        break;
-                    case DatabaseHelper.STATUS_DELETED:
-                        popupMenu.inflate(R.menu.popup_menu_with_restore);
-                        break;
-                }
-                popupMenu.show();
-                break;
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.ivChart:
-                Intent chartIntent = new Intent(this, WeightExerciseChartActivity.class);
-                chartIntent.putExtra(TrainingConstants.EXTRA_NAME_EXERCISE, m_exerciseData.getName());
-                chartIntent.putExtra(TrainingConstants.EXTRA_ID_EXERCISE, m_exerciseData.getId());
-                startActivity(chartIntent);
-                break;
-            case R.id.ivTimer:
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                TimerDialog timerDialog = new TimerDialog(ExerciseInfoActivity.this, getNextWeight(), getNextReps());
-                timerDialog.setOnDismissListener(this);
-                timerDialog.show();
-                break;
             case R.id.llWarmUpSet1:
                 ind = 0;
                 changeStateOfSetLine(ind);
@@ -441,78 +550,6 @@ public class ExerciseInfoActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onDismiss(DialogInterface dialog) {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-    }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_edit:
-                Intent intent = new Intent(ExerciseInfoActivity.this, AddExerciseActivity.class);
-                intent.putExtra(TrainingConstants.EXTRA_ID_EXERCISE,m_exerciseData.getId());
-                intent.putExtra(TrainingConstants.EXTRA_FROM_INFO_EXERCISE_ACTIVITY,true);
-                startActivity(intent);
-                finish();
-                return true;
-            case R.id.item_delete:
-                String strQuestion = "";
-                switch (m_exerciseData.getStatus()){
-                    case DatabaseHelper.STATUS_NORMAL:
-                        strQuestion = getResources().getString(R.string.question_move_to_trash);
-                        break;
-                    case DatabaseHelper.STATUS_DELETED:
-                        strQuestion = getResources().getString(R.string.question_delete_exercise);
-                        break;
-                }
-                QuestionDialog questionDialog = new QuestionDialog(ExerciseInfoActivity.this, strQuestion, new Runnable() {
-                    @Override
-                    public void run() {
-                        DatabaseHelper databaseHandler = new DatabaseHelper(getApplicationContext());
-                        switch (m_exerciseData.getStatus()){
-                            case DatabaseHelper.STATUS_NORMAL:
-                                m_exerciseData.setStatus(DatabaseHelper.STATUS_DELETED);
-                                databaseHandler.updateExercise(m_exerciseData);
-                                break;
-                            case DatabaseHelper.STATUS_DELETED:
-                                databaseHandler.deleteExercise(m_exerciseData.getId());
-                                break;
-                        }
-                        databaseHandler.close();
-                        finish();
-                    }
-                });
-                questionDialog.show();
-                return true;
-            case R.id.item_restore:
-                QuestionDialog questionDialogRestore = new QuestionDialog(ExerciseInfoActivity.this,
-                        getResources().getString(R.string.question_restore_exercise), new Runnable() {
-                    @Override
-                    public void run() {
-                        DatabaseHelper databaseHandler = new DatabaseHelper(getApplicationContext());
-                        m_exerciseData.setStatus(DatabaseHelper.STATUS_NORMAL);
-                        databaseHandler.updateExercise(m_exerciseData);
-                        databaseHandler.close();
-                        finish();
-                    }
-                });
-                questionDialogRestore.show();
-                return true;
-            case R.id.item_get_stuck:
-                QuestionDialog questionDialog1 = new QuestionDialog(ExerciseInfoActivity.this, getString(R.string.question_get_stuck), new Runnable() {
-                    @Override
-                    public void run() {
-                        getStuckCalc();
-
-                        DatabaseHelper databaseHandler = new DatabaseHelper(getApplicationContext());
-                        databaseHandler.updateExercise(m_exerciseData);
-                        databaseHandler.close();
-
-                        initData();
-                    }
-                });
-                questionDialog1.show();
-                return true;
-        }
-        return false;
     }
 
     private String getNextWeight(){

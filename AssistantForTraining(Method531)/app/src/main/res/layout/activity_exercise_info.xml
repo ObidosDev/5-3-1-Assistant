@@ -6,70 +6,13 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
         android:elevation="4dp"
-        android:orientation="horizontal"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/titleBar_height"
-        android:layout_weight="0"
-        android:background="@color/colorPrimary"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="@dimen/btn_back_size"
-            android:layout_height="@dimen/btn_back_size"
-            android:scaleType="fitCenter"
-            android:clickable="true"
-            android:src="@drawable/btn_back_states"
-            android:padding="@dimen/titleBar_margin"/>
-
-        <TextView
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="name"
-            android:gravity="center_vertical|left"
-            android:layout_marginLeft="@dimen/titleBar_margin"
-            android:textSize="@dimen/titleBar_textSize"
-            android:textColor="@color/white"
-            android:id="@+id/tvTitleActivity" />
-
-        <ImageView
-            android:padding="@dimen/titleBar_icons_padding"
-            android:layout_width="@dimen/titleBar_icons"
-            android:layout_height="match_parent"
-            android:src="@drawable/btn_chart_states"
-            android:clickable="true"
-            android:scaleType="fitCenter"
-            android:layout_weight="0"
-            android:id="@+id/ivChart" />
-
-        <ImageView
-            android:padding="@dimen/titleBar_icons_padding"
-            android:layout_width="@dimen/titleBar_icons"
-            android:layout_height="match_parent"
-            android:src="@drawable/btn_timer_states"
-            android:clickable="true"
-            android:scaleType="fitCenter"
-            android:layout_weight="0"
-            android:id="@+id/ivTimer" />
-
-        <ImageView
-            android:paddingLeft="@dimen/titleBar_icons_padding"
-            android:paddingRight="@dimen/titleBar_icon_menu_padding"
-            android:paddingTop="@dimen/padding_icon_titleBar"
-            android:paddingBottom="@dimen/padding_icon_titleBar"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/btn_menu_states"
-            android:clickable="true"
-            android:scaleType="fitEnd"
-            android:layout_weight="0"
-            android:id="@+id/ivMenu" />
-    </LinearLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@color/white"/>
 
     <ScrollView
         android:background="@color/colorPrimaryLight"
