@@ -8,7 +8,7 @@
     <string name="bottom_part_body">Станова тяга, присідання</string>
     <string name="btn_cancel">ВІДМІНА</string>
     <string name="btn_no">НІ</string>
-    <string name="btn_save">ЗБЕРЕГТИ</string>
+    <string name="menu_save">Зберегти</string>
     <string name="btn_yes">ТАК</string>
     <string name="delete_all_exercises">Видалити всі вправи</string>
     <string name="dialog_pick_color">Оберіть колір для вправи:</string>
@@ -136,5 +136,6 @@
     <string name="text_sync">Sync</string>
     <string name="menu_timer">Таймер</string>
     <string name="menu_chart">Графік</string>
+    <string name="menu_help">Допомога</string>
 
 </resources>

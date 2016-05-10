@@ -10,7 +10,8 @@
     <string name="title_dialog_add_body_weight">Add your body weight</string>
     <string name="title_dialog_change_body_weight">Edit record</string>
     <string name="btn_cancel">CANCEL</string>
-    <string name="btn_save">SAVE</string>
+    <string name="menu_save">Save</string>
+    <string name="menu_help">Help</string>
     <string name="btn_no">NO</string>
     <string name="btn_yes">YES</string>
     <string name="btn_ok" translatable="false">OK</string>

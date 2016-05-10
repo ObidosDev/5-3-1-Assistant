@@ -1,9 +1,15 @@
 package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -18,6 +24,7 @@ import java.util.Calendar;
 import dev.obidos.wrd.assistantfortrainingmethod531.R;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.DatabaseHelper;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseWeightData;
+import dev.obidos.wrd.assistantfortrainingmethod531.dialog.InfoDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.tools.DateConverter;
 import dev.obidos.wrd.assistantfortrainingmethod531.tools.TrainingConstants;
 
@@ -26,8 +33,10 @@ import dev.obidos.wrd.assistantfortrainingmethod531.tools.TrainingConstants;
  */
 public class LastSetCalculationActivity extends BaseActivity implements View.OnClickListener {
 
-    private ImageView m_ivCancel;
-    private TextView m_tvBtnSave;
+    private static final int MENU_SAVE = 1;
+
+    private Toolbar mToolbar;
+
     private TextView m_tvAimWeight, m_tvCalcWeightLastSet, m_tvPercentage, m_tvWeightLastSet;
     private EditText m_edtRepeatCount;
     private int m_nExerciseId = -2;
@@ -42,20 +51,31 @@ public class LastSetCalculationActivity extends BaseActivity implements View.OnC
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
+        getSupportActionBar().setTitle(R.string.title_activity_last_set);
+
+        Drawable drawableIconNavigation = ContextCompat.getDrawable(this, R.drawable.svg_close);
+        drawableIconNavigation.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        mToolbar.setNavigationIcon(drawableIconNavigation);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        Drawable drawableIconOverflow = ContextCompat.getDrawable(this, R.drawable.svg_menu_popup);
+        drawableIconOverflow.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        mToolbar.setOverflowIcon(drawableIconOverflow);
+
         m_nExerciseId = getIntent().getIntExtra(TrainingConstants.EXTRA_ID_EXERCISE, -2);
         if(m_nExerciseId==-2){
             finish();
         }
 
-        findViewById(R.id.ivCancel).setOnClickListener(this);
-
         m_tilReps = (TextInputLayout) findViewById(R.id.tilRepsCountLastSet);
-
-        m_tvBtnSave = (TextView) findViewById(R.id.btnSave);
-        m_tvBtnSave.setOnClickListener(this);
-
-        m_ivCancel = (ImageView) findViewById(R.id.ivCancel);
-        m_ivCancel.setOnClickListener(this);
 
         m_tvAimWeight = (TextView) findViewById(R.id.tvAimWeight);
         m_tvAimWeight.setText(getIntent().getStringExtra(TrainingConstants.EXTRA_AIM_WEIGHT_EXERCISE));
@@ -96,9 +116,6 @@ public class LastSetCalculationActivity extends BaseActivity implements View.OnC
     private void init(){
         removeErrorFromTIL(m_tilReps);
 
-        setMediumFont(findViewById(R.id.tvTitleActivity));
-        setMediumFont(m_tvBtnSave);
-
         setRegularFont(m_edtRepeatCount);
         setRegularFont(findViewById(R.id.tvRepsLastSetLabel));
         setRegularFont(findViewById(R.id.tvCalcWeightLastSetLabel));
@@ -112,12 +129,26 @@ public class LastSetCalculationActivity extends BaseActivity implements View.OnC
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.ivCancel:
-                finish();
-                break;
-            case R.id.btnSave:
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.clear();
+
+        MenuItem itemSave = menu.add(1, MENU_SAVE, Menu.NONE, R.string.menu_save);
+
+        Drawable drawableIcon = ContextCompat.getDrawable(this, R.drawable.svg_save);
+        drawableIcon.setColorFilter(this.getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        itemSave.setIcon(drawableIcon);
+        itemSave.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        itemSave.setShortcut('1', 'b');
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case MENU_SAVE:
                 if(checkRepeatCountIsValid()) {
                     saveValueToBd();
                     finish();
@@ -126,6 +157,12 @@ public class LastSetCalculationActivity extends BaseActivity implements View.OnC
                 }
                 break;
         }
+
+        return true;
+    }
+
+    @Override
+    public void onClick(View v) {
     }
 
     private void saveValueToBd() {

@@ -8,7 +8,7 @@
     <string name="bottom_part_body">Становая тяга, приседания</string>
     <string name="btn_cancel">ОТМЕНА</string>
     <string name="btn_no">НЕТ</string>
-    <string name="btn_save">СОХРАНИТЬ</string>
+    <string name="menu_save">Сохранить</string>
     <string name="btn_yes">ДА</string>
     <string name="delete_all_exercises">Удалить все упражнения</string>
     <string name="dialog_pick_color">Выберите цвет для упражнения:</string>
@@ -138,4 +138,5 @@
     <string name="text_sync">Sync</string>
     <string name="menu_timer">Таймер</string>
     <string name="menu_chart">График</string>
+    <string name="menu_help">Помощь</string>
 </resources>

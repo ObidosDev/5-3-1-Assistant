@@ -1,8 +1,14 @@
 package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -18,6 +24,7 @@ import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseData
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.ColorPickerDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.InfoDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.QuestionDialog;
+import dev.obidos.wrd.assistantfortrainingmethod531.dialog.TimerDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.tools.DateConverter;
 import dev.obidos.wrd.assistantfortrainingmethod531.tools.TrainingConstants;
 
@@ -26,9 +33,14 @@ import dev.obidos.wrd.assistantfortrainingmethod531.tools.TrainingConstants;
  */
 public class AddExerciseActivity extends BaseActivity implements View.OnClickListener {
 
-    private ImageView m_ivInfo;
+    private static final int MENU_SAVE = 1;
+    private static final int MENU_HELP = 2;
+
+    public static final int NEW_EXERCISE = -2;
+
+    private Toolbar mToolbar;
+
     private ImageView m_ivColorChange;
-    private TextView m_tvBtnSave;
     private EditText m_edtName, m_edtWeight, m_edtRepeatCount, m_edtAimWeight;
     private RadioButton m_rbtnTop, m_rbtnBottom;
     private int m_nExerciseId = -2;
@@ -44,7 +56,24 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
-        findViewById(R.id.ivBack).setOnClickListener(this);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
+        getSupportActionBar().setTitle(R.string.title_new_exercise);
+
+        Drawable drawableIconNavigation = ContextCompat.getDrawable(this, R.drawable.svg_close);
+        drawableIconNavigation.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        mToolbar.setNavigationIcon(drawableIconNavigation);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        Drawable drawableIconOverflow = ContextCompat.getDrawable(this, R.drawable.svg_menu_popup);
+        drawableIconOverflow.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        mToolbar.setOverflowIcon(drawableIconOverflow);
 
         m_tilName = (TextInputLayout) findViewById(R.id.tilName);
         m_tilWeight = (TextInputLayout) findViewById(R.id.tilWeight);
@@ -56,16 +85,10 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
         removeErrorFromTIL(m_tilReps);
         removeErrorFromTIL(m_tilAimWeight);
 
-        m_nExerciseId = getIntent().getIntExtra(TrainingConstants.EXTRA_ID_EXERCISE, -2);
+        m_nExerciseId = getIntent().getIntExtra(TrainingConstants.EXTRA_ID_EXERCISE, NEW_EXERCISE);
 
         m_ivColorChange = (ImageView) findViewById(R.id.ivColorChange);
         m_ivColorChange.setOnClickListener(this);
-
-        m_ivInfo = (ImageView) findViewById(R.id.ivInfoMenu);
-        m_ivInfo.setOnClickListener(this);
-
-        m_tvBtnSave = (TextView) findViewById(R.id.btnSave);
-        m_tvBtnSave.setOnClickListener(this);
 
         m_edtName = (EditText) findViewById(R.id.edtName);
         m_edtWeight = (EditText) findViewById(R.id.edtWeight);
@@ -76,7 +99,7 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
         m_rbtnBottom = (RadioButton) findViewById(R.id.rbtnBottom);
 
         m_exerciseData = new ExerciseData();
-        if(m_nExerciseId!=-2){
+        if(m_nExerciseId!= NEW_EXERCISE){
             m_bFromInfoActivity = getIntent().getBooleanExtra(TrainingConstants.EXTRA_FROM_INFO_EXERCISE_ACTIVITY, false);
             DatabaseHelper databaseHandler = new DatabaseHelper(this);
             m_exerciseData = databaseHandler.getExercise(m_nExerciseId);
@@ -90,7 +113,7 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
             } else {
                 m_rbtnBottom.setChecked(true);
             }
-            ((TextView)findViewById(R.id.tvTitleActivity)).setText(R.string.title_edit_exercise);
+            getSupportActionBar().setTitle(R.string.title_edit_exercise);
             setColorExercise(m_exerciseData.getColorNumber());
             m_nStartColor = m_exerciseData.getColorNumber();
         }
@@ -99,10 +122,6 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void init(){
-
-        setMediumFont(findViewById(R.id.tvTitleActivity));
-        setMediumFont(m_tvBtnSave);
-
         setRegularFont(m_edtRepeatCount);
         setRegularFont(m_edtWeight);
         setRegularFont(m_edtAimWeight);
@@ -114,6 +133,45 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.clear();
+
+        MenuItem itemHelp = menu.add(0, MENU_HELP, Menu.NONE, R.string.menu_help);
+        MenuItem itemSave = menu.add(1, MENU_SAVE, Menu.NONE, R.string.menu_save);
+
+        Drawable drawableIcon = ContextCompat.getDrawable(this, R.drawable.svg_help);
+        drawableIcon.setColorFilter(this.getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        itemHelp.setIcon(drawableIcon);
+        itemHelp.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        itemHelp.setShortcut('0', 'a');
+
+        drawableIcon = ContextCompat.getDrawable(this, R.drawable.svg_save);
+        drawableIcon.setColorFilter(this.getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        itemSave.setIcon(drawableIcon);
+        itemSave.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        itemSave.setShortcut('1', 'b');
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case MENU_HELP:
+                InfoDialog infoDialog = new InfoDialog(AddExerciseActivity.this,R.string.text_tip_how_fill_out_the_form);
+                infoDialog.show();
+                break;
+            case MENU_SAVE:
+                saveExerciseAndExit();
+                break;
+        }
+
+        return true;
+    }
+
+    @Override
     public void onBackPressed() {
         if(checkChanges()
                 && (getTextFromTextView(m_edtName).length()!=0
@@ -122,7 +180,7 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
                     || getTextFromTextView(m_edtAimWeight).length()!=0)) {
             QuestionDialog questionDialog;
             String strMessage;
-            if(m_nExerciseId==-2) {
+            if(m_nExerciseId==NEW_EXERCISE) {
                 strMessage = getResources().getString(R.string.question_do_not_save);
             } else {
                 strMessage = getResources().getString(R.string.question_do_not_save_changes);
@@ -131,7 +189,7 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
                     new Runnable() {
                         @Override
                         public void run() {
-                            m_tvBtnSave.performClick();
+                            saveExerciseAndExit();
                         }
                     }, new Runnable() {
                         @Override
@@ -142,7 +200,7 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
                     });
             questionDialog.show();
         } else {
-            if(m_nExerciseId!=-2){
+            if(m_nExerciseId!=NEW_EXERCISE){
                 returnToInfoActivityIfNeed();
                 finish();
             } else {
@@ -158,62 +216,56 @@ public class AddExerciseActivity extends BaseActivity implements View.OnClickLis
                 ColorPickerDialog colorPickerDialog = new ColorPickerDialog(this);
                 colorPickerDialog.show();
                 break;
-            case R.id.ivBack:
-                onBackPressed();
-                break;
-            case R.id.ivInfoMenu:
-                InfoDialog infoDialog = new InfoDialog(AddExerciseActivity.this,R.string.text_tip_how_fill_out_the_form);
-                infoDialog.show();
-                break;
-            case R.id.btnSave:
-                if(checkValuesInEdt()) {
-                    if(m_nExerciseId==-2) {
-                        m_exerciseData.setName(getTextFromTextView(m_edtName));
+        }
+    }
 
-                        double weight = Double.valueOf(getTextFromTextView(m_edtWeight));
-                        int count = Integer.valueOf(getTextFromTextView(m_edtRepeatCount));
-                        double calcWeight = ((weight * count * 0.0333) + weight) * 0.9;
-                        m_exerciseData.setWeight(roundWeight(calcWeight));
+    private void saveExerciseAndExit(){
+        if(checkValuesInEdt()) {
+            if(m_nExerciseId==-2) {
+                m_exerciseData.setName(getTextFromTextView(m_edtName));
 
-                        m_exerciseData.setAimWeight(getTextFromTextView(m_edtAimWeight));
+                double weight = Double.valueOf(getTextFromTextView(m_edtWeight));
+                int count = Integer.valueOf(getTextFromTextView(m_edtRepeatCount));
+                double calcWeight = ((weight * count * 0.0333) + weight) * 0.9;
+                m_exerciseData.setWeight(roundWeight(calcWeight));
 
-                        if (m_rbtnTop.isChecked()) {
-                            m_exerciseData.setType(ExerciseData.PART_TOP);
-                        } else {
-                            m_exerciseData.setType(ExerciseData.PART_BOTTOM);
-                        }
+                m_exerciseData.setAimWeight(getTextFromTextView(m_edtAimWeight));
 
-                        setStartDateForExercise(m_exerciseData);
-
-                        DatabaseHelper databaseHandler = new DatabaseHelper(this);
-                        if (databaseHandler.getAllExercisesByStatus(DatabaseHelper.STATUS_NORMAL).size() == 0) {//if we do not have any exercises
-                            setWeekOfCycle(0);
-                            DateConverter culc = new DateConverter();
-                            culc.setDate(Calendar.getInstance());
-                            setStrDateStartOfCycle(culc.getStrDate());
-                        }
-                        databaseHandler.addExercise(m_exerciseData);
-                        databaseHandler.close();
-                    } else {
-                        m_exerciseData.setName(getTextFromTextView(m_edtName));
-                        double weight = Double.valueOf(getTextFromTextView(m_edtWeight));
-                        int count = Integer.valueOf(getTextFromTextView(m_edtRepeatCount));
-                        double calcWeight = ((weight * count * 0.0333) + weight) * 0.9;
-                        m_exerciseData.setWeight(roundWeight(calcWeight));
-                        m_exerciseData.setAimWeight(getTextFromTextView(m_edtAimWeight));
-                        if (m_rbtnTop.isChecked()) {
-                            m_exerciseData.setType(ExerciseData.PART_TOP);
-                        } else {
-                            m_exerciseData.setType(ExerciseData.PART_BOTTOM);
-                        }
-                        DatabaseHelper databaseHandler = new DatabaseHelper(this);
-                        databaseHandler.updateExercise(m_exerciseData);
-                        databaseHandler.close();
-                    }
-                    returnToInfoActivityIfNeed();
-                    finish();
+                if (m_rbtnTop.isChecked()) {
+                    m_exerciseData.setType(ExerciseData.PART_TOP);
+                } else {
+                    m_exerciseData.setType(ExerciseData.PART_BOTTOM);
                 }
-                break;
+
+                setStartDateForExercise(m_exerciseData);
+
+                DatabaseHelper databaseHandler = new DatabaseHelper(this);
+                if (databaseHandler.getAllExercisesByStatus(DatabaseHelper.STATUS_NORMAL).size() == 0) {//if we do not have any exercises
+                    setWeekOfCycle(0);
+                    DateConverter culc = new DateConverter();
+                    culc.setDate(Calendar.getInstance());
+                    setStrDateStartOfCycle(culc.getStrDate());
+                }
+                databaseHandler.addExercise(m_exerciseData);
+                databaseHandler.close();
+            } else {
+                m_exerciseData.setName(getTextFromTextView(m_edtName));
+                double weight = Double.valueOf(getTextFromTextView(m_edtWeight));
+                int count = Integer.valueOf(getTextFromTextView(m_edtRepeatCount));
+                double calcWeight = ((weight * count * 0.0333) + weight) * 0.9;
+                m_exerciseData.setWeight(roundWeight(calcWeight));
+                m_exerciseData.setAimWeight(getTextFromTextView(m_edtAimWeight));
+                if (m_rbtnTop.isChecked()) {
+                    m_exerciseData.setType(ExerciseData.PART_TOP);
+                } else {
+                    m_exerciseData.setType(ExerciseData.PART_BOTTOM);
+                }
+                DatabaseHelper databaseHandler = new DatabaseHelper(this);
+                databaseHandler.updateExercise(m_exerciseData);
+                databaseHandler.close();
+            }
+            returnToInfoActivityIfNeed();
+            finish();
         }
     }
 

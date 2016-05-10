@@ -4,8 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +22,7 @@ import dev.obidos.wrd.assistantfortrainingmethod531.dialog.EnterNumberDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.EnterTimeDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.QuestionDialog;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.SetStartTimeDialog;
+import dev.obidos.wrd.assistantfortrainingmethod531.tools.TrainingConstants;
 import dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView;
 
 /**
@@ -25,22 +30,35 @@ import dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView;
  */
 public class SettingsActivity extends BaseActivity implements DialogInterface.OnDismissListener, View.OnClickListener {
 
+    private Toolbar mToolbar;
+
     private CheckableImageView m_checkableImageViewCalcCycle, m_checkableImageViewSixWeekCycle;
     private CheckableImageView m_checkableImageViewBoringButBig, m_checkableImageViewSkipDeload;
     private CheckableImageView m_checkableImageViewVibration;
     private TextView m_tvMinWeightPlate, m_tvAddWeightTop, m_tvAddWeightBottom, m_tvTimerValue, m_tvStartDateValue;
-    private  EnterNumberDialog enterNumberDialog;
+    private  EnterNumberDialog m_enterNumberDialog;
     private LinearLayout m_llResetAll, m_llResetChart, m_llDeleteAllExercises;
     private LinearLayout m_llAbout, m_llWriteToAuthor, m_llResetAllExerciseCharts, m_llSetStartDate;
-    private ImageView m_ivBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        m_ivBack = (ImageView) findViewById(R.id.ivBack);
-        m_ivBack.setOnClickListener(this);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
+        getSupportActionBar().setTitle(R.string.title_settings);
+
+        Drawable drawableIconNavigation = ContextCompat.getDrawable(this, R.drawable.svg_back);
+        drawableIconNavigation.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+        mToolbar.setNavigationIcon(drawableIconNavigation);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         m_tvStartDateValue = (TextView) findViewById(R.id.tvSetStartDateValue);
         m_tvStartDateValue.setText(getStrDateStartOfCycle());
@@ -51,11 +69,11 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
         findViewById(R.id.llMinWeightPlate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enterNumberDialog = new EnterNumberDialog(SettingsActivity.this,
+                m_enterNumberDialog = new EnterNumberDialog(SettingsActivity.this,
                         m_tvMinWeightPlate.getText().toString(),
                         EnterNumberDialog.MIN_PLATE_WEIGHT);
-                enterNumberDialog.setOnDismissListener(SettingsActivity.this);
-                enterNumberDialog.show();
+                m_enterNumberDialog.setOnDismissListener(SettingsActivity.this);
+                m_enterNumberDialog.show();
             }
         });
 
@@ -77,11 +95,11 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
         findViewById(R.id.llAddWeightTop).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enterNumberDialog = new EnterNumberDialog(SettingsActivity.this,
+                m_enterNumberDialog = new EnterNumberDialog(SettingsActivity.this,
                         m_tvAddWeightTop.getText().toString(),
                         EnterNumberDialog.ADD_WEIGHT_TOP);
-                enterNumberDialog.setOnDismissListener(SettingsActivity.this);
-                enterNumberDialog.show();
+                m_enterNumberDialog.setOnDismissListener(SettingsActivity.this);
+                m_enterNumberDialog.show();
             }
         });
 
@@ -90,11 +108,11 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
         findViewById(R.id.llAddWeightBottom).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enterNumberDialog = new EnterNumberDialog(SettingsActivity.this,
+                m_enterNumberDialog = new EnterNumberDialog(SettingsActivity.this,
                         m_tvAddWeightBottom.getText().toString(),
                         EnterNumberDialog.ADD_WEIGHT_BOTTOM);
-                enterNumberDialog.setOnDismissListener(SettingsActivity.this);
-                enterNumberDialog.show();
+                m_enterNumberDialog.setOnDismissListener(SettingsActivity.this);
+                m_enterNumberDialog.show();
             }
         });
 
@@ -123,7 +141,6 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
     }
 
     private void init() {
-        setMediumFont(findViewById(R.id.tvTitleActivity));
         setMediumFont(m_tvMinWeightPlate);
         setMediumFont(m_tvAddWeightBottom);
         setMediumFont(m_tvAddWeightTop);
@@ -187,9 +204,6 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
     public void onClick(View v) {
         QuestionDialog questionDialog;
         switch (v.getId()){
-            case R.id.ivBack:
-                finish();
-                break;
             case R.id.chbCalculation:
                 m_checkableImageViewCalcCycle.changeCheckState();
                 setCalculateCycle(m_checkableImageViewCalcCycle.isChecked());

@@ -62,7 +62,7 @@
             android:textSize="@dimen/text_size_info_btn" />
 
         <TextView
-            android:text="@string/btn_save"
+            android:text="@string/menu_save"
             android:id="@+id/btnOk"
             android:layout_width="wrap_content"
             android:paddingLeft="@dimen/info_dialog_margin_btn"
