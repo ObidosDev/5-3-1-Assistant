@@ -131,7 +131,7 @@
         <item name="week_hard2">6 (Тяжелая)</item>
         <item name="week_light">7 (Разгрузочная)</item>
     </string-array>
-    <string name="app_author_name">© Обидейко Виталий, 2016</string>
+    <string name="app_author_name">Обидейко Виталий, 2016</string>
     <string name="title_mail_chooser">Написать e-mail...</string>
     <string name="info_no_mail_clients">На вашем устройстве нет почтовых клиентов.</string>
     <string name="app_version">Версия</string>
