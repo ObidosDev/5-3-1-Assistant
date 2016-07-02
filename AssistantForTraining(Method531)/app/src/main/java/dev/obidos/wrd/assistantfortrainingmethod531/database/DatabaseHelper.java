@@ -15,10 +15,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dev.obidos.wrd.assistantfortrainingmethod531.R;
 import dev.obidos.wrd.assistantfortrainingmethod531.activity.BaseActivity;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.BodyWeightData;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseData;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseWeightData;
+import dev.obidos.wrd.assistantfortrainingmethod531.dialog.InfoDialog;
 
 /**
  * Created by vobideyko on 8/17/15.
@@ -548,15 +550,25 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
         try {
             File backupDB = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), DATABASE_NAME);
             File currentDB = baseActivity.getApplicationContext().getDatabasePath(DATABASE_NAME);
-            if (currentDB.exists()) {
-                fis = new FileInputStream(currentDB);
-                fos = new FileOutputStream(backupDB);
-                fos.getChannel().transferFrom(fis.getChannel(), 0, fis.getChannel().size());
-                fis.close();
-                fos.close();
-                Log.i("Database successfully", " copied to download folder");
-                return true;
-            } else Log.i("Copying Database", " fail, database not found");
+            if(!backupDB.exists()) {
+                if (currentDB.exists()) {
+                    fis = new FileInputStream(currentDB);
+                    fos = new FileOutputStream(backupDB);
+                    fos.getChannel().transferFrom(fis.getChannel(), 0, fis.getChannel().size());
+                    fis.close();
+                    fos.close();
+                    Log.i("Database successfully", " copied to download folder");
+                    return true;
+                } else {
+                    Log.i("Copying Database", " fail, database not found");
+                }
+            } else {
+                InfoDialog infoDialog = new InfoDialog(baseActivity,
+                        baseActivity.getString(R.string.dialog_remove_old_backup)
+                        + " "
+                        + DATABASE_NAME);
+                infoDialog.show();
+            }
         } catch (IOException e) {
             Log.d("Copying Database", "fail, reason:", e);
             return false;
@@ -577,12 +589,17 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
         try {
             File backupDB = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), DATABASE_NAME);
             File currentDB = baseActivity.getApplicationContext().getDatabasePath(DATABASE_NAME);
-            fis = new FileInputStream(backupDB);
-            fos = new FileOutputStream(currentDB);
-            fos.getChannel().transferFrom(fis.getChannel(), 0, fis.getChannel().size());
-            fis.close();
-            fos.close();
-            Log.i("Database successfully", " copied from download folder");
+            if(backupDB.exists()) {
+                fis = new FileInputStream(backupDB);
+                fos = new FileOutputStream(currentDB);
+                fos.getChannel().transferFrom(fis.getChannel(), 0, fis.getChannel().size());
+                fis.close();
+                fos.close();
+                Log.i("Database successfully", " copied from download folder");
+            } else {
+                InfoDialog infoDialog = new InfoDialog(baseActivity, R.string.dialog_no_backup);
+                infoDialog.show();
+            }
             return true;
         } catch (IOException e) {
             Log.d("Copying Database", "fail, reason:", e);

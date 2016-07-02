@@ -165,4 +165,6 @@
     <string name="menu_timer">Timer</string>
     <string name="menu_chart">Chart</string>
 
+    <string name="dialog_remove_old_backup">Remove backup from Download. File name:</string>
+    <string name="dialog_no_backup">Can not find the file of backup :(</string>
 </resources>

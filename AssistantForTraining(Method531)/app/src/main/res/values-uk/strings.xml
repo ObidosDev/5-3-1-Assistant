@@ -138,4 +138,6 @@
     <string name="menu_chart">Графік</string>
     <string name="menu_help">Допомога</string>
 
+    <string name="dialog_remove_old_backup">Видаліть застарілий файл з папки Завантажень. Назва файлу:</string>
+    <string name="dialog_no_backup">Не знайдено файл відновлення :(</string>
 </resources>

@@ -139,4 +139,7 @@
     <string name="menu_timer">Таймер</string>
     <string name="menu_chart">График</string>
     <string name="menu_help">Помощь</string>
+
+    <string name="dialog_remove_old_backup">Удалите старый файл из Загрузок. Название файла:</string>
+    <string name="dialog_no_backup">Не найдено файл восстановления :(</string>
 </resources>

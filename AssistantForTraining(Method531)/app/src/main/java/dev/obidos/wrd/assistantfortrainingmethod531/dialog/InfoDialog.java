@@ -17,7 +17,8 @@ public class InfoDialog extends Dialog implements
         View.OnClickListener {
 
     private BaseActivity m_Activity;
-    private int m_nIdInfoString;
+    private int m_nIdInfoString = -1;
+    private String m_strInfoString = null;
     private TextView m_tvOkButton;
     private TextView m_tvInfo;
 
@@ -25,6 +26,13 @@ public class InfoDialog extends Dialog implements
         super(baseActivity);
         this.m_Activity = baseActivity;
         m_nIdInfoString = nIdInfoString;
+        m_strInfoString = getContext().getResources().getString(m_nIdInfoString);
+    }
+
+    public InfoDialog(BaseActivity baseActivity, String strInfoString) {
+        super(baseActivity);
+        this.m_Activity = baseActivity;
+        m_strInfoString = strInfoString;
     }
 
     @Override
@@ -36,7 +44,7 @@ public class InfoDialog extends Dialog implements
         setContentView(R.layout.dialog_info);
 
         m_tvInfo = (TextView) findViewById(R.id.tvInfo);
-        m_tvInfo.setText(getContext().getResources().getString(m_nIdInfoString));
+        m_tvInfo.setText(m_strInfoString);
 
         m_tvOkButton = (TextView) findViewById(R.id.btnOk);
         m_tvOkButton.setOnClickListener(this);
