@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 import dev.obidos.wrd.assistantfortrainingmethod531.R;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.DatabaseHelper;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.EnterNumberDialog;
@@ -39,6 +41,7 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
     private  EnterNumberDialog m_enterNumberDialog;
     private LinearLayout m_llResetAll, m_llResetChart, m_llDeleteAllExercises;
     private LinearLayout m_llAbout, m_llWriteToAuthor, m_llResetAllExerciseCharts, m_llSetStartDate;
+    private LinearLayout m_llLoadData, m_llSaveData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,12 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
 
         m_llWriteToAuthor = (LinearLayout) findViewById(R.id.llWriteToAuthor);
         m_llWriteToAuthor.setOnClickListener(this);
+
+        m_llSaveData = (LinearLayout) findViewById(R.id.llSaveData);
+        m_llSaveData.setOnClickListener(this);
+
+        m_llLoadData = (LinearLayout) findViewById(R.id.llLoadData);
+        m_llLoadData.setOnClickListener(this);
 
         m_tvAddWeightTop = (TextView) findViewById(R.id.tvAddWeightTopValue);
         m_tvAddWeightTop.setText(String.valueOf(getWeightAddTop()));
@@ -151,6 +160,7 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
         setMediumFont(findViewById(R.id.tvTitleCycle));
         setMediumFont(findViewById(R.id.tvTitleWorkout));
         setMediumFont(findViewById(R.id.tvTitleOther));
+        setMediumFont(findViewById(R.id.tvTitleData));
 
         setRegularFont(findViewById(R.id.tvPlateWeight));
         setRegularFont(findViewById(R.id.tvAddWeightTop));
@@ -167,6 +177,8 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
         setRegularFont(findViewById(R.id.tvBoringButBig));
         setRegularFont(findViewById(R.id.tvVibration));
         setRegularFont(findViewById(R.id.tvSetStartDate));
+        setRegularFont(findViewById(R.id.tvSaveData));
+        setRegularFont(findViewById(R.id.tvLoadData));
     }
 
     private void setupCheckableImageView(){
@@ -309,6 +321,20 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
                 SetStartTimeDialog setStartTimeDialog = new SetStartTimeDialog(this);
                 setStartTimeDialog.setOnDismissListener(SettingsActivity.this);
                 setStartTimeDialog.show();
+                break;
+            case R.id.llSaveData:
+                try {
+                    new DatabaseHelper(this).saveDatabaseToDownloadFolder(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.llLoadData:
+                try {
+                    new DatabaseHelper(this).loadDatabaseFromDownloadFolder(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }

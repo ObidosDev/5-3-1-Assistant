@@ -5,10 +5,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.provider.BaseColumns;
+import android.util.Log;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import dev.obidos.wrd.assistantfortrainingmethod531.activity.BaseActivity;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.BodyWeightData;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseData;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseWeightData;
@@ -532,5 +539,61 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
 
         exerciseData.setRecordWeight(String.valueOf(fRecordWeight));
         updateExercise(exerciseData);
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    public boolean saveDatabaseToDownloadFolder(BaseActivity baseActivity) throws IOException {
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        try {
+            File backupDB = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), DATABASE_NAME);
+            File currentDB = baseActivity.getApplicationContext().getDatabasePath(DATABASE_NAME);
+            if (currentDB.exists()) {
+                fis = new FileInputStream(currentDB);
+                fos = new FileOutputStream(backupDB);
+                fos.getChannel().transferFrom(fis.getChannel(), 0, fis.getChannel().size());
+                fis.close();
+                fos.close();
+                Log.i("Database successfully", " copied to download folder");
+                return true;
+            } else Log.i("Copying Database", " fail, database not found");
+        } catch (IOException e) {
+            Log.d("Copying Database", "fail, reason:", e);
+            return false;
+        } finally {
+            if(fis!=null) {
+                fis.close();
+            }
+            if(fos!=null) {
+                fos.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean loadDatabaseFromDownloadFolder(BaseActivity baseActivity) throws IOException {
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        try {
+            File backupDB = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), DATABASE_NAME);
+            File currentDB = baseActivity.getApplicationContext().getDatabasePath(DATABASE_NAME);
+            fis = new FileInputStream(backupDB);
+            fos = new FileOutputStream(currentDB);
+            fos.getChannel().transferFrom(fis.getChannel(), 0, fis.getChannel().size());
+            fis.close();
+            fos.close();
+            Log.i("Database successfully", " copied from download folder");
+            return true;
+        } catch (IOException e) {
+            Log.d("Copying Database", "fail, reason:", e);
+            return false;
+        } finally {
+            if(fis!=null) {
+                fis.close();
+            }
+            if(fos!=null) {
+                fos.close();
+            }
+        }
     }
 }

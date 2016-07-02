@@ -963,6 +963,126 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                -------------------------------------
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@color/colorDivider"
+                    android:paddingBottom="@dimen/divider_big_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:paddingLeft="@dimen/titleBar_margin"
+                        android:paddingTop="@dimen/padding_title_settings"
+                        android:paddingBottom="@dimen/padding_title_settings"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_subtitle_settings"
+                        android:background="@color/colorPrimaryLight"
+                        android:clickable="true"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Data"
+                            android:id="@+id/tvTitleData"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/text_size_settings_main"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/colorDivider"
+                    android:paddingBottom="@dimen/divider_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:id="@+id/llSaveData"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:background="@drawable/item_bg_states">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_mail"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivSaveData" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Save data"
+                            android:id="@+id/tvSaveData"
+                            android:textColor="@color/colorPrimaryText"
+                            android:textSize="@dimen/text_size_settings_main"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/titleBar_height"
+                    android:gravity="center"
+                    android:background="@color/colorDivider"
+                    android:paddingBottom="@dimen/divider_big_settings">
+
+                    <LinearLayout
+                        android:paddingRight="@dimen/padding_settings"
+                        android:paddingLeft="@dimen/padding_settings"
+                        android:paddingBottom="@dimen/padding_item_settings"
+                        android:paddingTop="@dimen/padding_item_settings"
+                        android:id="@+id/llLoadData"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/items_settings"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:background="@drawable/item_bg_states">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_item_size"
+                            android:layout_height="@dimen/settings_icon_item_size"
+                            android:layout_marginRight="@dimen/settings_icon_margin"
+                            android:src="@drawable/png_about"
+                            android:scaleType="fitCenter"
+                            android:id="@+id/ivLoadData" />
+
+                        <TextView
+                            android:paddingLeft="@dimen/padding_text_settings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Load Data"
+                            android:id="@+id/tvLoadData"
+                            android:textColor="@color/colorPrimaryText"
+                            android:textSize="@dimen/text_size_settings_main"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
     </ScrollView>
 
