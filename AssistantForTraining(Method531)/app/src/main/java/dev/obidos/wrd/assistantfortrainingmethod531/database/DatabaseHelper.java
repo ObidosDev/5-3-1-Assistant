@@ -21,6 +21,7 @@ import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.BodyWeightDa
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseData;
 import dev.obidos.wrd.assistantfortrainingmethod531.database.entity.ExerciseWeightData;
 import dev.obidos.wrd.assistantfortrainingmethod531.dialog.InfoDialog;
+import dev.obidos.wrd.assistantfortrainingmethod531.dialog.QuestionDialog;
 
 /**
  * Created by vobideyko on 8/17/15.
@@ -544,7 +545,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
-    public boolean saveDatabaseToDownloadFolder(BaseActivity baseActivity) throws IOException {
+    public void saveDatabaseToDownloadFolder(BaseActivity baseActivity) {
         FileInputStream fis = null;
         FileOutputStream fos = null;
         try {
@@ -558,7 +559,6 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
                     fis.close();
                     fos.close();
                     Log.i("Database successfully", " copied to download folder");
-                    return true;
                 } else {
                     Log.i("Copying Database", " fail, database not found");
                 }
@@ -571,46 +571,65 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
             }
         } catch (IOException e) {
             Log.d("Copying Database", "fail, reason:", e);
-            return false;
         } finally {
-            if(fis!=null) {
-                fis.close();
+            if(fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-            if(fos!=null) {
-                fos.close();
+            if(fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        return false;
     }
 
-    public boolean loadDatabaseFromDownloadFolder(BaseActivity baseActivity) throws IOException {
-        FileInputStream fis = null;
-        FileOutputStream fos = null;
-        try {
-            File backupDB = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), DATABASE_NAME);
-            File currentDB = baseActivity.getApplicationContext().getDatabasePath(DATABASE_NAME);
-            if(backupDB.exists()) {
-                fis = new FileInputStream(backupDB);
-                fos = new FileOutputStream(currentDB);
-                fos.getChannel().transferFrom(fis.getChannel(), 0, fis.getChannel().size());
-                fis.close();
-                fos.close();
-                Log.i("Database successfully", " copied from download folder");
-            } else {
-                InfoDialog infoDialog = new InfoDialog(baseActivity, R.string.dialog_no_backup);
-                infoDialog.show();
+    public void loadDatabaseFromDownloadFolder(final BaseActivity baseActivity) {
+        String strQuestion = baseActivity.getString(R.string.import_warning);
+        QuestionDialog questionDialog = new QuestionDialog(baseActivity, strQuestion, new Runnable() {
+            @Override
+            public void run() {
+                FileInputStream fis = null;
+                FileOutputStream fos = null;
+                try {
+                    File backupDB = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), DATABASE_NAME);
+                    File currentDB = baseActivity.getApplicationContext().getDatabasePath(DATABASE_NAME);
+                    if(backupDB.exists()) {
+                        fis = new FileInputStream(backupDB);
+                        fos = new FileOutputStream(currentDB);
+                        fos.getChannel().transferFrom(fis.getChannel(), 0, fis.getChannel().size());
+                        fis.close();
+                        fos.close();
+                        Log.i("Database successfully", " copied from download folder");
+                    } else {
+                        InfoDialog infoDialog = new InfoDialog(baseActivity, R.string.dialog_no_backup);
+                        infoDialog.show();
+                    }
+                } catch (IOException e) {
+                    Log.d("Copying Database", "fail, reason:", e);
+                } finally {
+                    if(fis!=null) {
+                        try {
+                            fis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if(fos!=null) {
+                        try {
+                            fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             }
-            return true;
-        } catch (IOException e) {
-            Log.d("Copying Database", "fail, reason:", e);
-            return false;
-        } finally {
-            if(fis!=null) {
-                fis.close();
-            }
-            if(fos!=null) {
-                fos.close();
-            }
-        }
+        });
+        questionDialog.show();
     }
 }

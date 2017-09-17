@@ -987,12 +987,12 @@
                         android:gravity="center">
 
                         <TextView
+                            android:id="@+id/tvTitleData"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Data"
-                            android:id="@+id/tvTitleData"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/text_size_settings_main"/>
+                            android:textSize="@dimen/text_size_settings_main" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -1024,7 +1024,7 @@
                             android:layout_width="@dimen/settings_icon_item_size"
                             android:layout_height="@dimen/settings_icon_item_size"
                             android:layout_marginRight="@dimen/settings_icon_margin"
-                            android:src="@drawable/png_mail"
+                            android:src="@drawable/png_export"
                             android:scaleType="fitCenter"
                             android:id="@+id/ivSaveData" />
 
@@ -1032,7 +1032,7 @@
                             android:paddingLeft="@dimen/padding_text_settings"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Save data"
+                            android:text="@string/export_database_btn"
                             android:id="@+id/tvSaveData"
                             android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>
@@ -1067,7 +1067,7 @@
                             android:layout_width="@dimen/settings_icon_item_size"
                             android:layout_height="@dimen/settings_icon_item_size"
                             android:layout_marginRight="@dimen/settings_icon_margin"
-                            android:src="@drawable/png_about"
+                            android:src="@drawable/png_import"
                             android:scaleType="fitCenter"
                             android:id="@+id/ivLoadData" />
 
@@ -1075,7 +1075,7 @@
                             android:paddingLeft="@dimen/padding_text_settings"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Load Data"
+                            android:text="@string/import_database_btn"
                             android:id="@+id/tvLoadData"
                             android:textColor="@color/colorPrimaryText"
                             android:textSize="@dimen/text_size_settings_main"/>

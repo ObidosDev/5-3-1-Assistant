@@ -140,4 +140,7 @@
 
     <string name="dialog_remove_old_backup">Видаліть застарілий файл з папки Завантажень. Назва файлу:</string>
     <string name="dialog_no_backup">Не знайдено файл відновлення :(</string>
+    <string name="import_database_btn">Завантажити дані з файлу в папці Завантаження</string>
+    <string name="export_database_btn">Зберегти дані в файл в папці Завантаження</string>
+    <string name="import_warning">Поточні дані додатку будуть перезаписані. Ви впевнені?</string>
 </resources>

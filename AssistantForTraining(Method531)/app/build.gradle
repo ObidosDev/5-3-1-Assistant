@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.0"
 
     defaultConfig {
-        applicationId "dev.obidos.wrd.assistantfortrainingmethod531"
+        applicationId "com.obidos.assistant531"
         minSdkVersion 16
         targetSdkVersion 25
     }

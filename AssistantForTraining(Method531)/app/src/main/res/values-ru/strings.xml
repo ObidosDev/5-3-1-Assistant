@@ -142,4 +142,7 @@
 
     <string name="dialog_remove_old_backup">Удалите старый файл из Загрузок. Название файла:</string>
     <string name="dialog_no_backup">Не найдено файл восстановления :(</string>
+    <string name="import_database_btn">Загрузить данные из файла в папке Загрузки</string>
+    <string name="export_database_btn">Сохранить Данные в файл в папке Загрузки</string>
+    <string name="import_warning">Текущие данные приложения будут перезаписаны. Вы уверены?</string>
 </resources>

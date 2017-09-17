@@ -116,6 +116,9 @@
     <string name="reset_chart_btn">Reset body weight chart</string>
     <string name="delete_all_exercises">Delete all exercises</string>
     <string name="about_app_btn">About</string>
+    <string name="export_database_btn">Export data to file in Downloads</string>
+    <string name="import_database_btn">Import data from file in Downloads</string>
+    <string name="import_warning">It will override all current data. Are you sure?</string>
     <string name="settings_vibration">Vibration</string>
     <string name="settings_reset_all_charts_exercises">Reset all charts of exercises</string>
     <string name="six_week_cycle_settings">6 week cycle + deload</string>
@@ -159,7 +162,7 @@
     <string name="text_restore">Restore</string>
     <string name="question_delete_all_from_trash">Are you sure you want to permanently delete the exercises from the Trash?</string>
     <string name="question_move_to_trash">Move to trash?</string>
-    <string name="title_mail_chooser">Send mail...</string>
+    <string name="title_mail_chooser">Send mail…</string>
     <string name="info_no_mail_clients">There are no email clients installed.</string>
     <string name="text_sync">Sync</string>
     <string name="menu_timer">Timer</string>

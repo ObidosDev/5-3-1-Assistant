@@ -1,5 +1,7 @@
 package dev.obidos.wrd.assistantfortrainingmethod531.activity;
 
+import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -7,7 +9,9 @@ import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -31,6 +35,9 @@ import dev.obidos.wrd.assistantfortrainingmethod531.views.CheckableImageView;
  * Created by vobideyko on 8/20/15.
  */
 public class SettingsActivity extends BaseActivity implements DialogInterface.OnDismissListener, View.OnClickListener {
+
+    private static final int REQUEST_CODE_EXPORT = 666;
+    private static final int REQUEST_CODE_IMPORT = 999;
 
     private Toolbar mToolbar;
 
@@ -311,7 +318,7 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
                 emailIntent.putExtra(Intent.EXTRA_TEXT, "");
                 try {
                     startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.title_mail_chooser)));
-                } catch (android.content.ActivityNotFoundException ex) {
+                } catch (ActivityNotFoundException ex) {
                     Toast.makeText(this,
                             R.string.info_no_mail_clients,
                             Toast.LENGTH_SHORT).show();
@@ -323,19 +330,42 @@ public class SettingsActivity extends BaseActivity implements DialogInterface.On
                 setStartTimeDialog.show();
                 break;
             case R.id.llSaveData:
-                try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        new DatabaseHelper(this).saveDatabaseToDownloadFolder(this);
+                    } else {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_EXPORT);
+                    }
+                } else {
                     new DatabaseHelper(this).saveDatabaseToDownloadFolder(this);
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
                 break;
             case R.id.llLoadData:
-                try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        new DatabaseHelper(this).loadDatabaseFromDownloadFolder(this);
+                    } else {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_IMPORT);
+                    }
+                } else {
                     new DatabaseHelper(this).loadDatabaseFromDownloadFolder(this);
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            switch (requestCode) {
+                case REQUEST_CODE_EXPORT:
+                    new DatabaseHelper(this).saveDatabaseToDownloadFolder(this);
+                    break;
+                case REQUEST_CODE_IMPORT:
+                    new DatabaseHelper(this).loadDatabaseFromDownloadFolder(this);
+                    break;
+            }
         }
     }
 
